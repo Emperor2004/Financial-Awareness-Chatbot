@@ -1,0 +1,141 @@
+What are the obligations for verifying identity of clients under PMLA?
+Section 11A together with Section 12 of the Prevention of Money Laundering Act, 2002, requires every reporting entity to verify and maintain the records of the identity of all its clients, as prescribed by rule 9 of the PML Rules.
+
+
+Does PMLA, 2002 or the rules thereunder prescribe any procedures and manner verifying for identity of clients?
+Yes. Rules 9 and 10 of the PML Rules prescribe the procedures & manner for verification and maintenance of the records of the identity of clients.
+
+
+
+What is a Transaction ?
+Transaction means a purchase, sale, loan, pledge, gift, transfer, delivery or the arrangement thereof and includes -
+
+(i) opening of an account;
+(ii) deposits, withdrawal, exchange or transfer of funds in whatever currency, whether in cash or by cheque, payment order or other instruments or by electronic or other non-physical means;
+(iii) the use of a safety deposit box or any other form of safe deposit;
+(iv) entering into any fiduciary relationship;
+(v) any payment made or received in whole or in part of any contractual or other legal obligation;
+(vi) any payment made in respect of playing games of chance for cash or kind including such activities associated with casino; and
+(vii) establishing or creating a legal person or legal arrangement.
+
+
+Is it mandatory to implement a Client Due Dilegence programme?
+Yes. Every reporting entity is required to formulate and implement a client due diligence programme approved by the senior management.
+
+
+What is an Officially Valid Document?
+Officially valid document means the passport, the driving licence proof of possession of Aadhaar number, the Voter's Identity Card issued by Election Commission of India, job card issued by NREGA duly signed by an officer of the State Government, the letter issued by the National Population Register containing details of name, address or any other document as notified by the Central Government in consultation with the Regulator, the Permanent Account Number (PAN) Card, the Voter's Identity Card issued by Election Commission of India, job card issued by NREGA duly signed by an officer of the State Government, the letter issued by the Unique Identification Authority of India or the National Population Register containing details of name, address and Aadhaar number or any other document as notified by the Central Government in consultation with the regulatory.
+
+Provided that where simplified measures are applied for verifying the identity of the clients the following documents shall also be deemed to be 'officially valid documents:
+
+(a) identity card with applicant's Photograph issued by Central/State Government Departments, Statutory/Regulatory Authorities, Public Sector Undertakings, Scheduled Commercial Banks, and Public Financial Institutions;
+
+(b) letter issued by a gazetted officer, with a duly attested photograph of the person;
+
+Provided further that where simplified measures are applied for verifying the limited purpose of proof of address of the clients, where a prospective customer is unable to produce any proof of address, the following documents shall also be deemed to be 'officially valid document':
+
+(a) utility bill which is not more than two months old of any service provider (electricity, telephone, post-paid mobile phone, piped gas, Water bill);)
+
+(b) property or Municipal tax receipt;
+
+(c) bank account or Post Office savings bank account statement;
+
+(d) pension or family pension payment orders (PPOs) issued to retired employees by Government Departments or Public Sector Undertakings, if they contain the address;
+
+(e) letter of allotment of accommodation from employer issued by State or Central Government Departments or Public Sector Undertakings, scheduled commercial banks, financial institutions and listed companies. Similarly, leave and licence agreements with such employers allotting official accommodation; and
+
+Provided also that in case the officially valid document presented by a foreign national does not contain the details of address, in such case the documents issued by the Government departments of foreign jurisdictions and letter issued by the Foreign Embassy or Mission in India shall be accepted as proof of address.
+
+Provided also that where the client submits his proof of possession of Aadhaar number as an officially valid document, he may submit it in such form as are issued by the Unique Identification Authority of India;
+
+A document shall be deemed to an "officially valid document" even if there is a change in the name subsequent to its issuance provided it is supported by a marriage certificate issued by the State Government or Gazette notification, indicating such a change of name, for the purpose of clause (d) of Rule (2) of Prevention of Money-Laundering (Maintenance of Records) Rules, 2005
+
+
+Which documents need to be submitted to the RE for Client Due Diligence, verified and maintained when the client is an individual?
+Where the client is an individual, he shall submit to the reporting entity, -
+
+(a) the Aadhaar number where, he is desirous of receiving any benefit or subsidy or where he decides to submit his Aadhaar number voluntarily; or
+
+(b) the proof of possession of Aadhaar number where offline verification can be carried out; or
+
+(c) the proof of possession of Aadhaar number where offline verification cannot be carried out or any officially valid document or the equivalent e-document thereof containing the details of his identity and address; and
+
+(d) the Permanent Account Number or the equivalent e-document thereof or Form No. 60 as defined in Income-tax Rules, 1962; and
+
+(e) such other documents including in respect of the nature of business and financial status of the client, or the equivalent e-documents thereof as may be required by the reporting entity:
+
+
+Which documents need to be submitted to the RE for Client Due Diligence,when the client is a company?
+Where the client is a company, it shall submit to the reporting entity the certified copies of the following documents or the equivalent e-documents thereof, namely:-
+
+(i) certificate of incorporation;
+
+(ii) Memorandum and Articles of Association;
+
+(iii) Permanent Account Number of the company;
+
+(iv) a resolution from the Board of Directors and power of attorney granted to its managers, officers or employees, as the case may be, to transact on its behalf; and
+
+(v) such documents as are required for an individual under sub-rule (4) relating to beneficial owner, managers, officers or employees, as the case may be, holding an attorney to transact on the company's behalf;
+
+
+Which documents needs to be submitted to the RE for Client Due Diligence, client is a partnership firm?
+Where the client is a partnership firm, it shall submit to the reporting entity the certified copies of the following documents or the equivalent e-documents thereof, namely: -
+
+(i) registration certificate;
+
+(ii) partnership deed;
+
+(iii) Permanent Account Number of the partnership firm; and
+
+(iv) such documents as are required for an individual under sub-rule (4) relating to beneficial owner, managers, officers or employees, as the case may be, holding an attorney to transact on its behalf;
+
+
+What documents needs to be submitted to the RE for Client Due Diligence, client is a trust
+Where the client is a trust, it shall submit to the reporting entity the certified copies of the following documents or the equivalent e-documents thereof, namely:-
+
+(i) registration certificate;
+
+(ii) trust deed;
+
+(iii) Permanent Account Number or Form No.60 of the trust; and
+
+(iv) such documents as are required for an individual under sub-rule (4) relating to beneficial owner, managers, officers or employees, as the case may be, holding an attorney to transact on its behalf;
+
+
+What documents needs to be submitted to the RE for Client Due Diligence,if the client is an unincorporated association or a body of individuals ?
+Following document need to be verified and maintained when the client is an body of individuals : Where the client is an unincorporated association or a body of individuals, it shall submit to the reporting entity the certified copies of the following documents or the equivalent e-documents thereof, namely:-
+
+(i) resolution of the managing body of such association or body of individuals;
+
+(ii) Permanent account number or Form No.60 of the unincorporated association or a body of individuals;
+
+(iii) power of attorney granted to him to transact on its behalf; and
+
+(iv) such documents as are required for an individual under sub-rule (4) relating to beneficial owner, managers, officers or employees, as the case may be, holding an attorney to transact on its behalf;
+
+(v) such information as may be required by the reporting entity to collectively establish the existence of such association or body of individuals.
+
+
+When should the verification of identity of clients be undertaken?
+Every reporting entity shall identify its clients, verify their identity, obtain information on the purpose and intended nature of the business relationship; and determine whether a client is acting on behalf of a beneficial owner, and identify the beneficial owner and take all steps to verify the identity of the beneficial owner, at the time of commencement of an account-based relationship and also verify identity while carrying out transaction of an amount equal to or exceeding rupees fifty thousand, whether conducted as a single transaction or several transactions that appear to be connected, or any international money transfer operations.
+
+
+In what form is the information on identity of clients required to be maintained
+Rule 10 of the PML Rules specifies that the reporting entity shall maintain information on identity of clients in the manner as may be specified by the sector Regulators.
+
+
+Who is a beneficial owner?
+Beneficial owner is an individual who ultimately owns or controls a client of a reporting entity or the person on whose behalf a transaction is being conducted and includes a person who exercises ultimate effective control over a juridical person.
+
+
+What are a reporting entity’s obligations with regard to the beneficial ownership verification?
+All reporting entities should, at the time of commencement of an account-based relationship with a client, determine whether the client is acting on behalf of a beneficial owner, and identify the beneficial owner and take all steps to verify the identity of the beneficial owner.
+
+
+What are a reporting entity’s obligations with regard to risk mitigation?
+Every reporting entity is required to exercise ongoing due diligence with respect to the business relationship with every client and closely examine the transactions in order to ensure that they are consistent with their knowledge of the client, his business and risk profile and where necessary, the source of funds.
+
+Every reporting entity should carry out risk assessment to identify, assess and take effective measures to mitigate its money laundering and terrorist financing risk for clients, countries or geographic areas, and products, services, transactions or delivery channels
+
+The risk assessment should be documented, should consider all the relevant risk factors before determining the level of overall risk and the appropriate level and type of mitigation to be applied, should be kept up to date and should be available to competent authorities and self-regulating bodies.

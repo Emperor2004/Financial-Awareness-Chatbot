@@ -1,0 +1,28 @@
+What type of information is required to be furnished under PMLA?
+Every reporting entity is required to furnish information about -
+
+all cash transactions of the value of more than ten lakh rupees or its equivalent in foreign currency
+all series of cash transactions integrally connected to each other which have been individually valued below rupees ten lakh or its equivalent in foreign currency where such series of transactions have taken place within a month and the monthly aggregate exceeds an amount of ten lakh rupees or its equivalent in foreign currency
+all transactions involving receipts by non-profit organizations of value more than rupees ten lakh, or its equivalent in foreign currency
+all cash transactions where forged or counterfeit currency notes or bank notes have been used as genuine or where any forgery of a valuable security or a document has taken place facilitating the transactions
+all suspicious transactions whether or not made in cash
+all cross border wire transfers of the value of more than five lakh rupees or its equivalent in foreign currency where either the origin or destination of fund is in India.
+all purchase and sale by any person of immovable property valued at fifty lakh rupees or more that is registered by the reporting entity, as the case may be
+
+Is there any standard format required to be used by reporting entity for furnishing information to the Director, FIU-IND?
+Yes. Every reporting entity is necessarily required to furnish information to Director, FIU-IND online in a standard format prescribed for the purpose . For this purpose, the reporting entity has to register itself with FIU-IND using the portal https://finnet.gov.in.
+
+
+Who has the responsibility to furnish information to Director, FIU-IND?
+Every reporting is required to communicate to the Director the name, designation and address of the Designated Director and the Principal Officer. The Principal Officer shall furnish the information referred to in Rule 3 of Prevention of Money-Laundering (Maintenance of Records) Rules 2005, to the Director, FIU-IND on the basis of information available with the reporting entity. A copy of such information shall be retained by the Principal Officer for the purposes of official record.
+
+The Principal Officer of a reporting entity shall furnish the information promptly to the Director in respect of all suspicious transactions not later than seven working days on being satisfied that the transaction is suspicious.
+
+It shall be the duty of every reporting entity, its designated director, officers and employees to observe the procedure and the manner of furnishing information as specified by the Director in consultation with its Regulator.
+
+
+Are there any time limits prescribed for furnishing information to Director, FIU-IND?
+Yes. Rule 8 of the Prevention of Money-Laundering (Maintenance of Records) Rules 2005 prescribes time limit for furnishing information to the Director, FIU-IND
+
+The time limit for furnishing information about cash transactions and integrally connected cash transactions , transactions involving receipts by non-profit organisations, cash transactions where forged or counterfeit currency notes or bank notes have been used and cross border wire transfers, every month, as referred to in clauses (A), (B), (BA), (C) and (E) of sub-rule (1) of rule 3 of Prevention of Money-Laundering (Maintenance of Records) Rules, 2005 Shall be by the 15th day of the succeeding month.
+In respect of all suspicious transactions referred to in clause (D) of sub-rule (1) of rule 3 , the same shall be reported promptly and not later than seven working days on being satisfied that the transaction is suspicious.

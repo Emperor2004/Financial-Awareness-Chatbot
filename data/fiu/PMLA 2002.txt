@@ -1,0 +1,48 @@
+What is PMLA?
+PMLA is an abbreviation for Prevention of Money Laundering Act, 2002 which is in force since 1st July 2005.
+
+
+What are the actions for not complying with the obligations under PMLA?
+If the Director, in the course of any inquiry, finds that a reporting entity or its designated director on the Board or any of its employees has failed to comply with the obligations under Chapter IV of the Prevention of Money Laundering Act, 2002 , then, without prejudice to any other action that may be taken under any other provisions of this Act, he may-
+(a) issue a warning in writing; or
+(b) direct such reporting entity or its designated director on the Board or any of its employees, to comply with specific instructions; or
+(c) direct such reporting entity or its designated director on the Board or any of its employees, to send reports at such interval as may be prescribed on the measures it is taking; or
+(d) by an order, impose a monetary penalty on such reporting entity or its designated director on the Board or any of its employees, which shall not be less than ten thousand rupees but may extend to one lakh rupees for each failure.
+
+
+Can fine imposed under section 13 be recovered in the event of default?
+Yes. Section 69 of the Prevention of Money Laundering Act, 2002, provides that where any fine or penalty imposed on any person is not paid within six months from the day of imposition of fine or penalty, the Director or any other officer-authorised by him in this behalf may proceed to recover the amount from the said person in the same manner as prescribed in Schedule II of the Income-tax Act, 1961 for the recovery of arrears and he or any officer authorised by him in this behalf shall have all the powers of the Tax Recovery Officer mentioned in the said Schedule for the said purpose
+
+
+Whether any civil or criminal proceedings can be initiated for furnishing information?
+No. It is provided for in section 14 of the Prevention of Money Laundering Act, 2002, that the reporting entity, its directors and employees shall not be liable to any civil or criminal proceedings against them for furnishing information under clause (b) of sub-section (l) of section 12
+
+
+Can appeal be filed against the order of Director, FIU-IND imposing fine?
+Any reporting entity aggrieved by any order of the Director made under sub-section (2) of section 13, may prefer an appeal to the Appellate Tribunal
+
+
+Can civil court grant injunction against any action taken by the Director, FIU-IND?
+No civil Court shall have jurisdiction to entertain any suit or proceeding in respect of any matter which the Director, an Adjudicating Authority or the Appellate Tribunal is empowered by or under this Act to determine and no injunction shall be granted by any Court or other authority in respect of any action taken or to be taken in pursuance of any power conferred by or under this Act.
+
+
+Can Director, FIU-IND issue summons for discovery and production?
+The Director shall, for the purposes of section 13, have the same powers as are vested in a civil Court under the Code of Civil Procedure, 1908 (5 of 1908) while trying a suit in respect of the following matters, namely
+(a) discovery and inspection;
+(b) enforcing the attendance of any person, including any officer of a reporting entity, and examining him on oath;
+(c) compelling the production of records;
+(d) receiving evidence on affidavits;
+(e) issuing commissions for examination of witnesses and documents; and
+(f) any other matter which may be prescribed.
+
+
+What are the roles and responsibilities of various regulators & authorities in the enforcement of PMLA?
+Section 54 of the Prevention of Money Laundering Act, 2002 empowers and requires various regulators & authorities to assist in the enforcement of the Act.
+
+
+What is the legal framework for sharing of information with other authorities?
+Section 66 of the Prevention of Money Laundering Act, 2002 provides for disclosure of information to other officers, authority or body.
+
+
+What is the legal framework for exchanging information with foreign countries?
+Section 56 of the Prevention of Money Laundering Act, 2002 provides for entering into agreements with foreign countries to enforce provision of PMLA, 2002 and for exchange of information.

@@ -1,0 +1,49 @@
+What are the obligations for maintenance of records under PMLA?
+In terms of section 12 of the Prevention of Money Laundering Act, 2002, every reporting entity shall maintain a record of all transactions, including the information furnished to FIU-IND, in such a manner as to enable it to reconstruct individual transactions. The Reporting Entities shall also maintain record of documents evidencing identity of its clients and beneficial owners as well as account files and business correspondence relating to its clients.
+
+The record has to be maintained of the prescribed transactions and information for a minimum period of five years.
+
+
+
+Which records need to be maintained as per PMLA?
+As per Rule 3 of the Rules Prevention of Money-Laundering (Maintenance of Records) Rules 2005, every reporting entity shall maintain a record of all transactions including, the record of -
+
+all cash transactions of the value of more than ten lakh rupees or its equivalent in foreign currency
+all series of cash transactions integrally connected to each other which have been individually valued below rupees ten lakh or its equivalent in foreign currency where such series of transactions have taken place within a month and the monthly aggregate exceeds an amount of ten lakh rupees or its equivalent in foreign currency
+all transactions involving receipts by non-profit organizations of value more than rupees ten lakh, or its equivalent in foreign currency
+all cash transactions where forged or counterfeit currency notes or bank notes have been used as genuine or where any forgery of a valuable security or a document has taken place facilitating the transactions
+all suspicious transactions whether or not made in cash
+all cross border wire transfers of the value of more than five lakh rupees or its equivalent in foreign currency where either the origin or destination of fund is in India
+all purchase and sale by any person of immovable property valued at fifty lakh rupees or more that is registered by the reporting entity, as the case may be
+
+What constitutes a suspicious transaction under PMLA?
+Suspicious transaction means a transaction referred to in clause (h) of sub-rule(1) of Rule 2 of Prevention of Money-Laundering (Maintenance of Records) Rules 2005, including an attempted transaction, whether or not made in cash, which to a person acting in good faith-
+
+(a) gives rise to a reasonable ground of suspicion that it may involve proceeds of an offence specified in the Schedule to the Act, regardless of the value involved; or
+(b) appears to be made in circumstances of unusual or unjustified complexity; or
+(c) appears to have no economic rationale or bona fide purpose; or
+(d) gives rise to a reasonable ground of suspicion that it may involve financing of the activities relating to terrorism;
+
+Transaction involving financing of the activities relating to terrorism includes transaction involving funds suspected to be linked or related to, or to be used for terrorism, terrorist acts or by a terrorist, terrorist organisation or those who finance or are attempting to finance terrorism.
+
+
+Whether a transaction can be reported both under CTR and STR
+Yes, in case it is a cash transaction falling within the prescribed rules and has also an element of suspicious transaction.
+
+
+How does PMLA, 2002 define records?
+Records include the records maintained in the form of books or stored in a computer or such other form as may be prescribed.
+
+
+
+For how long should the record of transactions be retained?
+The records referred to in clause (a) of sub-section (1) of Section 12 shall be maintained for a period of five years from the date of transaction between a client and the reporting entity. The records referred to in clause (e) of sub-section (1) of Section 12 shall be maintained for a period of five years after the business relationship between a client and the reporting entity has ended or the account has been closed, whichever is later.
+
+
+Can a reporting entity be penalized for not complying with the obligations of maintenance of records under PMLA, 2002?
+Yes, under section 13 of the Prevention of Money Laundering Act, 2002. If the Director, in the course of any inquiry, finds that a reporting entity or its designated director on the Board or any of its employees has failed to comply with the obligations under Chapter IV of the Prevention of Money Laundering Act, 2002 , then, without prejudice to any other action that may be taken under any other provisions of this Act, he may-
+
+(a) issue a warning in writing; or
+(b) direct such reporting entity or its designated director on the Board or any of its employees, to comply with specific instructions; or
+(c) direct such reporting entity or its designated director on the Board or any of its employees, to send reports at such interval as may be prescribed on the measures it is taking; or
+(d) by an order, impose a monetary penalty on such reporting entity or its designated director on the Board or any of its employees, which shall not be less than ten thousand rupees but may extend to one lakh rupees for each failure.

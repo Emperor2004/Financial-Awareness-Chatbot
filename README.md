@@ -151,17 +151,16 @@ Stage 3: Run the Application
 Start the Flask web server.
 
 ```Bash
-
 python app.py
 ```
-Open your web browser and navigate to http://127.0.0.1:5000 to start chatting with the bot.
+Open your web browser and navigate to http://localhost:3000 to start chatting with the bot.
 
 ## 7. Frontend UI/UX
 The user interface is designed to be simple, intuitive, and mobile-friendly.
 
 - **Chat Window:** A clean, scrollable window displays the conversation history. User messages are aligned to the right, and bot responses are aligned to the left.
 
-- Input Area:** A text box at the bottom allows users to type their questions, with a clear "Send" button.
+- **Input Area:** A text box at the bottom allows users to type their questions, with a clear "Send" button.
 
 - **Loading Indicator:** While the bot is processing a query and generating a response, a subtle loading indicator appears to provide feedback to the user.
 

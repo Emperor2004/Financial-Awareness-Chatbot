@@ -1,6 +1,6 @@
-# Financial Information Retrieval Assistant (Fin-Info-Bot)
+# Financial Information Retrieval Assistant
 
-**Fin-Info-Bot** is an intelligent, agentic chatbot designed to provide accurate and accessible financial information to users in India. It leverages a Retrieval-Augmented Generation (RAG) architecture to answer user queries based on a trusted knowledge base built from official government and regulatory sources.
+**Financial Awareness Chatbot** is an intelligent, agentic chatbot designed to provide accurate and accessible financial information to users in India. It leverages a Retrieval-Augmented Generation (RAG) architecture to answer user queries based on a trusted knowledge base built from official government and regulatory sources.
 
 This project addresses the challenge of navigating dense and complex financial documents on websites like the RBI, SEBI, and the Income Tax Department, providing users with clear, synthesized answers and direct source links.
 
@@ -34,136 +34,116 @@ The workflow is as follows:
 
 This project utilizes a modern, Python-based stack for AI and web development.
 
-* **Backend**: **Flask** (a lightweight Python web framework for serving the API).
-* **AI/NLP Framework**: **LangChain** (for orchestrating the RAG pipeline, including data loading, chunking, and interacting with the LLM).
-* **LLM & Embeddings**: **Google Gemini & Google Embeddings API**.
-* **Vector Database**: **ChromaDB** (for local development and efficient similarity search).
-* **Data Collection**:
-    * **Requests** & **BeautifulSoup4**: For scraping HTML content.
-    * **PyMuPDF**: For extracting text from PDF documents.
-* **Frontend**: Plain **HTML**, **CSS**, and **JavaScript** for a clean, responsive user interface.
-
+* **Backend**:
+    * **Framework**: **FastAPI**
+    * **AI/NLP**: **LangChain**, **Google Gemini**
+    * **Vector Database**: **ChromaDB**
+    * **Data Collection**: **BeautifulSoup4**, **PyMuPDF**, **Requests**, **Selenium**, **Undetected Chromedriver**
+* **Frontend**:
+    * **Framework**: **SvelteKit**
+    * **Styling**: **Tailwind CSS**, **DaisyUI**
+    * **Language**: **TypeScript**
 ---
 
-## 4. Project Structure
+## 4. Project Structure and File Descriptions
 
-The project is organized into a clean and scalable directory structure:
-
-```bash
-fin-info-bot/
+The project is organized into a monorepo with two primary directories: `backend` for the Python-based API and AI logic, and `frontend` for the SvelteKit-based user interface.
+```
+Financial Awareness Chatbot/
 │
-├── scripts/              # Data collection and processing scripts
-│   ├── scrape_fiu.py
-│   ├── scrape_incometax.py
-│   ├── process_local_pdfs.py  # For manually downloaded files
-│   └── ingest.py            # Processes all data into the vector DB
+├── backend/
+│   ├── scripts/
+│   ├── data/
+│   ├── db/
+│   ├── .env
+│   ├── app.py
+│   └── requirements.txt
 │
-├── app.py                # Main Flask application and API endpoint
-│
-├── templates/
-│   └── index.html        # Frontend chat interface
-│
-├── static/
-│   ├── css/style.css     # Styling for the chat
-│   └── js/script.js      # Frontend logic for API calls
-│
-├── db/                   # Local Chroma vector database storage
-│
-├── data/                 # Raw text data scraped from sources
-│   ├── fiu/
-│   ├── incometax/
-│   └── sebi_from_pdf/
-│
-├── .env                  # Stores secret API keys (e.g., GOOGLE_API_KEY)
-└── README.md             # This file
+├── frontend/
+│   ├── src/
+│   ├── static/
+│   ├── package.json
+│   ├── svelte.config.js
+│   └── tailwind.config.cjs
+└── README.md
 ```
 
 ## 5. Setup and Installation
 Follow these steps to get the project running on your local machine.
 
-1. Clone the Repository:
+Clone the Repository:
 
 ```Bash
 git clone <your-repository-url>
-cd fin-info-bot
+cd Financial Awareness Chatbot
 ```
-2. Create and Activate a Virtual Environment:
+### Backend Setup
 
-```Bash
-python -m venv fin_venv
-# On Windows
-.\fin_venv\Scripts\activate
-# On macOS/Linux
-source fin_venv/bin/activate
-```
-3. Install Dependencies:
-Create a `requirements.txt` file with the following content:
+1.  **Navigate to the backend directory**:
+    ```bash
+    cd backend
+    ```
+2.  **Create and activate a Python virtual environment**:
+    ```bash
+    python -m venv venv
+    # On Windows
+    .\venv\Scripts\activate
+    # On macOS/Linux
+    source venv/bin/activate
+    ```
+3.  **Install Python dependencies**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+4.  **Set up your Google API Key**:
+    * Create a `.env` file in the `backend` directory.
+    * Add your key: `GOOGLE_API_KEY="YOUR_API_KEY_HERE"`
 
-```Plaintext
-flask
-langchain
-langchain-google-genai
-langchain-community
-chromadb
-beautifulsoup4
-requests
-PyMuPDF
-python-dotenv
-```
-Then, install the packages:
+---
 
-```Bash
-pip install -r requirements.txt
-```
-4. Set Up API Key:
-- Create a file named `.env` in the root project directory.
+### Frontend Setup
 
-- Get your API key from <a>Google AI Studio</a>.
+1.  **Navigate to the frontend directory**:
+    ```bash
+    cd frontend
+    ```
+2.  **Install Node.js dependencies**:
+    ```bash
+    npm install
+    ```
 
-- Add your key to the .env file:
-
-`GOOGLE_API_KEY="YOUR_API_KEY_HERE"`
+---
 
 ## 6. Usage Workflow
-The project is run in three stages:
+The project is run in three stages. You will need two separate terminals to run the backend and frontend servers simultaneously.
 
-Stage 1: Data Collection
-Run the scrapers to collect the latest information.
+#### **Stage 1: Prepare the Knowledge Base** (in `backend` terminal)
 
-```Bash
-python scripts/scrape_fiu.py
-python scripts/scrape_incometax.py
-```
-For protected sites like SEBI and RBI, perform the manual PDF download as described in the development process and run the local processor:
+This only needs to be done once to build your chatbot's brain.
 
-```Bash
-python scripts/process_local_pdfs.py
-```
-Stage 2: Data Ingestion
+1.  **Collect Data**: Run the scrapers to fetch documents. For sites that block scraping (like SEBI), you will need to manually download the relevant PDF or text files into the `data/` directory.
+    ```bash
+    python scripts/scrape_fiu.py
+    python scripts/scrape_incometax.py
+    ```
+2.  **Build the Vector Database**: Process all text files into the ChromaDB store.
+    ```bash
+    python scripts/vector_embeddings.py
+    ```
 
-Process all the collected text files and build your vector database. This only needs to be done once after you've collected your data.
+#### **Stage 2: Run the Servers**
 
-```Bash
-python scripts/ingest.py
-```
-Stage 3: Run the Application
+1.  **Start the Backend API** (in `backend` terminal):
+    ```bash
+    uvicorn app:app --reload
+    ```
+    The backend API will be running on `http://127.0.0.1:8000`.
 
-Start the Flask web server.
+#### **Stage 3: Run the Frontends**
+1.  **Start the Frontend Application** (in `frontend` terminal):
+    ```bash
+    npm run dev
+    ```
+    The frontend will be accessible at `http://localhost:5173`.
 
-```Bash
-python app.py
-```
-Open your web browser and navigate to http://localhost:3000 to start chatting with the bot.
-
-## 7. Frontend UI/UX
-The user interface is designed to be simple, intuitive, and mobile-friendly.
-
-- **Chat Window:** A clean, scrollable window displays the conversation history. User messages are aligned to the right, and bot responses are aligned to the left.
-
-- **Input Area:** A text box at the bottom allows users to type their questions, with a clear "Send" button.
-
-- **Loading Indicator:** While the bot is processing a query and generating a response, a subtle loading indicator appears to provide feedback to the user.
-
-- **Source Citation:** Each response from the bot includes a list of clickable source URLs, allowing users to verify the information directly from the official documents.
-
-- **Disclaimer:** A clear and persistent disclaimer is visible on the page to inform users of the tool's purpose and limitations.
+You can now open your browser and navigate to **http://localhost:5173** to use the Financial Awareness Chatbot.

@@ -14,7 +14,7 @@ Official financial information in India is spread across numerous government web
 
 ---
 
-## 2. Solution: An Agentic RAG Chatbot
+## 2. Solution
 
 This project solves the problem by implementing a **Retrieval-Augmented Generation (RAG)** system. This architecture ensures that the chatbot's answers are grounded in facts from our curated knowledge base, significantly reducing the risk of AI "hallucinations" or providing incorrect information.
 

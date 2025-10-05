@@ -1,8 +1,5 @@
-requests
-beautifulsoup4
-langchain-community
-langchain-text-splitters
-langchain-google-genai
-langchain-chroma
-chromadb
-python-dotenv
+langchain==0.1.20
+langchain-community==0.0.38
+langchain-google-genai==1.0.1
+chromadb==0.4.22
+python-dotenv==1.0.0

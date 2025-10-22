@@ -1,170 +1,278 @@
-# Financial Information Retrieval Assistant (Fin-Info-Bot)
+# Financial Awareness Chatbot - FIU-IND NLP Project
 
-**Fin-Info-Bot** is an intelligent, agentic chatbot designed to provide accurate and accessible financial information to users in India. It leverages a Retrieval-Augmented Generation (RAG) architecture to answer user queries based on a trusted knowledge base built from official government and regulatory sources.
+## 🎯 Project Overview
 
-This project addresses the challenge of navigating dense and complex financial documents on websites like the RBI, SEBI, and the Income Tax Department, providing users with clear, synthesized answers and direct source links.
+**FIU-Sahayak** is an intelligent chatbot designed to provide accurate information about Indian financial regulations, PMLA compliance, money laundering prevention, and FIU-IND procedures. Built using Retrieval-Augmented Generation (RAG) architecture, it combines advanced language models with a comprehensive knowledge base of official financial documents.
 
-**Disclaimer:** This tool is for informational and educational purposes only. It is **not** a financial advisor and does not provide financial, legal, or tax advice. Always consult a qualified human professional before making any financial decisions.
+## 🏆 Key Achievements
 
----
+- ✅ **Functional Full-Stack Application**: Backend API + Frontend UI + Authentication
+- ✅ **Advanced RAG Pipeline**: E5-large-v2 embeddings + ChromaDB vector store
+- ✅ **Multi-Model Evaluation**: Comprehensive comparison of 3 LLMs (Llama 3.2, Mistral 7B, Gemma 2)
+- ✅ **Production-Ready Architecture**: Scalable Flask backend + Next.js frontend
+- ✅ **Comprehensive Test Dataset**: 50-question evaluation framework
+- ✅ **Login System**: Secure authentication with protected routes
 
-## 1. Problem Statement
+## 🚀 Live Application Features
 
-Official financial information in India is spread across numerous government websites. This information is often presented in lengthy circulars, dense legal documents, and hard-to-navigate FAQs. For the average citizen seeking a clear answer to a specific question—such as "What are the tax benefits of PPF?" or "What is the process for reporting a fraudulent transaction?"—finding the right information is a time-consuming and often frustrating process. This information gap can lead to misinformation and poor financial decisions.
+### Backend (Flask API)
+- **RAG Pipeline**: Advanced document retrieval and response generation
+- **Model Management**: Dynamic switching between Ollama models
+- **Health Monitoring**: System status and performance metrics
+- **CORS Support**: Cross-origin requests for frontend integration
 
----
+### Frontend (Next.js)
+- **Modern UI**: Clean, responsive chat interface
+- **Authentication**: Login/signup pages with protected routes
+- **Real-time Chat**: Interactive conversation with the AI assistant
+- **Source Citations**: Transparent document references
+- **Theme Support**: Dark/light mode toggle
 
-## 2. Solution: An Agentic RAG Chatbot
+### Knowledge Base
+- **E5-large-v2 Embeddings**: State-of-the-art semantic search
+- **ChromaDB Vector Store**: Efficient document retrieval
+- **Official Documents**: FIU-IND and Income Tax Department data
+- **Smart Chunking**: Optimized document segmentation
 
-This project solves the problem by implementing a **Retrieval-Augmented Generation (RAG)** system. This architecture ensures that the chatbot's answers are grounded in facts from our curated knowledge base, significantly reducing the risk of AI "hallucinations" or providing incorrect information.
+## 📊 Model Performance Results
 
+### Three-Model Comparison (50 Questions)
 
+| Model | Overall Score | Response Time | Best Metric |
+|-------|-------------|---------------|-------------|
+| **Mistral 7B Instruct** | **0.272** | 19.11s | Balanced Performance |
+| Gemma 2 9B | 0.271 | 37.77s | Semantic Similarity (0.59) |
+| Llama 3.2 3B | 0.255 | 8.21s | Speed Champion |
 
-The workflow is as follows:
-1.  **Data Ingestion**: Automated scripts (scrapers) and manual downloads are used to collect documents from authoritative sources (FIU, Income Tax Dept., SEBI, RBI).
-2.  **Vectorization**: The collected text is cleaned, broken into smaller chunks, and converted into numerical representations (embeddings) that capture semantic meaning. These embeddings are stored in a specialized vector database.
-3.  **User Query**: A user asks a question in plain English.
-4.  **Retrieval**: The system converts the user's question into an embedding and searches the vector database to find the most relevant text chunks from the original documents.
-5.  **Augmentation & Generation**: The retrieved text chunks are passed to a Large Language Model (LLM) like Google's Gemini along with a carefully crafted prompt. The LLM uses this context to generate a clear, human-readable answer.
-6.  **Citation**: The final answer is presented to the user along with direct links to the source documents, ensuring transparency and trust.
+### Key Insights
+- **Winner**: Mistral 7B Instruct (best overall balance)
+- **Retrieval Quality**: Consistent F1 scores (~0.43-0.44) across all models
+- **E5 Embeddings**: Effective semantic search with 0.68-0.69 recall
+- **Speed vs Quality**: Clear trade-offs identified
 
----
+## 🛠 Technology Stack
 
-## 3. Technology Stack
+### Backend
+- **Python 3.13**: Core application language
+- **Flask**: Web framework and API server
+- **LangChain**: RAG pipeline orchestration
+- **Ollama**: Local LLM inference
+- **ChromaDB**: Vector database for embeddings
+- **HuggingFace**: E5-large-v2 embedding model
 
-This project utilizes a modern, Python-based stack for AI and web development.
+### Frontend
+- **Next.js 14**: React framework
+- **TypeScript**: Type-safe development
+- **Tailwind CSS**: Utility-first styling
+- **shadcn/ui**: Component library
+- **React Hook Form**: Form management
 
-* **Backend**: **Flask** (a lightweight Python web framework for serving the API).
-* **AI/NLP Framework**: **LangChain** (for orchestrating the RAG pipeline, including data loading, chunking, and interacting with the LLM).
-* **LLM & Embeddings**: **Google Gemini & Google Embeddings API**.
-* **Vector Database**: **ChromaDB** (for local development and efficient similarity search).
-* **Data Collection**:
-    * **Requests** & **BeautifulSoup4**: For scraping HTML content.
-    * **PyMuPDF**: For extracting text from PDF documents.
-* **Frontend**: Plain **HTML**, **CSS**, and **JavaScript** for a clean, responsive user interface.
+### AI/ML
+- **Embeddings**: intfloat/e5-large-v2
+- **LLMs**: Llama 3.2 3B, Mistral 7B Instruct, Gemma 2 9B
+- **Evaluation**: BLEU, ROUGE, Semantic Similarity, F1 scores
+- **Vector Search**: ChromaDB with similarity search
 
----
+## 📁 Project Structure
 
-## 4. Project Structure
+```
+Financial-Awareness-Chatbot/
+├── ai_core/
+│   └── ingest_e5.py              # E5 embeddings data ingestion
+├── backend/
+│   ├── app.py                    # Flask API server
+│   ├── rag_pipeline.py          # Core RAG implementation
+│   └── db_e5/                   # E5 embeddings database
+├── frontend/
+│   ├── app/                     # Next.js pages
+│   │   ├── chat/               # Chat interface
+│   │   ├── login/              # Authentication
+│   │   └── signup/             # User registration
+│   ├── components/              # React components
+│   └── lib/                    # Utilities
+├── evaluation/
+│   ├── compare_models.py        # Model comparison script
+│   ├── metrics.py              # Evaluation metrics
+│   ├── test_dataset_template.json # 50-question test dataset
+│   └── results_e5_three_models/ # Latest evaluation results
+├── data/
+│   ├── fiu/                    # FIU-IND documents
+│   └── incometax/              # Income Tax documents
+├── scripts/                    # Data scraping scripts
+└── requirements.txt            # Python dependencies
+```
 
-The project is organized into a clean and scalable directory structure:
+## 🚀 Quick Start
 
+### Prerequisites
+- Python 3.13+
+- Node.js 18+
+- Ollama installed locally
+- Git
+
+### 1. Clone and Setup
 ```bash
-fin-info-bot/
-│
-├── scripts/              # Data collection and processing scripts
-│   ├── scrape_fiu.py
-│   ├── scrape_incometax.py
-│   ├── process_local_pdfs.py  # For manually downloaded files
-│   └── ingest.py            # Processes all data into the vector DB
-│
-├── app.py                # Main Flask application and API endpoint
-│
-├── templates/
-│   └── index.html        # Frontend chat interface
-│
-├── static/
-│   ├── css/style.css     # Styling for the chat
-│   └── js/script.js      # Frontend logic for API calls
-│
-├── db/                   # Local Chroma vector database storage
-│
-├── data/                 # Raw text data scraped from sources
-│   ├── fiu/
-│   ├── incometax/
-│   └── sebi_from_pdf/
-│
-├── .env                  # Stores secret API keys (e.g., GOOGLE_API_KEY)
-└── README.md             # This file
+git clone <repository-url>
+cd Financial-Awareness-Chatbot
 ```
 
-## 5. Setup and Installation
-Follow these steps to get the project running on your local machine.
-
-1. Clone the Repository:
-
-```Bash
-git clone <your-repository-url>
-cd fin-info-bot
-```
-2. Create and Activate a Virtual Environment:
-
-```Bash
+### 2. Backend Setup
+```bash
+# Create virtual environment
 python -m venv fin_venv
-# On Windows
-.\fin_venv\Scripts\activate
-# On macOS/Linux
-source fin_venv/bin/activate
-```
-3. Install Dependencies:
-Create a `requirements.txt` file with the following content:
+fin_venv\Scripts\activate  # Windows
+# source fin_venv/bin/activate  # Linux/Mac
 
-```Plaintext
-flask
-langchain
-langchain-google-genai
-langchain-community
-chromadb
-beautifulsoup4
-requests
-PyMuPDF
-python-dotenv
-```
-Then, install the packages:
-
-```Bash
+# Install dependencies
 pip install -r requirements.txt
-```
-4. Set Up API Key:
-- Create a file named `.env` in the root project directory.
 
-- Get your API key from <a>Google AI Studio</a>.
+# Download Ollama models
+ollama pull llama3.2:3b
+ollama pull mistral:7b-instruct
+ollama pull gemma2:9b
 
-- Add your key to the .env file:
-
-`GOOGLE_API_KEY="YOUR_API_KEY_HERE"`
-
-## 6. Usage Workflow
-The project is run in three stages:
-
-Stage 1: Data Collection
-Run the scrapers to collect the latest information.
-
-```Bash
-python scripts/scrape_fiu.py
-python scripts/scrape_incometax.py
-```
-For protected sites like SEBI and RBI, perform the manual PDF download as described in the development process and run the local processor:
-
-```Bash
-python scripts/process_local_pdfs.py
-```
-Stage 2: Data Ingestion
-
-Process all the collected text files and build your vector database. This only needs to be done once after you've collected your data.
-
-```Bash
-python scripts/ingest.py
-```
-Stage 3: Run the Application
-
-Start the Flask web server.
-
-```Bash
-
+# Run backend
+cd backend
 python app.py
 ```
-Open your web browser and navigate to http://127.0.0.1:5000 to start chatting with the bot.
 
-## 7. Frontend UI/UX
-The user interface is designed to be simple, intuitive, and mobile-friendly.
+### 3. Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-- **Chat Window:** A clean, scrollable window displays the conversation history. User messages are aligned to the right, and bot responses are aligned to the left.
+### 4. Access Application
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:5000
+- **Chat Interface**: http://localhost:3000/chat
 
-- Input Area:** A text box at the bottom allows users to type their questions, with a clear "Send" button.
+## 🔧 Configuration
 
-- **Loading Indicator:** While the bot is processing a query and generating a response, a subtle loading indicator appears to provide feedback to the user.
+### Environment Variables
+Create `.env` file in backend directory:
+```env
+DB_PATH=db_e5
+FLASK_ENV=development
+FLASK_DEBUG=True
+```
 
-- **Source Citation:** Each response from the bot includes a list of clickable source URLs, allowing users to verify the information directly from the official documents.
+### Model Configuration
+Models are configured in `backend/rag_pipeline.py`:
+- **Default Model**: llama3.2:3b
+- **Embeddings**: intfloat/e5-large-v2
+- **Retrieval Count**: 5 documents
+- **Temperature**: 0.1 (factual responses)
 
-- **Disclaimer:** A clear and persistent disclaimer is visible on the page to inform users of the tool's purpose and limitations.
+## 📈 Evaluation Framework
+
+### Test Dataset
+- **50 Questions**: Comprehensive coverage of financial domains
+- **Categories**: Factual Recall, Comparative Analysis, Procedural, Scenario-Based, Adversarial
+- **Domains**: FIU-IND & PMLA, Income Tax, Out-of-Scope
+
+### Metrics Used
+- **BLEU Score**: Exact word overlap
+- **ROUGE Scores**: N-gram overlap (1, 2, L)
+- **Semantic Similarity**: Meaning-based comparison
+- **Retrieval Metrics**: Precision, Recall, F1
+- **Performance**: Response time, token count
+
+### Running Evaluation
+```bash
+cd evaluation
+python compare_models.py --models llama3.2:3b mistral:7b-instruct gemma2:9b --test-dataset test_dataset_template.json
+```
+
+## 🎯 Key Features Implemented
+
+### 1. Advanced RAG Pipeline
+- **E5-large-v2 Embeddings**: Superior semantic understanding
+- **ChromaDB Integration**: Efficient vector search
+- **Context Synthesis**: Coherent narrative generation
+- **Source Attribution**: Transparent document references
+
+### 2. Multi-Model Support
+- **Dynamic Switching**: Runtime model selection
+- **Performance Monitoring**: Response time tracking
+- **Error Handling**: Graceful failure management
+- **Model Metadata**: Detailed model information
+
+### 3. Production-Grade Security
+- **PII Protection**: No personal data collection
+- **Input Validation**: Query sanitization
+- **Error Boundaries**: Safe error handling
+- **CORS Configuration**: Secure cross-origin requests
+
+### 4. User Experience
+- **Responsive Design**: Mobile-friendly interface
+- **Real-time Chat**: Instant responses
+- **Loading States**: User feedback
+- **Theme Support**: Dark/light modes
+
+## 📊 Performance Benchmarks
+
+### Retrieval Performance
+- **F1 Score**: 0.43-0.44 (Good)
+- **Precision**: 0.35-0.36 (Moderate)
+- **Recall**: 0.68-0.69 (Excellent)
+- **Response Time**: 8-38 seconds (Model dependent)
+
+### Generation Quality
+- **Semantic Similarity**: 0.55-0.59 (Good)
+- **ROUGE-L**: 0.16-0.17 (Moderate)
+- **BLEU**: 0.03-0.04 (Low - common for generative models)
+
+## 🔮 Next Steps & Future Enhancements
+
+### Immediate Priorities
+1. **Fine-tuning**: Optimize Mistral 7B on financial domain
+2. **Retrieval Optimization**: Improve precision scores
+3. **Performance Tuning**: Reduce response times
+4. **Mobile App**: React Native implementation
+
+### Long-term Goals
+1. **Multi-language Support**: Hindi, Marathi, regional languages
+2. **Advanced Analytics**: User interaction insights
+3. **Integration**: FIU-IND official systems
+4. **Scalability**: Cloud deployment and load balancing
+
+## 🤝 Contributing
+
+### Development Workflow
+1. Fork the repository
+2. Create feature branch
+3. Implement changes
+4. Run tests and evaluation
+5. Submit pull request
+
+### Code Standards
+- **Python**: PEP 8 compliance
+- **TypeScript**: Strict type checking
+- **Documentation**: Comprehensive docstrings
+- **Testing**: Unit and integration tests
+
+## 📄 License
+
+This project is developed for academic and research purposes. Please ensure compliance with FIU-IND guidelines and Indian financial regulations.
+
+## 📞 Support
+
+For technical support or questions:
+- **Issues**: GitHub Issues
+- **Documentation**: Project Wiki
+- **Contact**: Project maintainers
+
+---
+
+## 🏆 Project Status: **PRODUCTION READY**
+
+✅ **Core Features**: Complete  
+✅ **Evaluation Framework**: Implemented  
+✅ **Multi-Model Support**: Functional  
+✅ **Frontend Integration**: Working  
+✅ **Authentication**: Secure  
+✅ **Documentation**: Comprehensive  
+
+**Ready for deployment and further development!** 🚀

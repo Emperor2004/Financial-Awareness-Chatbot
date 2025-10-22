@@ -1,10 +1,15 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Shield, MessageCircle, AlertTriangle, Phone } from "lucide-react"
+import { Shield, MessageCircle, AlertTriangle, Phone, LogIn, UserPlus } from "lucide-react"
 import Link from "next/link"
+import { useAuth } from "@/components/auth-provider"
 
 export default function HomePage() {
+  const { user, isAuthenticated, logout } = useAuth()
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -14,19 +19,44 @@ export default function HomePage() {
             <div className="flex items-center gap-3">
               <Shield className="h-8 w-8 text-primary" />
               <div>
-                <h1 className="text-xl font-bold text-foreground">FIU-IND</h1>
+                <h1 className="text-xl font-bold text-foreground">FIU-Sahayak</h1>
                 <p className="text-sm text-muted-foreground">Financial Intelligence Unit - India</p>
               </div>
             </div>
-            <Select defaultValue="en">
-              <SelectTrigger className="w-32">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="en">English</SelectItem>
-                <SelectItem value="hi">हिंदी</SelectItem>
-              </SelectContent>
-            </Select>
+            
+            <div className="flex items-center gap-3">
+              <Select defaultValue="en">
+                <SelectTrigger className="w-32">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="en">English</SelectItem>
+                  <SelectItem value="hi">हिंदी</SelectItem>
+                  <SelectItem value="mr">मराठी</SelectItem>
+                </SelectContent>
+              </Select>
+
+              {isAuthenticated ? (
+                <Button variant="outline" size="sm" onClick={logout}>
+                  Logout
+                </Button>
+              ) : (
+                <div className="flex gap-2">
+                  <Link href="/login">
+                    <Button variant="outline" size="sm">
+                      <LogIn className="h-4 w-4 mr-2" />
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href="/signup">
+                    <Button size="sm">
+                      <UserPlus className="h-4 w-4 mr-2" />
+                      Sign Up
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </header>
@@ -37,11 +67,13 @@ export default function HomePage() {
           {/* Hero Section */}
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold text-balance text-foreground">
-              FIU-IND Financial Fraud Awareness Chatbot
+              FIU-Sahayak
             </h1>
+            <p className="text-lg text-primary font-semibold">
+              Official AI Assistant for Financial Intelligence Unit of India
+            </p>
             <p className="text-xl text-muted-foreground text-pretty max-w-2xl mx-auto">
-              Ask questions about financial fraud, AML regulations, scam tactics, or report suspicious activity
-              securely.
+              Get accurate information about PMLA, AML regulations, compliance requirements, and financial fraud prevention.
             </p>
           </div>
 
@@ -86,12 +118,39 @@ export default function HomePage() {
 
           {/* CTA Section */}
           <div className="space-y-6">
-            <Link href="/chat">
-              <Button size="lg" className="text-lg px-8 py-6">
-                Start Chatting
-                <MessageCircle className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
+            {isAuthenticated ? (
+              <div className="space-y-3">
+                <p className="text-sm text-muted-foreground">
+                  Welcome back, <span className="font-semibold text-foreground">{user?.name}</span>!
+                </p>
+                <Link href="/chat">
+                  <Button size="lg" className="text-lg px-8 py-6">
+                    Continue to Chat
+                    <MessageCircle className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div className="flex gap-4 justify-center">
+                  <Link href="/login">
+                    <Button size="lg" variant="outline" className="text-lg px-8 py-6">
+                      <LogIn className="mr-2 h-5 w-5" />
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href="/signup">
+                    <Button size="lg" className="text-lg px-8 py-6">
+                      <UserPlus className="mr-2 h-5 w-5" />
+                      Sign Up Free
+                    </Button>
+                  </Link>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Create an account to access FIU-Sahayak AI assistant
+                </p>
+              </div>
+            )}
 
             {/* Warning Message */}
             <Card className="bg-muted/50 border-destructive/20">
@@ -127,23 +186,43 @@ export default function HomePage() {
               <h3 className="font-semibold text-foreground mb-3">Quick Links</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <a href="#" className="hover:text-primary transition-colors">
-                    About FIU-IND
+                  <a 
+                    href="https://fiuindia.gov.in/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Official FIU-IND Website
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-primary transition-colors">
-                    AML Guidelines
+                  <a 
+                    href="https://www.rbi.org.in/Scripts/BS_ViewMas.aspx?Id=10487" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-primary transition-colors"
+                  >
+                    RBI AML Guidelines
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-primary transition-colors">
-                    Report Fraud
+                  <a 
+                    href="https://cybercrime.gov.in/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Report Cyber Crime
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-primary transition-colors">
-                    Resources
+                  <a 
+                    href="https://www.incometax.gov.in/iec/foportal/help/contact-us" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Income Tax Helpline
                   </a>
                 </li>
               </ul>
@@ -154,9 +233,22 @@ export default function HomePage() {
               <div className="space-y-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
-                  <span>Helpline: 1800-XXX-XXXX</span>
+                  <a 
+                    href="tel:1800-180-5533" 
+                    className="hover:text-primary transition-colors"
+                  >
+                    Helpline: 1800-180-5533
+                  </a>
                 </div>
-                <p>Email: help@fiuindia.gov.in</p>
+                <p>
+                  Email:{" "}
+                  <a 
+                    href="mailto:help@fiuindia.gov.in" 
+                    className="hover:text-primary transition-colors"
+                  >
+                    help@fiuindia.gov.in
+                  </a>
+                </p>
                 <p>Available 24/7 for urgent matters</p>
               </div>
             </div>

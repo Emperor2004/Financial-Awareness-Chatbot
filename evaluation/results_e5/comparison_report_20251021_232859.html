@@ -1,0 +1,94 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Model Comparison Report</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 40px; background-color: #f5f5f5; }
+                h1 { color: #333; border-bottom: 3px solid #4CAF50; padding-bottom: 10px; }
+                h2 { color: #555; margin-top: 30px; }
+                table { border-collapse: collapse; width: 100%; margin: 20px 0; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+                th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+                th { background-color: #4CAF50; color: white; font-weight: bold; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                tr:hover { background-color: #f1f1f1; }
+                .best { background-color: #d4edda !important; font-weight: bold; }
+                .metric { font-family: monospace; }
+                img { max-width: 100%; height: auto; margin: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                .summary { background: white; padding: 20px; margin: 20px 0; border-left: 4px solid #4CAF50; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+                .timestamp { color: #888; font-size: 0.9em; }
+            </style>
+        </head>
+        <body>
+            <h1>Model Comparison Report</h1>
+            <p class="timestamp">Generated: 2025-10-21 23:29:04</p>
+            
+            <div class="summary">
+                <h2>Summary</h2>
+                <p><strong>Number of Models Compared:</strong> 2</p>
+                <p><strong>Test Cases:</strong> 10</p>
+                <p><strong>Best Overall Model:</strong> llama3.2:3b 
+                   (Score: 0.1898)</p>
+            </div>
+            
+            <h2>Aggregate Metrics Comparison</h2>
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <th>BLEU</th>
+                    <th>ROUGE-1</th>
+                    <th>ROUGE-2</th>
+                    <th>ROUGE-L</th>
+                    <th>Semantic Sim.</th>
+                    <th>Retrieval F1</th>
+                    <th>Retrieval Precision</th>
+                    <th>Retrieval Recall</th>
+                    <th>Avg Response Time</th>
+                    <th>Overall Score</th>
+                </tr>
+        
+                <tr class="best">
+                    <td>llama3.2:3b</td>
+                    <td class="metric">0.0085</td>
+                    <td class="metric">0.1730</td>
+                    <td class="metric">0.0295</td>
+                    <td class="metric">0.1042</td>
+                    <td class="metric">0.4562</td>
+                    <td class="metric">0.0000</td>
+                    <td class="metric">0.0000</td>
+                    <td class="metric">0.0000</td>
+                    <td class="metric">5.13s</td>
+                    <td class="metric">0.1898</td>
+                </tr>
+            
+                <tr>
+                    <td>mistral:7b-instruct</td>
+                    <td class="metric">0.0094</td>
+                    <td class="metric">0.1676</td>
+                    <td class="metric">0.0278</td>
+                    <td class="metric">0.1018</td>
+                    <td class="metric">0.4166</td>
+                    <td class="metric">0.0000</td>
+                    <td class="metric">0.0000</td>
+                    <td class="metric">0.0000</td>
+                    <td class="metric">16.71s</td>
+                    <td class="metric">0.1765</td>
+                </tr>
+            
+            </table>
+            
+            <h2>Visualizations</h2>
+            <img src="results_e5\comparison_report_20251021_232859.png" alt="Model Comparison Charts">
+            
+            <h2>Recommendations</h2>
+            <div class="summary">
+                <ul>
+                    <li><strong>Best for Accuracy:</strong> llama3.2:3b (Semantic Similarity: 0.4562)</li>
+                    <li><strong>Fastest Response:</strong> llama3.2:3b (5.13s)</li>
+                    <li><strong>Best Overall:</strong> llama3.2:3b (Overall Score: 0.1898)</li>
+                </ul>
+            </div>
+            
+        </body>
+        </html>
+        

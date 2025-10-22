@@ -1,0 +1,2 @@
+model_name,num_cases,avg_bleu,avg_rouge1,avg_rouge2,avg_rougeL,avg_semantic_similarity,avg_response_time,total_time,avg_precision,avg_recall,avg_f1,overall_score,embedding_model,vector_db,collection,evaluation_date
+llama3.2:3b,50,0.03960864153252886,0.21266199529363114,0.09199520773810599,0.14813507931121406,0.5588121575117111,8.173320536613465,408.6660268306732,0.34375,0.6770833333333334,0.4368055555555555,0.2508909718770225,intfloat/e5-large-v2,ChromaDB,financial_regulations_e5,2025-10-22 01:59:06

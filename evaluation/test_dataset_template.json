@@ -1,0 +1,555 @@
+[
+  {
+    "question_id": "Q001",
+    "question": "What is PMLA?",
+    "reference_answers": [
+      "PMLA is an abbreviation for Prevention of Money Laundering Act, 2002 which is in force since 1st July 2005."
+    ],
+    "relevant_documents": ["PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "easy",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q002",
+    "question": "What is the penalty for not complying with PMLA obligations?",
+    "reference_answers": [
+      "The Director may impose a monetary penalty on the reporting entity or its designated director or employees, which shall not be less than ten thousand rupees but may extend to one lakh rupees for each failure. The Director may also issue warnings, direct compliance with specific instructions, or require periodic compliance reports."
+    ],
+    "relevant_documents": ["PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q003",
+    "question": "How can I report suspicious financial activity to FIU-IND?",
+    "reference_answers": [
+      "Reporting entities must furnish information as per section 12(1)(b) of the Prevention of Money Laundering Act, 2002. The reporting entity, its directors and employees shall not be liable to any civil or criminal proceedings for furnishing such information."
+    ],
+    "relevant_documents": ["PMLA 2002.txt", "Reporting Entities.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "procedural"
+  },
+  {
+    "question_id": "Q004",
+    "question": "What are the key rights of taxpayers according to the Taxpayer Charter?",
+    "reference_answers": [
+      "Key taxpayer rights include: fair and courteous treatment, being treated as honest, access to appeal and review mechanisms, receiving complete and accurate information, timely decisions, collection of only correct tax amounts, privacy protection, confidentiality of information, accountability of authorities, choice of representative, mechanism to lodge complaints, fair and just system, published service standards, and consideration of compliance costs."
+    ],
+    "relevant_documents": ["taxpayer-charter.txt"],
+    "domain": "Income Tax",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q005",
+    "question": "Can a civil court grant an injunction against actions taken by the Director of FIU-IND?",
+    "reference_answers": [
+      "No. No civil Court shall have jurisdiction to entertain any suit or proceeding in respect of any matter which the Director, an Adjudicating Authority or the Appellate Tribunal is empowered by or under this Act to determine and no injunction shall be granted by any Court or other authority in respect of any action taken or to be taken in pursuance of any power conferred by or under this Act."
+    ],
+    "relevant_documents": ["PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "legal"
+  },
+  {
+    "question_id": "Q006",
+    "question": "What powers does the Director of FIU-IND have for discovery and production?",
+    "reference_answers": [
+      "The Director has the same powers as a civil Court under the Code of Civil Procedure, 1908, including: discovery and inspection, enforcing attendance and examining persons on oath, compelling production of records, receiving evidence on affidavits, issuing commissions for examination of witnesses and documents, and any other prescribed matters."
+    ],
+    "relevant_documents": ["PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "legal"
+  },
+  {
+    "question_id": "Q007",
+    "question": "What are the taxpayer obligations according to the Taxpayer Charter?",
+    "reference_answers": [
+      "Taxpayer obligations include: being honest and compliant, being informed about compliance requirements, keeping accurate records as per law, knowing what their representative does on their behalf, responding in time, and paying tax due in a timely manner."
+    ],
+    "relevant_documents": ["taxpayer-charter.txt"],
+    "domain": "Income Tax",
+    "difficulty": "easy",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q008",
+    "question": "Can reporting entities be prosecuted for furnishing information under PMLA?",
+    "reference_answers": [
+      "No. Section 14 of the Prevention of Money Laundering Act, 2002 provides that the reporting entity, its directors and employees shall not be liable to any civil or criminal proceedings against them for furnishing information under clause (b) of sub-section (l) of section 12."
+    ],
+    "relevant_documents": ["PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "legal"
+  },
+  {
+    "question_id": "Q009",
+    "question": "Can an appeal be filed against the order of the Director of FIU-IND imposing a fine?",
+    "reference_answers": [
+      "Yes. Any reporting entity aggrieved by any order of the Director made under sub-section (2) of section 13 may prefer an appeal to the Appellate Tribunal."
+    ],
+    "relevant_documents": ["PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "procedural"
+  },
+  {
+    "question_id": "Q010",
+    "question": "How can fines imposed under PMLA be recovered in case of default?",
+    "reference_answers": [
+      "Section 69 of the Prevention of Money Laundering Act, 2002 provides that where any fine or penalty is not paid within six months from the day of imposition, the Director or authorized officer may proceed to recover the amount in the same manner as prescribed in Schedule II of the Income-tax Act, 1961 for the recovery of arrears, with all the powers of the Tax Recovery Officer."
+    ],
+    "relevant_documents": ["PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "procedural"
+  },
+  {
+    "question_id": "Q011",
+    "question": "What is money laundering?",
+    "reference_answers": [
+      "Money laundering is the processing of criminal proceeds to disguise their illegal origin. It enables criminals to enjoy profits without jeopardizing their source. The process involves disguising sources, changing form, or moving funds to places where they are less likely to attract attention."
+    ],
+    "relevant_documents": ["Money Laundering.txt"],
+    "domain": "FIU",
+    "difficulty": "easy",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q012",
+    "question": "What constitutes a money laundering offence under PMLA?",
+    "reference_answers": [
+      "A person is guilty of money laundering if they directly or indirectly attempt to indulge or knowingly assist or are a party to concealment, possession, acquisition, use, projecting as untainted property, or claiming as untainted property, in any manner whatsoever, in relation to proceeds of crime."
+    ],
+    "relevant_documents": ["Money Laundering.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q013",
+    "question": "What are proceeds of crime?",
+    "reference_answers": [
+      "Proceeds of crime means any property derived or obtained, directly or indirectly, by any person as a result of criminal activity relating to a scheduled offence or the value of any such property. It includes property not only derived from the scheduled offence but also any property which may directly or indirectly be derived from any criminal activity relatable to the scheduled offence."
+    ],
+    "relevant_documents": ["Money Laundering.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q014",
+    "question": "What is a scheduled offence?",
+    "reference_answers": [
+      "Scheduled offence means: (a) the offences specified under Part A of the Schedule; or (b) the offences specified under Part B of the Schedule if the total value involved in such offences is one crore rupees or more; or (c) the offences specified under Part C of the Schedule."
+    ],
+    "relevant_documents": ["Money Laundering.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q015",
+    "question": "Who is a reporting entity under PMLA?",
+    "reference_answers": [
+      "Reporting entity means a banking company, financial institution, intermediary or a person carrying on a designated business or profession."
+    ],
+    "relevant_documents": ["Money Laundering.txt", "Reporting Entities.txt"],
+    "domain": "FIU",
+    "difficulty": "easy",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q016",
+    "question": "What is a banking company under PMLA?",
+    "reference_answers": [
+      "Banking company under PMLA means a banking company or a co-operative bank to which the Banking Regulation Act, 1949 applies and includes any bank or banking institution referred to in section 51 of that Act."
+    ],
+    "relevant_documents": ["Reporting Entities.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q017",
+    "question": "What is a financial institution under PMLA?",
+    "reference_answers": [
+      "Financial institution means a financial institution as defined in clause (c) of section 45-I of the Reserve Bank of India Act, 1934 and includes a chit fund company, a housing finance institution, an authorised person, a payment system operator, a non-banking financial company and the Department of Posts in the Government of India."
+    ],
+    "relevant_documents": ["Reporting Entities.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q018",
+    "question": "What is an intermediary under PMLA?",
+    "reference_answers": [
+      "Intermediary means: (i) a stock-broker, share transfer agent, banker to an issue, trustee to a trust deed, registrar to an issue, merchant banker, underwriter, portfolio manager, investment adviser or any other intermediary associated with securities market and registered under section 12 of the Securities and Exchange Board of India Act, 1992; or (ii) an association recognised or registered under the Forward Contracts (Regulation) Act, 1952 or any member of such association; (iii) intermediary registered by the Pension Fund Regulatory and Development Authority; or (iv) a recognised stock exchange referred to in clause (f) of section 2 of the Securities Contracts (Regulation) Act, 1956."
+    ],
+    "relevant_documents": ["Reporting Entities.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q019",
+    "question": "What are the obligations for verifying identity of clients under PMLA?",
+    "reference_answers": [
+      "Section 11A together with Section 12 of the Prevention of Money Laundering Act, 2002 requires every reporting entity to verify and maintain the records of the identity of all its clients, as prescribed by rule 9 of the PML Rules. Rules 9 and 10 of the PML Rules prescribe the procedures and manner for verification and maintenance of records."
+    ],
+    "relevant_documents": ["Identity of Clients.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q020",
+    "question": "What is an officially valid document for identity verification?",
+    "reference_answers": [
+      "Officially valid document means the passport, driving licence, proof of possession of Aadhaar number, Voter's Identity Card issued by Election Commission of India, job card issued by NREGA duly signed by an officer of the State Government, letter issued by the National Population Register containing details of name and address, Permanent Account Number (PAN) Card, letter issued by the Unique Identification Authority of India or the National Population Register containing details of name, address and Aadhaar number, or any other document as notified by the Central Government in consultation with the regulator."
+    ],
+    "relevant_documents": ["Identity of Clients.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q021",
+    "question": "What is a transaction under PMLA?",
+    "reference_answers": [
+      "Transaction means a purchase, sale, loan, pledge, gift, transfer, delivery or the arrangement thereof and includes: (i) opening of an account; (ii) deposits, withdrawal, exchange or transfer of funds in whatever currency, whether in cash or by cheque, payment order or other instruments or by electronic or other non-physical means; (iii) the use of a safety deposit box or any other form of safe deposit; (iv) entering into any fiduciary relationship; (v) any payment made or received in whole or in part of any contractual or other legal obligation; (vi) any payment made in respect of playing games of chance for cash or kind including such activities associated with casino; and (vii) establishing or creating a legal person or legal arrangement."
+    ],
+    "relevant_documents": ["Identity of Clients.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q022",
+    "question": "Is it mandatory to implement a Client Due Diligence programme?",
+    "reference_answers": [
+      "Yes. Every reporting entity is required to formulate and implement a client due diligence programme approved by the senior management."
+    ],
+    "relevant_documents": ["Identity of Clients.txt"],
+    "domain": "FIU",
+    "difficulty": "easy",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q023",
+    "question": "What are the obligations for maintenance of records under PMLA?",
+    "reference_answers": [
+      "In terms of section 12 of the Prevention of Money Laundering Act, 2002, every reporting entity shall maintain a record of all transactions, including the information furnished to FIU-IND, in such a manner as to enable it to reconstruct individual transactions. The Reporting Entities shall also maintain record of documents evidencing identity of its clients and beneficial owners as well as account files and business correspondence relating to its clients. The record has to be maintained for a minimum period of five years."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q024",
+    "question": "What records need to be maintained as per PMLA?",
+    "reference_answers": [
+      "Every reporting entity shall maintain records of: all cash transactions of value more than ten lakh rupees or its equivalent in foreign currency; all series of cash transactions integrally connected to each other which have been individually valued below rupees ten lakh where such series of transactions have taken place within a month and the monthly aggregate exceeds ten lakh rupees; all transactions involving receipts by non-profit organizations of value more than rupees ten lakh; all cash transactions where forged or counterfeit currency notes have been used; all suspicious transactions whether or not made in cash; all cross border wire transfers of value more than five lakh rupees where either origin or destination is in India; all purchase and sale of immovable property valued at fifty lakh rupees or more."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q025",
+    "question": "What constitutes a suspicious transaction under PMLA?",
+    "reference_answers": [
+      "Suspicious transaction means a transaction which to a person acting in good faith: (a) gives rise to a reasonable ground of suspicion that it may involve proceeds of an offence specified in the Schedule to the Act, regardless of the value involved; or (b) appears to be made in circumstances of unusual or unjustified complexity; or (c) appears to have no economic rationale or bona fide purpose; or (d) gives rise to a reasonable ground of suspicion that it may involve financing of the activities relating to terrorism."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q026",
+    "question": "What is the difference between a Cash Transaction Report (CTR) and a Suspicious Transaction Report (STR)?",
+    "reference_answers": [
+      "A Cash Transaction Report (CTR) is filed for cash transactions exceeding ten lakh rupees or equivalent in foreign currency, regardless of whether the transaction appears suspicious. A Suspicious Transaction Report (STR) is filed for any transaction that appears suspicious based on various factors like unusual complexity, lack of economic rationale, or potential involvement in proceeds of crime, regardless of the value involved."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "comparative"
+  },
+  {
+    "question_id": "Q027",
+    "question": "Can a transaction be reported both under CTR and STR?",
+    "reference_answers": [
+      "Yes, a transaction can be reported both under CTR and STR if it meets the criteria for both - i.e., it involves cash exceeding ten lakh rupees and also appears suspicious based on the circumstances."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q028",
+    "question": "What steps should a bank take to verify a customer's identity under KYC norms?",
+    "reference_answers": [
+      "Banks should verify customer identity using officially valid documents, maintain records of identity verification, implement a client due diligence programme approved by senior management, and follow the procedures prescribed in Rules 9 and 10 of the PML Rules for verification and maintenance of records of client identity."
+    ],
+    "relevant_documents": ["Identity of Clients.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "procedural"
+  },
+  {
+    "question_id": "Q029",
+    "question": "If a new customer without proper identification tries to deposit 15 lakhs in cash, what should the reporting entity do?",
+    "reference_answers": [
+      "The reporting entity should: (1) Refuse to accept the deposit until proper identification is provided as per KYC norms; (2) If the deposit is accepted after proper identification, file a Cash Transaction Report (CTR) since it exceeds ten lakh rupees; (3) If the transaction appears suspicious based on circumstances, also file a Suspicious Transaction Report (STR); (4) Maintain proper records of the transaction and identity verification as required under PMLA."
+    ],
+    "relevant_documents": ["Identity of Clients.txt", "Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "scenario"
+  },
+  {
+    "question_id": "Q030",
+    "question": "What are the penalties for non-compliance with PMLA obligations?",
+    "reference_answers": [
+      "For non-compliance with PMLA obligations, the Director may: (a) issue a warning in writing; or (b) direct compliance with specific instructions; or (c) direct submission of periodic compliance reports; or (d) impose a monetary penalty not less than ten thousand rupees but may extend to one lakh rupees for each failure. The penalty can be recovered as per Schedule II of the Income-tax Act, 1961 if not paid within six months."
+    ],
+    "relevant_documents": ["PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q031",
+    "question": "How can taxpayers lodge complaints about Income Tax Department services?",
+    "reference_answers": [
+      "Taxpayers can lodge complaints through the grievance redressal mechanism which includes: Central Grievance Cell under Chairman CBDT, Regional Grievance Cells under Chief Commissioners, Grievance Cells under out-station Commissioners, and ASK (Aaykar Seva Kendra) centers where functional. The Department provides mechanism for lodging complaints and prompt disposal thereof as per the Taxpayer Charter."
+    ],
+    "relevant_documents": ["citizen-charter-grievances-redressal.txt", "taxpayer-charter.txt"],
+    "domain": "Income Tax",
+    "difficulty": "medium",
+    "question_type": "procedural"
+  },
+  {
+    "question_id": "Q032",
+    "question": "What is the role of various regulators in PMLA enforcement?",
+    "reference_answers": [
+      "Section 54 of the Prevention of Money Laundering Act, 2002 empowers and requires various regulators and authorities to assist in the enforcement of the Act. This includes banking regulators, securities regulators, insurance regulators, and other relevant authorities who have jurisdiction over different types of reporting entities."
+    ],
+    "relevant_documents": ["PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q033",
+    "question": "What is the legal framework for sharing information with other authorities under PMLA?",
+    "reference_answers": [
+      "Section 66 of the Prevention of Money Laundering Act, 2002 provides for disclosure of information to other officers, authority or body. This enables FIU-IND to share relevant information with other law enforcement agencies and regulatory bodies for effective enforcement of anti-money laundering measures."
+    ],
+    "relevant_documents": ["PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q034",
+    "question": "What is the legal framework for exchanging information with foreign countries under PMLA?",
+    "reference_answers": [
+      "Section 56 of the Prevention of Money Laundering Act, 2002 provides for entering into agreements with foreign countries to enforce provisions of PMLA, 2002 and for exchange of information. This enables international cooperation in combating money laundering and terrorist financing."
+    ],
+    "relevant_documents": ["PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "factual"
+  },
+  {
+    "question_id": "Q035",
+    "question": "Tell me about transaction reporting.",
+    "reference_answers": [
+      "I need more specific information about transaction reporting. Are you asking about Cash Transaction Reports (CTR), Suspicious Transaction Reports (STR), Cross-Border Wire Transfer Reports (CBWTR), or Non-Profit Organisation Transaction Reports (NTR)? Each has different thresholds and requirements under PMLA. Please specify which type of transaction reporting you're interested in."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "easy",
+    "question_type": "ambiguous"
+  },
+  {
+    "question_id": "Q036",
+    "question": "What are the KYC requirements and what are the penalties if a bank doesn't follow them?",
+    "reference_answers": [
+      "KYC requirements under PMLA include: verification of customer identity using officially valid documents, maintenance of records of identity verification, implementation of client due diligence programme approved by senior management, and following procedures prescribed in Rules 9 and 10 of PML Rules. Penalties for non-compliance include warnings, directions for compliance, periodic reporting requirements, and monetary penalties ranging from ten thousand to one lakh rupees for each failure."
+    ],
+    "relevant_documents": ["Identity of Clients.txt", "PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "compound"
+  },
+  {
+    "question_id": "Q037",
+    "question": "How can I file my income tax return online?",
+    "reference_answers": [
+      "I apologize, but I cannot provide specific guidance on filing income tax returns online as this falls outside my knowledge base of FIU-IND and Income Tax Department policies and procedures. I can only provide information about taxpayer rights and obligations under the Taxpayer Charter, grievance redressal mechanisms, and general service standards. For specific tax filing procedures, please contact the Income Tax Department directly or visit their official website."
+    ],
+    "relevant_documents": [],
+    "domain": "Out of Scope",
+    "difficulty": "easy",
+    "question_type": "out_of_scope"
+  },
+  {
+    "question_id": "Q038",
+    "question": "Which mutual fund is best for tax saving?",
+    "reference_answers": [
+      "I cannot provide investment advice or recommend specific mutual funds as this falls outside my knowledge base. My expertise is limited to FIU-IND policies, PMLA compliance, and Income Tax Department procedures. For investment advice and tax-saving options, please consult a qualified financial advisor or visit the official websites of relevant regulatory authorities like SEBI."
+    ],
+    "relevant_documents": [],
+    "domain": "Out of Scope",
+    "difficulty": "easy",
+    "question_type": "out_of_scope"
+  },
+  {
+    "question_id": "Q039",
+    "question": "What is the monetary threshold for filing a Cash Transaction Report (CTR)?",
+    "reference_answers": [
+      "The monetary threshold for filing a Cash Transaction Report (CTR) is ten lakh rupees or its equivalent in foreign currency. This applies to all cash transactions exceeding this amount, as well as series of cash transactions integrally connected to each other which have been individually valued below ten lakh rupees but where the monthly aggregate exceeds ten lakh rupees."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "easy",
+    "question_type": "factual_specific"
+  },
+  {
+    "question_id": "Q040",
+    "question": "What is the threshold for cross-border wire transfers that require reporting?",
+    "reference_answers": [
+      "All cross border wire transfers of value more than five lakh rupees or its equivalent in foreign currency where either the origin or destination of fund is in India require reporting under PMLA."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual_specific"
+  },
+  {
+    "question_id": "Q041",
+    "question": "What is the threshold for immovable property transactions requiring reporting?",
+    "reference_answers": [
+      "All purchase and sale by any person of immovable property valued at fifty lakh rupees or more that is registered by the reporting entity requires reporting under PMLA."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual_specific"
+  },
+  {
+    "question_id": "Q042",
+    "question": "What is the threshold for non-profit organization transactions requiring reporting?",
+    "reference_answers": [
+      "All transactions involving receipts by non-profit organizations of value more than rupees ten lakh, or its equivalent in foreign currency, require reporting under PMLA."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "factual_specific"
+  },
+  {
+    "question_id": "Q043",
+    "question": "If a customer makes multiple cash deposits of 8 lakh rupees each within a month, what should the bank do?",
+    "reference_answers": [
+      "If a customer makes multiple cash deposits of 8 lakh rupees each within a month, and these transactions are integrally connected to each other, the bank should file a Cash Transaction Report (CTR) since the monthly aggregate exceeds ten lakh rupees. The bank should also assess whether the pattern appears suspicious and file a Suspicious Transaction Report (STR) if warranted."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "scenario"
+  },
+  {
+    "question_id": "Q044",
+    "question": "What should a bank do if it suspects a customer is involved in money laundering?",
+    "reference_answers": [
+      "If a bank suspects a customer is involved in money laundering, it should: (1) File a Suspicious Transaction Report (STR) to FIU-IND regardless of the transaction value; (2) Continue monitoring the customer's account and transactions; (3) Consider enhanced due diligence measures; (4) Maintain all relevant records as required under PMLA; (5) Not tip off the customer about the suspicion as this could constitute an offence under PMLA."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt", "Money Laundering.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "scenario"
+  },
+  {
+    "question_id": "Q045",
+    "question": "Can a reporting entity refuse to maintain records citing privacy concerns?",
+    "reference_answers": [
+      "No. Maintaining records as required under PMLA is a mandatory obligation for all reporting entities. Section 12 of the Prevention of Money Laundering Act, 2002 requires every reporting entity to maintain records of all transactions and client information. Privacy concerns do not override statutory compliance requirements under PMLA."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt", "PMLA 2002.txt"],
+    "domain": "FIU",
+    "difficulty": "medium",
+    "question_type": "scenario"
+  },
+  {
+    "question_id": "Q046",
+    "question": "What happens if a reporting entity fails to file a required STR within the prescribed time?",
+    "reference_answers": [
+      "Failure to file a required STR within the prescribed time constitutes non-compliance with PMLA obligations. The Director may impose penalties including warnings, directions for compliance, periodic reporting requirements, or monetary penalties ranging from ten thousand to one lakh rupees for each failure. The entity may also face enhanced scrutiny and monitoring by the regulator."
+    ],
+    "relevant_documents": ["PMLA 2002.txt", "Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "scenario"
+  },
+  {
+    "question_id": "Q047",
+    "question": "How long must reporting entities maintain records under PMLA?",
+    "reference_answers": [
+      "Reporting entities must maintain records of prescribed transactions and information for a minimum period of five years from the date of transaction or closure of account, whichever is later."
+    ],
+    "relevant_documents": ["Maintenance of Records.txt"],
+    "domain": "FIU",
+    "difficulty": "easy",
+    "question_type": "factual_specific"
+  },
+  {
+    "question_id": "Q048",
+    "question": "What is the difference between Part A, Part B, and Part C scheduled offences?",
+    "reference_answers": [
+      "Scheduled offences are categorized as: Part A offences - specified offences that always qualify as scheduled offences; Part B offences - specified offences that qualify as scheduled offences only if the total value involved is one crore rupees or more; Part C offences - specified offences that always qualify as scheduled offences. The categorization determines when proceeds of crime from these offences trigger PMLA provisions."
+    ],
+    "relevant_documents": ["Money Laundering.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "comparative"
+  },
+  {
+    "question_id": "Q049",
+    "question": "Can a person be prosecuted for money laundering if they didn't know the money was from illegal sources?",
+    "reference_answers": [
+      "Yes, a person can be prosecuted for money laundering even if they didn't know the money was from illegal sources, provided they knowingly assisted or were a party to the processes of concealment, possession, acquisition, use, projecting as untainted property, or claiming as untainted property. The key requirement is 'knowingly' assisting in these processes, not necessarily knowing the original source of the funds."
+    ],
+    "relevant_documents": ["Money Laundering.txt"],
+    "domain": "FIU",
+    "difficulty": "hard",
+    "question_type": "scenario"
+  },
+  {
+    "question_id": "Q050",
+    "question": "What are the taxpayer's rights regarding confidentiality of information provided to the Income Tax Department?",
+    "reference_answers": [
+      "According to the Taxpayer Charter, taxpayers have the right to confidentiality. The Department shall not disclose any information provided by taxpayer to the department unless authorized by law. This includes maintaining confidentiality of personal and financial information submitted during tax proceedings, assessments, or other interactions with the Department."
+    ],
+    "relevant_documents": ["taxpayer-charter.txt"],
+    "domain": "Income Tax",
+    "difficulty": "medium",
+    "question_type": "factual"
+  }
+]
+
+
+

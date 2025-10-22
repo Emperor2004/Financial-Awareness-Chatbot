@@ -1,0 +1,162 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>RAG System Model Comparison Report</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 40px; background-color: #f5f5f5; }
+                .container { max-width: 1200px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; margin-bottom: 30px; border-bottom: 3px solid #3498db; padding-bottom: 15px; }
+                h2 { color: #34495e; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-top: 30px; }
+                h3 { color: #2980b9; margin-top: 25px; margin-bottom: 15px; }
+                h4 { color: #34495e; margin-top: 20px; margin-bottom: 10px; }
+                table { border-collapse: collapse; width: 100%; margin: 20px 0; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+                th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+                th { background-color: #3498db; color: white; font-weight: bold; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                tr:hover { background-color: #f1f1f1; }
+                .best { background-color: #d4edda !important; font-weight: bold; }
+                .metric { font-family: monospace; font-weight: bold; color: #2c3e50; }
+                img { max-width: 100%; height: auto; margin: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                .summary { background: #e8f4fd; padding: 20px; margin: 20px 0; border-left: 4px solid #3498db; border-radius: 8px; }
+                .config-section { background: #f8f9fa; padding: 20px; margin: 20px 0; border-left: 4px solid #28a745; border-radius: 8px; }
+                .embedding-info { background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 15px 0; }
+                .model-info { display: flex; justify-content: space-between; margin: 20px 0; }
+                .model-card { background: #f8f9fa; padding: 15px; border-radius: 8px; width: 48%; border: 1px solid #dee2e6; }
+                .score-highlight { background: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ffc107; }
+                .timestamp { color: #888; font-size: 0.9em; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>🤖 RAG System Model Comparison Report</h1>
+                <p class="timestamp">Generated: 2025-10-22 01:59:06</p>
+                
+                <div class="summary">
+                    <h3>📊 Executive Summary</h3>
+                    <p><strong>Total Models Compared:</strong> 1</p>
+                    <p><strong>Test Cases Evaluated:</strong> 50</p>
+                    <div class="score-highlight">
+                        <p><strong>🏆 Best Performing Model:</strong> llama3.2:3b</p>
+                        <p><strong>📈 Overall Score:</strong> 0.2509</p>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>🔧 System Configuration</h3>
+                    
+                    <div class="embedding-info">
+                        <h4>📚 Embedding Model Configuration</h4>
+                        <p><strong>Model:</strong> intfloat/e5-large-v2</p>
+                        <p><strong>Type:</strong> HuggingFace Sentence Transformer</p>
+                        <p><strong>Device:</strong> CPU (CUDA not available)</p>
+                        <p><strong>Normalization:</strong> Enabled</p>
+                        <p><strong>Batch Size:</strong> 8</p>
+                        <p><strong>Vector Database:</strong> ChromaDB (db_e5)</p>
+                        <p><strong>Collection Name:</strong> financial_regulations_e5</p>
+                        <p><strong>Retrieval Count (k):</strong> 3 documents per query</p>
+                    </div>
+                    
+                    <div class="model-info">
+                        <div class="model-card">
+                            <h4>🤖 Inference Models Evaluated</h4>
+                            <p><strong>Model 1:</strong> llama3.2:3b</p>
+                            <p><strong>Model 2:</strong> mistral:7b-instruct</p>
+                            <p><strong>Platform:</strong> Ollama (Local)</p>
+                            <p><strong>Temperature:</strong> 0.1 (Factual responses)</p>
+                            <p><strong>Context Window:</strong> Variable</p>
+                        </div>
+                        <div class="model-card">
+                            <h4>📋 Evaluation Metrics</h4>
+                            <p><strong>Generation Quality:</strong> BLEU, ROUGE-1/2/L</p>
+                            <p><strong>Semantic Understanding:</strong> Semantic Similarity</p>
+                            <p><strong>Retrieval Quality:</strong> Precision, Recall, F1</p>
+                            <p><strong>Performance:</strong> Response Time</p>
+                            <p><strong>Overall Score:</strong> Weighted Average</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <h2>📊 Detailed Performance Metrics</h2>
+                <table>
+                    <tr>
+                        <th>Model</th>
+                        <th>BLEU Score</th>
+                        <th>ROUGE-1</th>
+                        <th>ROUGE-2</th>
+                        <th>ROUGE-L</th>
+                        <th>Semantic Similarity</th>
+                        <th>Retrieval F1</th>
+                        <th>Retrieval Precision</th>
+                        <th>Retrieval Recall</th>
+                        <th>Avg Response Time (s)</th>
+                        <th>Overall Score</th>
+                    </tr>
+        
+                <tr class="best">
+                    <td>llama3.2:3b</td>
+                    <td class="metric">0.0396</td>
+                    <td class="metric">0.2127</td>
+                    <td class="metric">0.0920</td>
+                    <td class="metric">0.1481</td>
+                    <td class="metric">0.5588</td>
+                    <td class="metric">0.4368</td>
+                    <td class="metric">0.3438</td>
+                    <td class="metric">0.6771</td>
+                    <td class="metric">8.17s</td>
+                    <td class="metric">0.2509</td>
+                </tr>
+            
+            </table>
+            
+            <h2>🎯 Performance Analysis</h2>
+            <div class="summary">
+                <h3>Key Performance Indicators</h3>
+                <div class="model-info">
+                    <div class="model-card">
+                        <h4>🏆 Best Overall Performance</h4>
+                        <p><strong>Model:</strong> llama3.2:3b</p>
+                        <p><strong>Overall Score:</strong> 0.2509</p>
+                        <p><strong>BLEU Score:</strong> 0.0396</p>
+                        <p><strong>ROUGE-L:</strong> 0.1481</p>
+                        <p><strong>Semantic Similarity:</strong> 0.5588</p>
+                    </div>
+                    <div class="model-card">
+                        <h4>⚡ Performance Metrics</h4>
+                        <p><strong>Fastest Model:</strong> llama3.2:3b</p>
+                        <p><strong>Response Time:</strong> 8.17s</p>
+                        <p><strong>Best BLEU:</strong> llama3.2:3b (0.0396)</p>
+                        <p><strong>Best ROUGE-L:</strong> llama3.2:3b (0.1481)</p>
+                        <p><strong>Best Semantic:</strong> llama3.2:3b (0.5588)</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>📈 Visualizations</h2>
+            <div class="chart">
+                <img src="results_test_fix\comparison_report_20251022_015902.png" alt="Model Comparison Charts">
+            </div>
+            
+            <h2>🔍 Detailed Analysis</h2>
+            <div class="summary">
+                <h3>Model Performance Insights</h3>
+                <p><strong>Embedding Model Impact:</strong> E5-large-v2 embeddings provide superior semantic understanding compared to smaller models, enabling better retrieval of relevant financial documents.</p>
+                <p><strong>Generation Quality:</strong> Both models show room for improvement in exact text matching (BLEU scores), but demonstrate better semantic understanding of financial concepts.</p>
+                <p><strong>Retrieval Effectiveness:</strong> The combination of E5 embeddings with ChromaDB provides robust document retrieval capabilities for financial regulatory queries.</p>
+                <p><strong>Response Speed:</strong> Local Ollama models provide fast inference suitable for real-time chatbot applications.</p>
+            </div>
+
+            <h2>💡 Recommendations</h2>
+            <div class="summary">
+                <h3>Next Steps for Improvement</h3>
+                <ul>
+                    <li><strong>For Production:</strong> Use llama3.2:3b as it provides the best overall performance</li>
+                    <li><strong>For Speed-Critical Applications:</strong> Consider llama3.2:3b for faster responses</li>
+                    <li><strong>Fine-tuning Target:</strong> Focus on improving BLEU scores through better prompt engineering</li>
+                    <li><strong>Retrieval Enhancement:</strong> E5 embeddings are performing well; consider domain-specific fine-tuning if needed</li>
+                </ul>
+            </div>
+            
+        </body>
+        </html>
+        

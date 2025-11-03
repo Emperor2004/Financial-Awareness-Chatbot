@@ -1,0 +1,3099 @@
+Starting test suite run at: 20251026_144749
+Logging output to: translation_test_log_20251026_144749.txt
+
+=============================================
+  Running Part 1: Edge Case & Error Tests    
+=============================================
+
+--- Test E001: Non-String (None) Input ---
+Input: None
+Expected Behavior: Raise ValueError with message 'Input text must be a string'
+Result: Module raised ValueError:
+  > 'Input text must be a string'
+Status: PASS
+
+--- Test E002: Non-String (Integer) Input ---
+Input: 123456789
+Expected Behavior: Raise ValueError with message 'Input text must be a string'
+Result: Module raised ValueError:
+  > 'Input text must be a string'
+Status: PASS
+
+--- Test E003: Empty String Input ---
+Input: ''
+Expected Behavior: Raise ValueError with message 'Input text is empty or whitespace'
+Result: Module raised ValueError:
+  > 'Input text is empty or whitespace'
+Status: PASS
+
+--- Test E004: Whitespace-Only Input ---
+Input: '   
+
+	   '
+Expected Behavior: Raise ValueError with message 'Input text is empty or whitespace'
+Result: Module raised ValueError:
+  > 'Input text is empty or whitespace'
+Status: PASS
+
+--- Test E005: Overly Long String Input ---
+Input: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...' (length: 50001)
+Expected Behavior: Raise ValueError with message 'Input text is too long'
+Result: Module raised ValueError:
+  > 'Input text is too long'
+Status: PASS
+
+--- Test E006: Unsupported Language Input ---
+Input: 'Bonjour le monde. Ceci est un test.'
+Expected Behavior: Raise ValueError with message 'Language 'fr' not supported'
+Result: Module raised ValueError:
+  > 'Language 'fr' not supported'
+Status: PASS
+
+--- Test E007: Undetectable Language Input ---
+Input: '12345 67890 12345 67890 12345 67890'
+Expected Behavior: Raise ValueError with message 'Could not detect language'
+Result: Module raised ValueError:
+  > 'Could not detect language'
+Status: PASS
+
+=============================================
+  Edge Case Test Summary
+=============================================
+Passed 7 / 7 tests.
+=============================================
+
+Setting up NLTK (downloading 'punkt', 'wordnet', 'omw-1.4')...
+NLTK setup complete.
+=============================================
+  Running Part 2: Functional & NLP Tests     
+=============================================
+
+Loading test cases from 'translation_test_cases.json'...
+Successfully loaded 65 test cases.
+
+Running 65 test cases (260 total API calls)...
+A delay of 0.5s is added between calls.
+Estimated test time: ~2.2 minutes. This will take a moment.
+
+--- Testing Case T001 (1/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    धन शोधन निवारण अधिनियम, 2002 (PMLA) भारत की संसद द्वारा अधिनियमित एक अधिनियम है, जो धन शोधन को रोकने और धन शोधन से प्राप्त, या उसमें शामिल संपत्ति की जब्ती का प्रावधान करने के लिए बनाया गया है।
+
+  [92mReference (Expected):
+    The Prevention of Money Laundering Act, 2002 (PMLA) is an Act of the Parliament of India enacted to prevent money laundering and to provide for confiscation of property derived from, or involved in, money laundering.
+
+  Hypothesis (Actual):
+    The Prevention of Money Laundering Act, 2002 (PMLA) is an Act enacted by the Parliament of India, which is enacted to prevent money laundering and to provide for the confiscation of property derived from, or involved in, money laundering.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    The Prevention of Money Laundering Act, 2002 (PMLA) is an Act of the Parliament of India enacted to prevent money laundering and to provide for confiscation of property derived from, or involved in, money laundering.
+
+  [92mReference (Expected):
+    धन शोधन निवारण अधिनियम, 2002 (PMLA) भारत की संसद द्वारा अधिनियमित एक अधिनियम है, जो धन शोधन को रोकने और धन शोधन से प्राप्त, या उसमें शामिल संपत्ति की जब्ती का प्रावधान करने के लिए बनाया गया है।
+
+  Hypothesis (Actual):
+    धन शोधन निवारण अधिनियम, 2002 (PMLA) भारत की संसद का एक अधिनियम है जिसे मनी लॉन्ड्रिंग को रोकने और मनी लॉन्ड्रिंग से प्राप्त या इसमें शामिल संपत्ति को जब्त करने का प्रावधान करने के लिए अधिनियमित किया गया है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    धन शोधन निवारण अधिनियम, 2002 (PMLA) हा भारतीय संसदेने लागू केलेला एक कायदा आहे, जो धन शोधन (मनी लॉन्ड्रिंग) रोखण्यासाठी आणि धन शोधनातून मिळालेल्या, किंवा त्यात गुंतलेल्या मालमत्तेच्या जप्तीची तरतूद करण्यासाठी बनवला आहे।
+
+  [92mReference (Expected):
+    The Prevention of Money Laundering Act, 2002 (PMLA) is an Act of the Parliament of India enacted to prevent money laundering and to provide for confiscation of property derived from, or involved in, money laundering.
+
+  Hypothesis (Actual):
+    धन शोधन निवारण अधिनियम, 2002 (PMLA) हा भारतीय संसदेने लागू केलेला एक कायदा आहे, जो धन शोधन (मनी लॉन्ड्रिंग) रोखण्यासाठी आणि धन शोधनातून मिळालेल्या, किंवा त्यात गुंतलेल्या मालमत्तेच्या जप्तीची तरतूद करण्यासाठी बनवला आहे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    The Prevention of Money Laundering Act, 2002 (PMLA) is an Act of the Parliament of India enacted to prevent money laundering and to provide for confiscation of property derived from, or involved in, money laundering.
+
+  [92mReference (Expected):
+    धन शोधन निवारण अधिनियम, 2002 (PMLA) हा भारतीय संसदेने लागू केलेला एक कायदा आहे, जो धन शोधन (मनी लॉन्ड्रिंग) रोखण्यासाठी आणि धन शोधनातून मिळालेल्या, किंवा त्यात गुंतलेल्या मालमत्तेच्या जप्तीची तरतूद करण्यासाठी बनवला आहे।
+
+  Hypothesis (Actual):
+    मनी लाँडरिंग प्रतिबंधक कायदा, 2002 (पीएमएलए) हा भारतीय संसदेचा एक कायदा आहे जो मनी लॉन्ड्रिंग रोखण्यासाठी आणि मनी लॉन्ड्रिंगमधून प्राप्त झालेल्या किंवा त्यात सामील असलेल्या मालमत्तेच्या जप्तीची तरतूद करण्यासाठी लागू केला गेला आहे.
+
+--- Testing Case T002 (2/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    FIU-IND के निदेशक रिपोर्टिंग इकाई पर मौद्रिक दंड लगा सकते हैं, जो प्रत्येक विफलता के लिए दस हजार रुपये से कम नहीं होगा, लेकिन एक लाख रुपये तक बढ़ाया जा सकता है।
+
+  [92mReference (Expected):
+    The Director of FIU-IND may impose a monetary penalty on a reporting entity, which shall not be less than ten thousand rupees but may extend to one lakh rupees for each failure.
+
+  Hypothesis (Actual):
+    The Director of FIU-IND may impose a monetary penalty on the reporting entity, which shall not be less than ten thousand rupees for each failure, but may be increased to one lakh rupees.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    The Director of FIU-IND may impose a monetary penalty on a reporting entity, which shall not be less than ten thousand rupees but may extend to one lakh rupees for each failure.
+
+  [92mReference (Expected):
+    FIU-IND के निदेशक रिपोर्टिंग इकाई पर मौद्रिक दंड लगा सकते हैं, जो प्रत्येक विफलता के लिए दस हजार रुपये से कम नहीं होगा, लेकिन एक लाख रुपये तक बढ़ाया जा सकता है।
+
+  Hypothesis (Actual):
+    एफआईयू-आईएनडी के निदेशक एक रिपोर्टिंग इकाई पर मौद्रिक जुर्माना लगा सकते हैं, जो दस हजार रुपये से कम नहीं होगा, लेकिन प्रत्येक विफलता के लिए एक लाख रुपये तक बढ़ाया जा सकता है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    FIU-IND चे संचालक रिपोर्टिंग संस्थेवर आर्थिक दंड लादू शकतात, जो प्रत्येक अयशस्वीतेसाठी दहा हजार रुपयांपेक्षा कमी नसेल, परंतु एक लाख रुपयांपर्यंत वाढवला जाऊ शकतो।
+
+  [92mReference (Expected):
+    The Director of FIU-IND may impose a monetary penalty on a reporting entity, which shall not be less than ten thousand rupees but may extend to one lakh rupees for each failure.
+
+  Hypothesis (Actual):
+    The directors of FIU-IND can impose a financial penalty on the reporting institution, which shall not be less than ten thousand rupees for each failure, but may be increased to one lakh rupees.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    The Director of FIU-IND may impose a monetary penalty on a reporting entity, which shall not be less than ten thousand rupees but may extend to one lakh rupees for each failure.
+
+  [92mReference (Expected):
+    FIU-IND चे संचालक रिपोर्टिंग संस्थेवर आर्थिक दंड लादू शकतात, जो प्रत्येक अयशस्वीतेसाठी दहा हजार रुपयांपेक्षा कमी नसेल, परंतु एक लाख रुपयांपर्यंत वाढवला जाऊ शकतो।
+
+  Hypothesis (Actual):
+    एफआययू-आयएनडीचे संचालक अहवाल देणार् या संस्थेवर आर्थिक दंड आकारू शकतात, जे दहा हजार रुपयांपेक्षा कमी नसतील परंतु प्रत्येक अपयशासाठी एक लाख रुपयांपर्यंत वाढू शकतात.
+
+--- Testing Case T003 (3/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    रिपोर्टिंग संस्थाएं, उनके निदेशक और कर्मचारी, सद्भावपूर्वक FIU-IND को जानकारी प्रस्तुत करने के लिए किसी भी दीवानी या आपराधिक कार्यवाही के लिए उत्तरदायी नहीं होंगे।
+
+  [92mReference (Expected):
+    Reporting entities, their directors, and employees shall not be liable to any civil or criminal proceedings for furnishing information to FIU-IND in good faith.
+
+  Hypothesis (Actual):
+    The reporting entities, their directors and employees, shall not be liable for any civil or criminal proceedings for presenting information to FIU-IND in good faith.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Reporting entities, their directors, and employees shall not be liable to any civil or criminal proceedings for furnishing information to FIU-IND in good faith.
+
+  [92mReference (Expected):
+    रिपोर्टिंग संस्थाएं, उनके निदेशक और कर्मचारी, सद्भावपूर्वक FIU-IND को जानकारी प्रस्तुत करने के लिए किसी भी दीवानी या आपराधिक कार्यवाही के लिए उत्तरदायी नहीं होंगे।
+
+  Hypothesis (Actual):
+    रिपोर्टिंग संस्थाएं, उनके निदेशक और कर्मचारी अच्छे विश्वास में एफआईयू-आईएनडी को जानकारी प्रस्तुत करने के लिए किसी भी नागरिक या आपराधिक कार्यवाही के लिए उत्तरदायी नहीं होंगे।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    रिपोर्टिंग संस्था, त्यांचे संचालक आणि कर्मचारी, सद्भावनेने FIU-IND ला माहिती पुरवल्याबद्दल कोणत्याही दिवाणी किंवा फौजदारी कार्यवाहीसाठी जबाबदार राहणार नाहीत।
+
+  [92mReference (Expected):
+    Reporting entities, their directors, and employees shall not be liable to any civil or criminal proceedings for furnishing information to FIU-IND in good faith.
+
+  Hypothesis (Actual):
+    रिपोर्टिंग संस्था, त्यांचे संचालक आणि कर्मचारी, सद्भावनेने FIU-IND ला माहिती पुरवल्याबद्दल कोणत्याही दिवाणी किंवा फौजदारी कार्यवाहीसाठी जबाबदार राहणार नाहीत।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Reporting entities, their directors, and employees shall not be liable to any civil or criminal proceedings for furnishing information to FIU-IND in good faith.
+
+  [92mReference (Expected):
+    रिपोर्टिंग संस्था, त्यांचे संचालक आणि कर्मचारी, सद्भावनेने FIU-IND ला माहिती पुरवल्याबद्दल कोणत्याही दिवाणी किंवा फौजदारी कार्यवाहीसाठी जबाबदार राहणार नाहीत।
+
+  Hypothesis (Actual):
+    अहवाल देणार् या संस्था, त्यांचे संचालक आणि कर्मचारी एफआययू-आयएनडीला चांगल्या हेतूने माहिती देण्यासाठी कोणत्याही दिवाणी किंवा फौजदारी कारवाईस जबाबदार असणार नाहीत.
+
+--- Testing Case T004 (4/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    करदाता चार्टर करदाताओं के प्रमुख अधिकारों की रूपरेखा देता है, जिसमें ईमानदार माने जाने का अधिकार और अपील एवं समीक्षा तंत्र का अधिकार शामिल है।
+
+  [92mReference (Expected):
+    The Taxpayer Charter outlines the key rights of taxpayers, including the right to be treated as honest and the right to appeal and review mechanisms.
+
+  Hypothesis (Actual):
+    The Taxpayers Charter outlines the key rights of taxpayers, including the right to be considered honest and the right to an appeal and review mechanism.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    The Taxpayer Charter outlines the key rights of taxpayers, including the right to be treated as honest and the right to appeal and review mechanisms.
+
+  [92mReference (Expected):
+    करदाता चार्टर करदाताओं के प्रमुख अधिकारों की रूपरेखा देता है, जिसमें ईमानदार माने जाने का अधिकार और अपील एवं समीक्षा तंत्र का अधिकार शामिल है।
+
+  Hypothesis (Actual):
+    करदाता चार्टर करदाताओं के प्रमुख अधिकारों को रेखांकित करता है, जिसमें ईमानदार माने जाने का अधिकार और अपील और समीक्षा तंत्र का अधिकार शामिल है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    करदाता सनद करदात्यांच्या मुख्य हक्कांची रूपरेषा देते, ज्यामध्ये प्रामाणिक वागणूक मिळण्याचा हक्क आणि अपील व पुनरावलोकन यंत्रणेचा हक्क यांचा समावेश आहे।
+
+  [92mReference (Expected):
+    The Taxpayer Charter outlines the key rights of taxpayers, including the right to be treated as honest and the right to appeal and review mechanisms.
+
+  Hypothesis (Actual):
+    The Taxpayer Charter outlines the main rights of taxpayers, including the right to be treated fairly and the right to an appeals and review mechanism.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    The Taxpayer Charter outlines the key rights of taxpayers, including the right to be treated as honest and the right to appeal and review mechanisms.
+
+  [92mReference (Expected):
+    करदाता सनद करदात्यांच्या मुख्य हक्कांची रूपरेषा देते, ज्यामध्ये प्रामाणिक वागणूक मिळण्याचा हक्क आणि अपील व पुनरावलोकन यंत्रणेचा हक्क यांचा समावेश आहे।
+
+  Hypothesis (Actual):
+    करदात्यांच्या सनदेमध्ये प्रामाणिक मानण्याचा अधिकार आणि अपील आणि पुनरावलोकन यंत्रणेचा अधिकार यासह करदात्यांच्या प्रमुख अधिकारांची रूपरेषा दिली आहे.
+
+--- Testing Case T005 (5/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    किसी भी दीवानी न्यायालय को किसी भी ऐसे मामले के संबंध में किसी भी वाद या कार्यवाही को ग्रहण करने का अधिकार क्षेत्र नहीं होगा, जिसे निदेशक या अपीलीय न्यायाधिकरण इस अधिनियम के तहत निर्धारित करने के लिए सशक्त है।
+
+  [92mReference (Expected):
+    No civil Court shall have jurisdiction to entertain any suit or proceeding in respect of any matter which the Director or Appellate Tribunal is empowered to determine under this Act.
+
+  Hypothesis (Actual):
+    No civil court shall have jurisdiction to entertain any suit or proceeding in respect of any matter which the Director or the Appellate Tribunal is empowered to determine under this Act.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    No civil Court shall have jurisdiction to entertain any suit or proceeding in respect of any matter which the Director or Appellate Tribunal is empowered to determine under this Act.
+
+  [92mReference (Expected):
+    किसी भी दीवानी न्यायालय को किसी भी ऐसे मामले के संबंध में किसी भी वाद या कार्यवाही को ग्रहण करने का अधिकार क्षेत्र नहीं होगा, जिसे निदेशक या अपीलीय न्यायाधिकरण इस अधिनियम के तहत निर्धारित करने के लिए सशक्त है।
+
+  Hypothesis (Actual):
+    किसी भी सिविल न्यायालय को किसी भी मामले के संबंध में किसी भी वाद या कार्यवाही पर विचार करने का अधिकार नहीं होगा, जिसे निदेशक या अपीलीय न्यायाधिकरण को इस अधिनियम के तहत निर्धारित करने का अधिकार है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    कोणत्याही दिवाणी न्यायालयाला अशा कोणत्याही बाबीच्या संदर्भात कोणताही दावा किंवा कार्यवाही स्वीकारण्याचा अधिकार असणार नाही, ज्यावर संचालक किंवा अपीलीय न्यायाधिकरण या कायद्यानुसार निर्णय घेण्यास सक्षम आहेत।
+
+  [92mReference (Expected):
+    No civil Court shall have jurisdiction to entertain any suit or proceeding in respect of any matter which the Director or Appellate Tribunal is empowered to determine under this Act.
+
+  Hypothesis (Actual):
+    कोणत्याही दिवाणी न्यायालयाला अशा कोणत्याही बाबीच्या संदर्भात कोणताही दावा किंवा कार्यवाही स्वीकारण्याचा अधिकार असणार नाही, ज्यावर संचालक किंवा अपीलीय न्यायाधिकरण या कायद्यानुसार निर्णय घेण्यास सक्षम आहेत।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    No civil Court shall have jurisdiction to entertain any suit or proceeding in respect of any matter which the Director or Appellate Tribunal is empowered to determine under this Act.
+
+  [92mReference (Expected):
+    कोणत्याही दिवाणी न्यायालयाला अशा कोणत्याही बाबीच्या संदर्भात कोणताही दावा किंवा कार्यवाही स्वीकारण्याचा अधिकार असणार नाही, ज्यावर संचालक किंवा अपीलीय न्यायाधिकरण या कायद्यानुसार निर्णय घेण्यास सक्षम आहेत।
+
+  Hypothesis (Actual):
+    या अधिनियमाखाली संचालक किंवा अपीलीय न्यायाधिकरणाला निश्चित करण्याचा अधिकार असलेल्या कोणत्याही प्रकरणाच्या संदर्भात कोणताही खटला किंवा कार्यवाही करण्याचा अधिकार कोणत्याही दिवाणी न्यायालयाला असणार नाही.
+
+--- Testing Case T006 (6/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    निदेशक के पास एक दीवानी न्यायालय के समान शक्तियाँ होंगी, जिसमें खोज और निरीक्षण, किसी भी व्यक्ति की उपस्थिति को लागू करना, और रिकॉर्ड प्रस्तुत करने के लिए विवश करना शामिल है।
+
+  [92mReference (Expected):
+    The Director shall have the same powers as a civil Court, including discovery and inspection, enforcing attendance of any person, and compelling the production of records.
+
+  Hypothesis (Actual):
+    The director will have the same powers as a civil court, including discovery and inspection, enforcing the presence of any person, and compeling the production of records.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    The Director shall have the same powers as a civil Court, including discovery and inspection, enforcing attendance of any person, and compelling the production of records.
+
+  [92mReference (Expected):
+    निदेशक के पास एक दीवानी न्यायालय के समान शक्तियाँ होंगी, जिसमें खोज और निरीक्षण, किसी भी व्यक्ति की उपस्थिति को लागू करना, और रिकॉर्ड प्रस्तुत करने के लिए विवश करना शामिल है।
+
+  Hypothesis (Actual):
+    निदेशक के पास सिविल न्यायालय के समान शक्तियां होंगी, जिसमें खोज और निरीक्षण, किसी भी व्यक्ति की उपस्थिति को लागू करना और रिकॉर्ड के उत्पादन को मजबूर करना शामिल है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    संचालकाकडे दिवाणी न्यायालयाप्रमाणेच अधिकार असतील, ज्यात शोध आणि तपासणी, कोणत्याही व्यक्तीला उपस्थित राहण्यास भाग पाडणे, आणि अभिलेख सादर करण्यास भाग पाडणे यांचा समावेश आहे।
+
+  [92mReference (Expected):
+    The Director shall have the same powers as a civil Court, including discovery and inspection, enforcing attendance of any person, and compelling the production of records.
+
+  Hypothesis (Actual):
+    The Director shall have the same powers as the Civil Court, including search and investigation, compel any person to attend, and to compel the production of records.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    The Director shall have the same powers as a civil Court, including discovery and inspection, enforcing attendance of any person, and compelling the production of records.
+
+  [92mReference (Expected):
+    संचालकाकडे दिवाणी न्यायालयाप्रमाणेच अधिकार असतील, ज्यात शोध आणि तपासणी, कोणत्याही व्यक्तीला उपस्थित राहण्यास भाग पाडणे, आणि अभिलेख सादर करण्यास भाग पाडणे यांचा समावेश आहे।
+
+  Hypothesis (Actual):
+    संचालकांना दिवाणी न्यायालयासारखेच अधिकार असतील, ज्यात शोध आणि तपासणी, कोणत्याही व्यक्तीची उपस्थिती लागू करणे आणि रेकॉर्ड तयार करण्यास भाग पाडणे समाविष्ट आहे.
+
+--- Testing Case T007 (7/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    करदाता के दायित्वों में ईमानदार और अनुपालनशील होना, कानून के अनुसार सटीक रिकॉर्ड रखना, और देय करों का समय पर भुगतान करना शामिल है।
+
+  [92mReference (Expected):
+    Taxpayer obligations include being honest and compliant, keeping accurate records as per law, and paying taxes due in a timely manner.
+
+  Hypothesis (Actual):
+    The taxpayer's obligations include being honest and compliant, keeping accurate records as per the law, and paying due taxes on time.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Taxpayer obligations include being honest and compliant, keeping accurate records as per law, and paying taxes due in a timely manner.
+
+  [92mReference (Expected):
+    करदाता के दायित्वों में ईमानदार और अनुपालनशील होना, कानून के अनुसार सटीक रिकॉर्ड रखना, और देय करों का समय पर भुगतान करना शामिल है।
+
+  Hypothesis (Actual):
+    करदाता दायित्वों में ईमानदार और अनुपालन करना, कानून के अनुसार सटीक रिकॉर्ड रखना और समय पर देय करों का भुगतान करना शामिल है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    करदात्याच्या जबाबदाऱ्यांमध्ये प्रामाणिक आणि अनुपालनशील असणे, कायद्यानुसार अचूक नोंदी ठेवणे, आणि देय करांचा वेळेवर भरणा करणे यांचा समावेश होतो।
+
+  [92mReference (Expected):
+    Taxpayer obligations include being honest and compliant, keeping accurate records as per law, and paying taxes due in a timely manner.
+
+  Hypothesis (Actual):
+    The responsibilities of a taxpayer include being honest and compliant, maintaining accurate records as per law, and timely payment of taxes due.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Taxpayer obligations include being honest and compliant, keeping accurate records as per law, and paying taxes due in a timely manner.
+
+  [92mReference (Expected):
+    करदात्याच्या जबाबदाऱ्यांमध्ये प्रामाणिक आणि अनुपालनशील असणे, कायद्यानुसार अचूक नोंदी ठेवणे, आणि देय करांचा वेळेवर भरणा करणे यांचा समावेश होतो।
+
+  Hypothesis (Actual):
+    करदात्यांच्या जबाबदाऱ्यांमध्ये प्रामाणिक आणि अनुपालन करणे, कायद्यानुसार अचूक नोंदी ठेवणे आणि वेळेवर देय कर भरणे यांचा समावेश आहे.
+
+--- Testing Case T008 (8/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    निदेशक के किसी आदेश से व्यथित कोई भी रिपोर्टिंग इकाई अपीलीय न्यायाधिकरण में अपील कर सकती है।
+
+  [92mReference (Expected):
+    Any reporting entity aggrieved by an order of the Director may prefer an appeal to the Appellate Tribunal.
+
+  Hypothesis (Actual):
+    Any reporting entity aggrieved by an order of the Director may appeal to the Appellate Tribunal.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Any reporting entity aggrieved by an order of the Director may prefer an appeal to the Appellate Tribunal.
+
+  [92mReference (Expected):
+    निदेशक के किसी आदेश से व्यथित कोई भी रिपोर्टिंग इकाई अपीलीय न्यायाधिकरण में अपील कर सकती है।
+
+  Hypothesis (Actual):
+    निदेशक के आदेश से व्यथित कोई भी रिपोर्टिंग संस्था अपीलीय न्यायाधिकरण में अपील करना पसंद कर सकती है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    संचालकाच्या कोणत्याही आदेशामुळे व्यथित झालेली कोणतीही रिपोर्टिंग संस्था अपीलीय न्यायाधिकरणाकडे अपील करू शकते।
+
+  [92mReference (Expected):
+    Any reporting entity aggrieved by an order of the Director may prefer an appeal to the Appellate Tribunal.
+
+  Hypothesis (Actual):
+    Any reporting institution aggrieved by any order of the Director may appeal to the Appellate Tribunal.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Any reporting entity aggrieved by an order of the Director may prefer an appeal to the Appellate Tribunal.
+
+  [92mReference (Expected):
+    संचालकाच्या कोणत्याही आदेशामुळे व्यथित झालेली कोणतीही रिपोर्टिंग संस्था अपीलीय न्यायाधिकरणाकडे अपील करू शकते।
+
+  Hypothesis (Actual):
+    संचालकांच्या आदेशाने व्यथित झालेली कोणतीही घटक, अपीलीय न्यायाधिकरणाकडे दाद मागू शकते.
+
+--- Testing Case T009 (9/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    यदि छह महीने के भीतर जुर्माना नहीं चुकाया जाता है, तो निदेशक आयकर अधिनियम, 1961 की अनुसूची II में निर्धारित तरीके से राशि की वसूली के लिए कार्यवाही कर सकता है।
+
+  [92mReference (Expected):
+    If a fine is not paid within six months, the Director may proceed to recover the amount in the same manner as prescribed in Schedule II of the Income-tax Act, 1961.
+
+  Hypothesis (Actual):
+    If the penalty is not paid within six months, the Director may proceed to recover the amount in the manner prescribed in Schedule II of the Income Tax Act, 1961.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    If a fine is not paid within six months, the Director may proceed to recover the amount in the same manner as prescribed in Schedule II of the Income-tax Act, 1961.
+
+  [92mReference (Expected):
+    यदि छह महीने के भीतर जुर्माना नहीं चुकाया जाता है, तो निदेशक आयकर अधिनियम, 1961 की अनुसूची II में निर्धारित तरीके से राशि की वसूली के लिए कार्यवाही कर सकता है।
+
+  Hypothesis (Actual):
+    यदि छह महीने के भीतर जुर्माना का भुगतान नहीं किया जाता है, तो निदेशक आयकर अधिनियम, 1961 की अनुसूची II में निर्धारित तरीके से राशि की वसूली के लिए आगे बढ़ सकता है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    जर सहा महिन्यांच्या आत दंड भरला नाही, तर संचालक आयकर अधिनियम, 1961 च्या अनुसूची II मध्ये विहित केल्यानुसार रक्कम वसूल करण्याची कार्यवाही करू शकतो।
+
+  [92mReference (Expected):
+    If a fine is not paid within six months, the Director may proceed to recover the amount in the same manner as prescribed in Schedule II of the Income-tax Act, 1961.
+
+  Hypothesis (Actual):
+    If penalty is not paid within six months, the Director may proceed to recover the amount as prescribed in Schedule II of the Income-tax Act, 1961.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    If a fine is not paid within six months, the Director may proceed to recover the amount in the same manner as prescribed in Schedule II of the Income-tax Act, 1961.
+
+  [92mReference (Expected):
+    जर सहा महिन्यांच्या आत दंड भरला नाही, तर संचालक आयकर अधिनियम, 1961 च्या अनुसूची II मध्ये विहित केल्यानुसार रक्कम वसूल करण्याची कार्यवाही करू शकतो।
+
+  Hypothesis (Actual):
+    सहा महिन्यांच्या आत दंड न भरल्यास, संचालक आयकर अधिनियम, 1961 च्या अनुसूची II मध्ये नमूद केल्याप्रमाणे रक्कम वसूल करण्यासाठी पुढे जाऊ शकतात.
+
+--- Testing Case T010 (10/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    धन शोधन आपराधिक आय की अवैध उत्पत्ति को छिपाने के लिए उसे संसाधित करने की प्रक्रिया है, जिसमें अक्सर स्रोतों को छिपाना, रूप बदलना, या कम ध्यान आकर्षित करने के लिए धन को स्थानांतरित करना शामिल होता है।
+
+  [92mReference (Expected):
+    Money laundering is the processing of criminal proceeds to disguise their illegal origin, often by disguising sources, changing form, or moving funds to attract less attention.
+
+  Hypothesis (Actual):
+    Money laundering is the process of processing criminal proceeds to conceal their illicit origins, often involving concealing sources, changing appearances, or transferring funds to attract less attention.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Money laundering is the processing of criminal proceeds to disguise their illegal origin, often by disguising sources, changing form, or moving funds to attract less attention.
+
+  [92mReference (Expected):
+    धन शोधन आपराधिक आय की अवैध उत्पत्ति को छिपाने के लिए उसे संसाधित करने की प्रक्रिया है, जिसमें अक्सर स्रोतों को छिपाना, रूप बदलना, या कम ध्यान आकर्षित करने के लिए धन को स्थानांतरित करना शामिल होता है।
+
+  Hypothesis (Actual):
+    मनी लॉन्ड्रिंग आपराधिक आय का प्रसंस्करण है जो उनके अवैध मूल को छिपाने के लिए है, अक्सर स्रोतों को छिपाकर, रूप बदलकर, या कम ध्यान आकर्षित करने के लिए धन को स्थानांतरित करके।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    धन शोधन (मनी लॉन्ड्रिंग) म्हणजे गुन्हेगारीतून मिळालेल्या पैशाचा बेकायदेशीर उगम लपवण्यासाठी त्यावर प्रक्रिया करणे, ज्यामध्ये अनेकदा स्त्रोत लपवणे, स्वरूप बदलणे, किंवा कमी लक्ष वेधण्यासाठी निधी हलवणे यांचा समावेश होतो।
+
+  [92mReference (Expected):
+    Money laundering is the processing of criminal proceeds to disguise their illegal origin, often by disguising sources, changing form, or moving funds to attract less attention.
+
+  Hypothesis (Actual):
+    धन शोधन (मनी लॉन्ड्रिंग) म्हणजे गुन्हेगारीतून मिळालेल्या पैशाचा बेकायदेशीर उगम लपवण्यासाठी त्यावर प्रक्रिया करणे, ज्यामध्ये अनेकदा स्त्रोत लपवणे, स्वरूप बदलणे, किंवा कमी लक्ष वेधण्यासाठी निधी हलवणे यांचा समावेश होतो।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Money laundering is the processing of criminal proceeds to disguise their illegal origin, often by disguising sources, changing form, or moving funds to attract less attention.
+
+  [92mReference (Expected):
+    धन शोधन (मनी लॉन्ड्रिंग) म्हणजे गुन्हेगारीतून मिळालेल्या पैशाचा बेकायदेशीर उगम लपवण्यासाठी त्यावर प्रक्रिया करणे, ज्यामध्ये अनेकदा स्त्रोत लपवणे, स्वरूप बदलणे, किंवा कमी लक्ष वेधण्यासाठी निधी हलवणे यांचा समावेश होतो।
+
+  Hypothesis (Actual):
+    मनी लॉन्ड्रिंग म्हणजे गुन्हेगारी उत्पन्नाची प्रक्रिया त्यांचे बेकायदेशीर मूळ लपविण्यासाठी, बहुतेकदा स्त्रोत लपवून, फॉर्म बदलून किंवा कमी लक्ष वेधण्यासाठी निधी हलवून.
+
+--- Testing Case T011 (11/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    कोई व्यक्ति धन शोधन का दोषी है यदि वह जानबूझकर अपराध की आय को छिपाने, रखने, या उपयोग करने से जुड़ी किसी भी प्रक्रिया में सहायता करता है या उसका हिस्सा है।
+
+  [92mReference (Expected):
+    A person is guilty of money laundering if they knowingly assist or are a party to any process connected with the concealment, possession, or use of proceeds of crime.
+
+  Hypothesis (Actual):
+    A person is guilty of money laundering if he knowingly assists or is part of any process involving the concealment, possession, or use of the proceeds of the crime.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A person is guilty of money laundering if they knowingly assist or are a party to any process connected with the concealment, possession, or use of proceeds of crime.
+
+  [92mReference (Expected):
+    कोई व्यक्ति धन शोधन का दोषी है यदि वह जानबूझकर अपराध की आय को छिपाने, रखने, या उपयोग करने से जुड़ी किसी भी प्रक्रिया में सहायता करता है या उसका हिस्सा है।
+
+  Hypothesis (Actual):
+    एक व्यक्ति मनी लॉन्ड्रिंग का दोषी है यदि वे जानबूझकर अपराध की आय को छिपाने, कब्जे या उपयोग से जुड़ी किसी भी प्रक्रिया में सहायता करते हैं या एक पक्ष हैं।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    जर एखादी व्यक्ती गुन्ह्यातून मिळालेल्या पैशाची लपवणूक, ताबा किंवा वापर यांच्याशी संबंधित कोणत्याही प्रक्रियेत जाणीवपूर्वक मदत करत असेल किंवा त्यात सहभागी असेल, तर ती व्यक्ती धन शोधनाच्या गुन्ह्यासाठी दोषी आहे।
+
+  [92mReference (Expected):
+    A person is guilty of money laundering if they knowingly assist or are a party to any process connected with the concealment, possession, or use of proceeds of crime.
+
+  Hypothesis (Actual):
+    जर एखादी व्यक्ती गुन्ह्यातून मिळालेल्या पैशाची लपवणूक, ताबा किंवा वापर यांच्याशी संबंधित कोणत्याही प्रक्रियेत जाणीवपूर्वक मदत करत असेल किंवा त्यात सहभागी असेल, तर ती व्यक्ती धन शोधनाच्या गुन्ह्यासाठी दोषी आहे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A person is guilty of money laundering if they knowingly assist or are a party to any process connected with the concealment, possession, or use of proceeds of crime.
+
+  [92mReference (Expected):
+    जर एखादी व्यक्ती गुन्ह्यातून मिळालेल्या पैशाची लपवणूक, ताबा किंवा वापर यांच्याशी संबंधित कोणत्याही प्रक्रियेत जाणीवपूर्वक मदत करत असेल किंवा त्यात सहभागी असेल, तर ती व्यक्ती धन शोधनाच्या गुन्ह्यासाठी दोषी आहे।
+
+  Hypothesis (Actual):
+    एखादी व्यक्ती मनी लॉन्ड्रिंगसाठी दोषी आहे जर ती जाणूनबुजून गुन्हेगारीच्या उत्पन्नास लपविणे, ताब्यात घेणे किंवा वापराशी संबंधित कोणत्याही प्रक्रियेस मदत करत असेल किंवा त्यात सहभागी असेल.
+
+--- Testing Case T012 (12/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    'अपराध की आय' का अर्थ है किसी अनुसूचित अपराध से संबंधित आपराधिक गतिविधि के परिणामस्वरूप किसी भी व्यक्ति द्वारा प्रत्यक्ष या अप्रत्यक्ष रूप से प्राप्त या व्युत्पन्न कोई भी संपत्ति।
+
+  [92mReference (Expected):
+    'Proceeds of crime' means any property derived or obtained, directly or indirectly, by any person as a result of criminal activity relating to a scheduled offence.
+
+  Hypothesis (Actual):
+    'Income of crime' means any property directly or indirectly obtained or derived by any person as a result of criminal activity related to a scheduled offence.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    'Proceeds of crime' means any property derived or obtained, directly or indirectly, by any person as a result of criminal activity relating to a scheduled offence.
+
+  [92mReference (Expected):
+    'अपराध की आय' का अर्थ है किसी अनुसूचित अपराध से संबंधित आपराधिक गतिविधि के परिणामस्वरूप किसी भी व्यक्ति द्वारा प्रत्यक्ष या अप्रत्यक्ष रूप से प्राप्त या व्युत्पन्न कोई भी संपत्ति।
+
+  Hypothesis (Actual):
+    'अपराध की आय' का अर्थ है किसी अनुसूचित अपराध से संबंधित आपराधिक गतिविधि के परिणामस्वरूप किसी भी व्यक्ति द्वारा प्रत्यक्ष या अप्रत्यक्ष रूप से प्राप्त या प्राप्त की गई कोई भी संपत्ति।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    'गुन्ह्यातून मिळालेली मालमत्ता' म्हणजे अनुसूचित गुन्ह्याशी संबंधित गुन्हेगारी कृत्याच्या परिणामी कोणत्याही व्यक्तीने प्रत्यक्ष किंवा अप्रत्यक्षपणे मिळवलेली किंवा प्राप्त केलेली कोणतीही मालमत्ता।
+
+  [92mReference (Expected):
+    'Proceeds of crime' means any property derived or obtained, directly or indirectly, by any person as a result of criminal activity relating to a scheduled offence.
+
+  Hypothesis (Actual):
+    "Property acquired by proceeds of crime" means any property acquired or acquired directly or indirectly by any person as a result of an offence relating to a scheduled offence.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    'Proceeds of crime' means any property derived or obtained, directly or indirectly, by any person as a result of criminal activity relating to a scheduled offence.
+
+  [92mReference (Expected):
+    'गुन्ह्यातून मिळालेली मालमत्ता' म्हणजे अनुसूचित गुन्ह्याशी संबंधित गुन्हेगारी कृत्याच्या परिणामी कोणत्याही व्यक्तीने प्रत्यक्ष किंवा अप्रत्यक्षपणे मिळवलेली किंवा प्राप्त केलेली कोणतीही मालमत्ता।
+
+  Hypothesis (Actual):
+    'गुन्ह्याची मिळकत' म्हणजे अनुसूचित गुन्ह्याशी संबंधित गुन्हेगारी कारवाईच्या परिणामी कोणत्याही व्यक्तीने प्रत्यक्ष किंवा अप्रत्यक्षपणे मिळवलेली किंवा प्राप्त केलेली कोणतीही मालमत्ता.
+
+--- Testing Case T013 (13/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    अनुसूची के भाग B के तहत एक अनुसूचित अपराध केवल तभी अर्हता प्राप्त करता है जब ऐसे अपराधों में शामिल कुल मूल्य एक करोड़ रुपये या उससे अधिक हो।
+
+  [92mReference (Expected):
+    A scheduled offence under Part B of the Schedule only qualifies if the total value involved in such offences is one crore rupees or more.
+
+  Hypothesis (Actual):
+    A scheduled offence under Part B of the Schedule qualifies only if the total value involved in such offences is one crore rupees or more.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A scheduled offence under Part B of the Schedule only qualifies if the total value involved in such offences is one crore rupees or more.
+
+  [92mReference (Expected):
+    अनुसूची के भाग B के तहत एक अनुसूचित अपराध केवल तभी अर्हता प्राप्त करता है जब ऐसे अपराधों में शामिल कुल मूल्य एक करोड़ रुपये या उससे अधिक हो।
+
+  Hypothesis (Actual):
+    अनुसूची के भाग बी के तहत एक अनुसूचित अपराध केवल तभी योग्य होता है जब ऐसे अपराधों में शामिल कुल मूल्य एक करोड़ रुपये या उससे अधिक हो।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    अनुसूचीच्या भाग B अंतर्गत येणारा अनुसूचित गुन्हा तेव्हाच पात्र ठरतो, जेव्हा अशा गुन्ह्यांमध्ये गुंतलेले एकूण मूल्य एक कोटी रुपये किंवा त्यापेक्षा जास्त असेल।
+
+  [92mReference (Expected):
+    A scheduled offence under Part B of the Schedule only qualifies if the total value involved in such offences is one crore rupees or more.
+
+  Hypothesis (Actual):
+    A scheduled offence falling under Part B of the Schedule is eligible only if the total value involved in such offences is one crore rupees or more.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A scheduled offence under Part B of the Schedule only qualifies if the total value involved in such offences is one crore rupees or more.
+
+  [92mReference (Expected):
+    अनुसूचीच्या भाग B अंतर्गत येणारा अनुसूचित गुन्हा तेव्हाच पात्र ठरतो, जेव्हा अशा गुन्ह्यांमध्ये गुंतलेले एकूण मूल्य एक कोटी रुपये किंवा त्यापेक्षा जास्त असेल।
+
+  Hypothesis (Actual):
+    अनुसूचीच्या भाग बी अंतर्गत अनुसूचित गुन्हा केवळ तेव्हाच पात्र ठरतो जेव्हा अशा गुन्ह्यांमध्ये समाविष्ट असलेले एकूण मूल्य एक कोटी रुपये किंवा त्याहून अधिक असेल.
+
+--- Testing Case T014 (14/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    'रिपोर्टिंग इकाई' का अर्थ है एक बैंकिंग कंपनी, वित्तीय संस्थान, मध्यस्थ या एक निर्दिष्ट व्यवसाय या पेशा करने वाला व्यक्ति।
+
+  [92mReference (Expected):
+    'Reporting entity' means a banking company, financial institution, intermediary or a person carrying on a designated business or profession.
+
+  Hypothesis (Actual):
+    'Reporting entity' means a banking company, financial institution, intermediary or a person carrying on a specified business or profession.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    'Reporting entity' means a banking company, financial institution, intermediary or a person carrying on a designated business or profession.
+
+  [92mReference (Expected):
+    'रिपोर्टिंग इकाई' का अर्थ है एक बैंकिंग कंपनी, वित्तीय संस्थान, मध्यस्थ या एक निर्दिष्ट व्यवसाय या पेशा करने वाला व्यक्ति।
+
+  Hypothesis (Actual):
+    'रिपोर्टिंग इकाई' का अर्थ है एक बैंकिंग कंपनी, वित्तीय संस्थान, मध्यस्थ या एक निर्दिष्ट व्यवसाय या पेशे को चलाने वाला व्यक्ति।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    'रिपोर्टिंग संस्था' म्हणजे बँकिंग कंपनी, वित्तीय संस्था, मध्यस्थ किंवा नियुक्त केलेला व्यवसाय किंवा पेशा करणारी व्यक्ती।
+
+  [92mReference (Expected):
+    'Reporting entity' means a banking company, financial institution, intermediary or a person carrying on a designated business or profession.
+
+  Hypothesis (Actual):
+    "Reporting agency" means a banking company, financial institution, intermediary or designated business or profession.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    'Reporting entity' means a banking company, financial institution, intermediary or a person carrying on a designated business or profession.
+
+  [92mReference (Expected):
+    'रिपोर्टिंग संस्था' म्हणजे बँकिंग कंपनी, वित्तीय संस्था, मध्यस्थ किंवा नियुक्त केलेला व्यवसाय किंवा पेशा करणारी व्यक्ती।
+
+  Hypothesis (Actual):
+    'रिपोर्टिंग एंटिटी' म्हणजे बँकिंग कंपनी, वित्तीय संस्था, मध्यस्थ किंवा नियुक्त व्यवसाय किंवा व्यवसाय करणारी व्यक्ती.
+
+--- Testing Case T015 (15/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    'मध्यस्थ' में एक स्टॉक-ब्रोकर, शेयर ट्रांसफर एजेंट, मर्चेंट बैंकर, पोर्टफोलिओ मैनेजर, या प्रतिभूति बाजार से जुड़ा कोई अन्य मध्यस्थ शामिल है।
+
+  [92mReference (Expected):
+    'Intermediary' includes a stock-broker, share transfer agent, merchant banker, portfolio manager, or any other intermediary associated with the securities market.
+
+  Hypothesis (Actual):
+    'Intermediary' includes a stock-broker, share transfer agent, merchant banker, portfolio manager, or any other intermediary associated with the securities market.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    'Intermediary' includes a stock-broker, share transfer agent, merchant banker, portfolio manager, or any other intermediary associated with the securities market.
+
+  [92mReference (Expected):
+    'मध्यस्थ' में एक स्टॉक-ब्रोकर, शेयर ट्रांसफर एजेंट, मर्चेंट बैंकर, पोर्टफोलिओ मैनेजर, या प्रतिभूति बाजार से जुड़ा कोई अन्य मध्यस्थ शामिल है।
+
+  Hypothesis (Actual):
+    'मध्यस्थ' में एक स्टॉक-ब्रोकर, शेयर ट्रांसफर एजेंट, मर्चेंट बैंकर, पोर्टफोलियो मैनेजर, या प्रतिभूति बाजार से जुड़ा कोई अन्य मध्यस्थ शामिल है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    'मध्यस्थ' म्हणजे स्टॉक-ब्रोकर, शेअर ट्रान्सफर एजंट, मर्चंट बँकर, पोर्टफोलिओ व्यवस्थापक, किंवा रोखे बाजाराशी संबंधित इतर कोणताही मध्यस्थ।
+
+  [92mReference (Expected):
+    'Intermediary' includes a stock-broker, share transfer agent, merchant banker, portfolio manager, or any other intermediary associated with the securities market.
+
+  Hypothesis (Actual):
+    'Intermediary' means a stock-broker, share transfer agent, merchant banker, portfolio manager, or any other intermediary associated with the securities market.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    'Intermediary' includes a stock-broker, share transfer agent, merchant banker, portfolio manager, or any other intermediary associated with the securities market.
+
+  [92mReference (Expected):
+    'मध्यस्थ' म्हणजे स्टॉक-ब्रोकर, शेअर ट्रान्सफर एजंट, मर्चंट बँकर, पोर्टफोलिओ व्यवस्थापक, किंवा रोखे बाजाराशी संबंधित इतर कोणताही मध्यस्थ।
+
+  Hypothesis (Actual):
+    'मध्यस्थ' मध्ये स्टॉक ब्रोकर, शेअर ट्रान्सफर एजंट, मर्चंट बँकर, पोर्टफोलिओ मॅनेजर किंवा सिक्युरिटीज मार्केटशी संबंधित इतर कोणत्याही मध्यस्थाचा समावेश होतो.
+
+--- Testing Case T016 (16/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    प्रत्येक रिपोर्टिंग इकाई को PML नियमों के नियम 9 द्वारा निर्धारित अनुसार, अपने सभी ग्राहकों की पहचान के रिकॉर्ड को सत्यापित और बनाए रखना चाहिए।
+
+  [92mReference (Expected):
+    Every reporting entity must verify and maintain the records of the identity of all its clients, as prescribed by rule 9 of the PML Rules.
+
+  Hypothesis (Actual):
+    Every reporting entity must verify and maintain records of the identity of all its customers, as prescribed by Rule 9 of the PML Rules.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Every reporting entity must verify and maintain the records of the identity of all its clients, as prescribed by rule 9 of the PML Rules.
+
+  [92mReference (Expected):
+    प्रत्येक रिपोर्टिंग इकाई को PML नियमों के नियम 9 द्वारा निर्धारित अनुसार, अपने सभी ग्राहकों की पहचान के रिकॉर्ड को सत्यापित और बनाए रखना चाहिए।
+
+  Hypothesis (Actual):
+    प्रत्येक रिपोर्टिंग इकाई को अपने सभी ग्राहकों की पहचान के रिकॉर्ड को सत्यापित और बनाए रखना चाहिए, जैसा कि पीएमएल नियमों के नियम 9 द्वारा निर्धारित किया गया है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    प्रत्येक रिपोर्टिंग संस्थेने PML नियमांच्या नियम 9 नुसार विहित केल्याप्रमाणे, आपल्या सर्व ग्राहकांच्या ओळखीच्या नोंदी सत्यापित करणे आणि त्या जतन करणे आवश्यक आहे।
+
+  [92mReference (Expected):
+    Every reporting entity must verify and maintain the records of the identity of all its clients, as prescribed by rule 9 of the PML Rules.
+
+  Hypothesis (Actual):
+    Every reporting entity is required to verify and preserve the identity records of all its customers, as prescribed under Rule 9 of the PML Rules.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Every reporting entity must verify and maintain the records of the identity of all its clients, as prescribed by rule 9 of the PML Rules.
+
+  [92mReference (Expected):
+    प्रत्येक रिपोर्टिंग संस्थेने PML नियमांच्या नियम 9 नुसार विहित केल्याप्रमाणे, आपल्या सर्व ग्राहकांच्या ओळखीच्या नोंदी सत्यापित करणे आणि त्या जतन करणे आवश्यक आहे।
+
+  Hypothesis (Actual):
+    प्रत्येक अहवाल देणार् या घटकाने पीएमएल नियमांच्या नियम 9 द्वारे विहित केल्यानुसार आपल्या सर्व ग्राहकांच्या ओळखीची नोंद सत्यापित करणे आणि ठेवणे आवश्यक आहे.
+
+--- Testing Case T017 (17/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    'आधिकारिक रूप से वैध दस्तावेज़' (OVD) में पासपोर्ट, ड्राइविंग लाइसेंस, आधार संख्या होने का प्रमाण, और मतदाता पहचान पत्र शामिल है।
+
+  [92mReference (Expected):
+    'Officially valid document' (OVD) includes the passport, driving licence, proof of possession of Aadhaar number, and the Voter's Identity Card.
+
+  Hypothesis (Actual):
+    The 'Officially Valid Document' (OVD) includes a passport, driving license, proof of having an Aadhaar number, and a voter ID card.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    'Officially valid document' (OVD) includes the passport, driving licence, proof of possession of Aadhaar number, and the Voter's Identity Card.
+
+  [92mReference (Expected):
+    'आधिकारिक रूप से वैध दस्तावेज़' (OVD) में पासपोर्ट, ड्राइविंग लाइसेंस, आधार संख्या होने का प्रमाण, और मतदाता पहचान पत्र शामिल है।
+
+  Hypothesis (Actual):
+    'आधिकारिक रूप से वैध दस्तावेज' (ओवीडी) में पासपोर्ट, ड्राइविंग लाइसेंस, आधार संख्या के कब्जे का प्रमाण और मतदाता पहचान पत्र शामिल हैं।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    'अधिकृतपणे वैध दस्तऐवज' (OVD) मध्ये पासपोर्ट, ड्रायव्हिंग लायसन्स, आधार क्रमांक असण्याचा पुरावा, आणि मतदार ओळखपत्र यांचा समावेश होतो।
+
+  [92mReference (Expected):
+    'Officially valid document' (OVD) includes the passport, driving licence, proof of possession of Aadhaar number, and the Voter's Identity Card.
+
+  Hypothesis (Actual):
+    A 'Officially Valid Document' (OVD) includes a passport, driving license, proof of having an Aadhaar number, and voter ID card.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    'Officially valid document' (OVD) includes the passport, driving licence, proof of possession of Aadhaar number, and the Voter's Identity Card.
+
+  [92mReference (Expected):
+    'अधिकृतपणे वैध दस्तऐवज' (OVD) मध्ये पासपोर्ट, ड्रायव्हिंग लायसन्स, आधार क्रमांक असण्याचा पुरावा, आणि मतदार ओळखपत्र यांचा समावेश होतो।
+
+  Hypothesis (Actual):
+    'ऑफिशिअल व्हॅलिड डॉक्युमेंट्स' (ओव्हीडी) मध्ये पासपोर्ट, ड्रायव्हिंग लायसन्स, आधार क्रमांक असल्याचा पुरावा आणि मतदार ओळखपत्र यांचा समावेश होतो.
+
+--- Testing Case T018 (18/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    PMLA के तहत 'लेन-देन' में खाता खोलना, जमा करना, निकालना, सेफ्टी डिपॉजिट बॉक्स का उपयोग करना, या कोई न्यासीय संबंध स्थापित करना शामिल है।
+
+  [92mReference (Expected):
+    A 'transaction' under PMLA includes the opening of an account, deposits, withdrawals, the use of a safety deposit box, or establishing any fiduciary relationship.
+
+  Hypothesis (Actual):
+    'Transactions' under the PMLA include opening an account, making deposits, withdrawing, using a safety deposit box, or establishing a fiduciary relationship.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A 'transaction' under PMLA includes the opening of an account, deposits, withdrawals, the use of a safety deposit box, or establishing any fiduciary relationship.
+
+  [92mReference (Expected):
+    PMLA के तहत 'लेन-देन' में खाता खोलना, जमा करना, निकालना, सेफ्टी डिपॉजिट बॉक्स का उपयोग करना, या कोई न्यासीय संबंध स्थापित करना शामिल है।
+
+  Hypothesis (Actual):
+    पीएमएलए के तहत एक 'लेनदेन' में खाता खोलना, जमा, निकासी, सुरक्षा जमा बॉक्स का उपयोग या कोई प्रत्ययी संबंध स्थापित करना शामिल है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    PMLA अंतर्गत 'व्यवहार' म्हणजे खाते उघडणे, ठेवी, पैसे काढणे, सेफ्टी डिपॉझिट बॉक्सचा वापर करणे, किंवा कोणताही विश्वस्त संबंध प्रस्थापित करणे।
+
+  [92mReference (Expected):
+    A 'transaction' under PMLA includes the opening of an account, deposits, withdrawals, the use of a safety deposit box, or establishing any fiduciary relationship.
+
+  Hypothesis (Actual):
+    PMLA अंतर्गत 'व्यवहार' म्हणजे खाते उघडणे, ठेवी, पैसे काढणे, सेफ्टी डिपॉझिट बॉक्सचा वापर करणे, किंवा कोणताही विश्वस्त संबंध प्रस्थापित करणे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A 'transaction' under PMLA includes the opening of an account, deposits, withdrawals, the use of a safety deposit box, or establishing any fiduciary relationship.
+
+  [92mReference (Expected):
+    PMLA अंतर्गत 'व्यवहार' म्हणजे खाते उघडणे, ठेवी, पैसे काढणे, सेफ्टी डिपॉझिट बॉक्सचा वापर करणे, किंवा कोणताही विश्वस्त संबंध प्रस्थापित करणे।
+
+  Hypothesis (Actual):
+    पीएमएलए अंतर्गत 'व्यवहार' मध्ये खाते उघडणे, ठेवी, पैसे काढणे, सुरक्षा ठेव बॉक्सचा वापर करणे किंवा कोणताही विश्वासू संबंध स्थापित करणे समाविष्ट आहे.
+
+--- Testing Case T019 (19/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    प्रत्येक रिपोर्टिंग इकाई को एक ग्राहक सम्यक तत्परता (CDD) कार्यक्रम तैयार करना और लागू करना आवश्यक है जो उसके वरिष्ठ प्रबंधन द्वारा अनुमोदित हो।
+
+  [92mReference (Expected):
+    Every reporting entity is required to formulate and implement a client due diligence (CDD) programme that is approved by its senior management.
+
+  Hypothesis (Actual):
+    Each reporting entity is required to prepare and implement a Customer Due Readiness (CDD) program that is approved by its senior management.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Every reporting entity is required to formulate and implement a client due diligence (CDD) programme that is approved by its senior management.
+
+  [92mReference (Expected):
+    प्रत्येक रिपोर्टिंग इकाई को एक ग्राहक सम्यक तत्परता (CDD) कार्यक्रम तैयार करना और लागू करना आवश्यक है जो उसके वरिष्ठ प्रबंधन द्वारा अनुमोदित हो।
+
+  Hypothesis (Actual):
+    प्रत्येक रिपोर्टिंग इकाई को एक क्लाइंट ड्यू डिलिजेंस (सीडीडी) कार्यक्रम तैयार करने और लागू करने की आवश्यकता होती है जिसे उसके वरिष्ठ प्रबंधन द्वारा अनुमोदित किया जाता है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    प्रत्येक रिपोर्टिंग संस्थेने ग्राहक योग्य तत्परता (CDD) कार्यक्रम तयार करणे आणि त्याची अंमलबजावणी करणे आवश्यक आहे, जो तिच्या वरिष्ठ व्यवस्थापनाने मंजूर केलेला असेल।
+
+  [92mReference (Expected):
+    Every reporting entity is required to formulate and implement a client due diligence (CDD) programme that is approved by its senior management.
+
+  Hypothesis (Actual):
+    प्रत्येक रिपोर्टिंग संस्थेने ग्राहक योग्य तत्परता (CDD) कार्यक्रम तयार करणे आणि त्याची अंमलबजावणी करणे आवश्यक आहे, जो तिच्या वरिष्ठ व्यवस्थापनाने मंजूर केलेला असेल।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Every reporting entity is required to formulate and implement a client due diligence (CDD) programme that is approved by its senior management.
+
+  [92mReference (Expected):
+    प्रत्येक रिपोर्टिंग संस्थेने ग्राहक योग्य तत्परता (CDD) कार्यक्रम तयार करणे आणि त्याची अंमलबजावणी करणे आवश्यक आहे, जो तिच्या वरिष्ठ व्यवस्थापनाने मंजूर केलेला असेल।
+
+  Hypothesis (Actual):
+    प्रत्येक अहवाल देणार् या घटकाने क्लायंट ड्यू डिलिजन्स (सीडीडी) प्रोग्राम तयार करणे आणि अंमलात आणणे आवश्यक आहे जे त्याच्या वरिष्ठ व्यवस्थापनाने मंजूर केले आहे.
+
+--- Testing Case T020 (20/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    रिपोर्टिंग संस्थाओं को सभी लेन-देन का रिकॉर्ड लेन-देन की तारीख से न्यूनतम पांच साल की अवधि के लिए बनाए रखना चाहिए।
+
+  [92mReference (Expected):
+    Reporting entities must maintain records of all transactions for a minimum period of five years from the date of the transaction.
+
+  Hypothesis (Actual):
+    Reporting entities should maintain a record of all transactions for a minimum period of five years from the date of transaction.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Reporting entities must maintain records of all transactions for a minimum period of five years from the date of the transaction.
+
+  [92mReference (Expected):
+    रिपोर्टिंग संस्थाओं को सभी लेन-देन का रिकॉर्ड लेन-देन की तारीख से न्यूनतम पांच साल की अवधि के लिए बनाए रखना चाहिए।
+
+  Hypothesis (Actual):
+    रिपोर्टिंग संस्थाओं को लेन-देन की तारीख से कम से कम पांच साल की अवधि के लिए सभी लेनदेन का रिकॉर्ड बनाए रखना चाहिए।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    रिपोर्टिंग संस्थांनी सर्व व्यवहारांच्या नोंदी व्यवहाराच्या तारखेपासून किमान पाच वर्षांच्या कालावधीसाठी जतन करणे आवश्यक आहे।
+
+  [92mReference (Expected):
+    Reporting entities must maintain records of all transactions for a minimum period of five years from the date of the transaction.
+
+  Hypothesis (Actual):
+    रिपोर्टिंग संस्थांनी सर्व व्यवहारांच्या नोंदी व्यवहाराच्या तारखेपासून किमान पाच वर्षांच्या कालावधीसाठी जतन करणे आवश्यक आहे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Reporting entities must maintain records of all transactions for a minimum period of five years from the date of the transaction.
+
+  [92mReference (Expected):
+    रिपोर्टिंग संस्थांनी सर्व व्यवहारांच्या नोंदी व्यवहाराच्या तारखेपासून किमान पाच वर्षांच्या कालावधीसाठी जतन करणे आवश्यक आहे।
+
+  Hypothesis (Actual):
+    अहवाल देणार् या संस्थांनी व्यवहाराच्या तारखेपासून किमान पाच वर्षांच्या कालावधीसाठी सर्व व्यवहारांची नोंद ठेवणे आवश्यक आहे.
+
+--- Testing Case T021 (21/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    व्यावसायिक संबंध समाप्त होने के बाद भी ग्राहक की पहचान और व्यावसायिक पत्राचार के रिकॉर्ड को पांच साल तक बनाए रखा जाना चाहिए।
+
+  [92mReference (Expected):
+    Records of client identity and business correspondence must also be maintained for five years after the business relationship has ended.
+
+  Hypothesis (Actual):
+    Records of the customer's identity and business correspondence must be maintained for five years even after the business relationship ends.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Records of client identity and business correspondence must also be maintained for five years after the business relationship has ended.
+
+  [92mReference (Expected):
+    व्यावसायिक संबंध समाप्त होने के बाद भी ग्राहक की पहचान और व्यावसायिक पत्राचार के रिकॉर्ड को पांच साल तक बनाए रखा जाना चाहिए।
+
+  Hypothesis (Actual):
+    व्यावसायिक संबंध समाप्त होने के बाद ग्राहक की पहचान और व्यावसायिक पत्राचार के रिकॉर्ड को भी पांच साल तक बनाए रखा जाना चाहिए।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    व्यावसायिक संबंध संपल्यानंतरही ग्राहकाची ओळख आणि व्यावसायिक पत्रव्यवहाराच्या नोंदी पाच वर्षांसाठी जतन करणे आवश्यक आहे।
+
+  [92mReference (Expected):
+    Records of client identity and business correspondence must also be maintained for five years after the business relationship has ended.
+
+  Hypothesis (Actual):
+    Even after the end of the business relationship, the customer's identity and records of business correspondence must be preserved for five years.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Records of client identity and business correspondence must also be maintained for five years after the business relationship has ended.
+
+  [92mReference (Expected):
+    व्यावसायिक संबंध संपल्यानंतरही ग्राहकाची ओळख आणि व्यावसायिक पत्रव्यवहाराच्या नोंदी पाच वर्षांसाठी जतन करणे आवश्यक आहे।
+
+  Hypothesis (Actual):
+    व्यवसाय संबंध संपल्यानंतर पाच वर्षे ग्राहकांची ओळख आणि व्यवसाय पत्रव्यवहाराची नोंद देखील ठेवली जाणे आवश्यक आहे.
+
+--- Testing Case T022 (22/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    दस लाख रुपये या विदेशी मुद्रा में इसके समकक्ष से अधिक के सभी नकद लेन-देन के लिए नकद लेन-देन रिपोर्ट (CTR) आवश्यक है।
+
+  [92mReference (Expected):
+    A Cash Transaction Report (CTR) is required for all cash transactions exceeding ten lakh rupees or its equivalent in foreign currency.
+
+  Hypothesis (Actual):
+    Cash Transaction Report (CTR) is required for all cash transactions exceeding ten lakh rupees or its equivalent in foreign currency.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A Cash Transaction Report (CTR) is required for all cash transactions exceeding ten lakh rupees or its equivalent in foreign currency.
+
+  [92mReference (Expected):
+    दस लाख रुपये या विदेशी मुद्रा में इसके समकक्ष से अधिक के सभी नकद लेन-देन के लिए नकद लेन-देन रिपोर्ट (CTR) आवश्यक है।
+
+  Hypothesis (Actual):
+    दस लाख रुपये से अधिक या विदेशी मुद्रा में इसके समतुल्य सभी नकद लेनदेन के लिए नकद लेनदेन रिपोर्ट (सीटीआर) की आवश्यकता होती है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    दहा लाख रुपये किंवा परकीय चलनात त्याच्या समतुल्य रकमेपेक्षा जास्त असलेल्या सर्व रोख व्यवहारांसाठी रोख व्यवहार अहवाल (CTR) आवश्यक आहे।
+
+  [92mReference (Expected):
+    A Cash Transaction Report (CTR) is required for all cash transactions exceeding ten lakh rupees or its equivalent in foreign currency.
+
+  Hypothesis (Actual):
+    A Cash Transaction Report (CTR) is required for all cash transactions exceeding ten lakh rupees or its equivalent in foreign currency.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A Cash Transaction Report (CTR) is required for all cash transactions exceeding ten lakh rupees or its equivalent in foreign currency.
+
+  [92mReference (Expected):
+    दहा लाख रुपये किंवा परकीय चलनात त्याच्या समतुल्य रकमेपेक्षा जास्त असलेल्या सर्व रोख व्यवहारांसाठी रोख व्यवहार अहवाल (CTR) आवश्यक आहे।
+
+  Hypothesis (Actual):
+    दहा लाख रुपयांपेक्षा जास्त किंवा परकीय चलनात त्याच्या समतुल्य असलेल्या सर्व रोख व्यवहारांसाठी रोख व्यवहार अहवाल (सीटीआर) आवश्यक आहे.
+
+--- Testing Case T023 (23/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    आपस में जुड़े नकद लेन-देन की एक श्रृंखला के लिए भी CTR की आवश्यकता होती है, जो व्यक्तिगत रूप से दस लाख रुपये से कम के हैं, लेकिन एक महीने में कुल मिलाकर दस लाख रुपये से अधिक हो जाते हैं।
+
+  [92mReference (Expected):
+    A CTR is also required for a series of connected cash transactions that are individually below ten lakh rupees but aggregate to more than ten lakh rupees in a month.
+
+  Hypothesis (Actual):
+    CTR is also required for a series of interconnected cash transactions, which are less than ten lakh rupees individually but exceed ten lakh rupees in a month in total.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A CTR is also required for a series of connected cash transactions that are individually below ten lakh rupees but aggregate to more than ten lakh rupees in a month.
+
+  [92mReference (Expected):
+    आपस में जुड़े नकद लेन-देन की एक श्रृंखला के लिए भी CTR की आवश्यकता होती है, जो व्यक्तिगत रूप से दस लाख रुपये से कम के हैं, लेकिन एक महीने में कुल मिलाकर दस लाख रुपये से अधिक हो जाते हैं।
+
+  Hypothesis (Actual):
+    कनेक्टेड कैश ट्रांजैक्शन की एक श्रृंखला के लिए भी सीटीआर की आवश्यकता होती है जो व्यक्तिगत रूप से दस लाख रुपये से कम है, लेकिन एक महीने में दस लाख रुपये से अधिक है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    एका महिन्यातील एकमेकांशी जोडलेल्या रोख व्यवहारांच्या मालिकेसाठी देखील CTR आवश्यक आहे, ज्यांचे वैयक्तिक मूल्य दहा लाख रुपयांपेक्षा कमी आहे परंतु त्यांची एकूण बेरीज दहा लाख रुपयांपेक्षा जास्त होते।
+
+  [92mReference (Expected):
+    A CTR is also required for a series of connected cash transactions that are individually below ten lakh rupees but aggregate to more than ten lakh rupees in a month.
+
+  Hypothesis (Actual):
+    CTR is also required for a series of interlinked cash transactions in a month, whose individual value is less than ten lakh rupees but their total sum is more than ten lakh rupees.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A CTR is also required for a series of connected cash transactions that are individually below ten lakh rupees but aggregate to more than ten lakh rupees in a month.
+
+  [92mReference (Expected):
+    एका महिन्यातील एकमेकांशी जोडलेल्या रोख व्यवहारांच्या मालिकेसाठी देखील CTR आवश्यक आहे, ज्यांचे वैयक्तिक मूल्य दहा लाख रुपयांपेक्षा कमी आहे परंतु त्यांची एकूण बेरीज दहा लाख रुपयांपेक्षा जास्त होते।
+
+  Hypothesis (Actual):
+    कनेक्ट केलेल्या रोख व्यवहारांच्या मालिकेसाठी सीटीआर देखील आवश्यक आहे जे वैयक्तिकरित्या दहा लाख रुपयांपेक्षा कमी आहेत परंतु एका महिन्यात एकूण दहा लाख रुपयांपेक्षा जास्त आहेत.
+
+--- Testing Case T024 (24/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    किसी भी ऐसे लेन-देन के लिए एक संदिग्ध लेन-देन रिपोर्ट (STR) दर्ज की जानी चाहिए जो असामान्य या अनुचित जटिलता की परिस्थितियों में किया गया प्रतीत होता है।
+
+  [92mReference (Expected):
+    A Suspicious Transaction Report (STR) must be filed for any transaction that appears to be made in circumstances of unusual or unjustified complexity.
+
+  Hypothesis (Actual):
+    A Suspicious Transaction Report (STR) must be filed for any transaction that appears to have been carried out under circumstances of unusual or undue complexity.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A Suspicious Transaction Report (STR) must be filed for any transaction that appears to be made in circumstances of unusual or unjustified complexity.
+
+  [92mReference (Expected):
+    किसी भी ऐसे लेन-देन के लिए एक संदिग्ध लेन-देन रिपोर्ट (STR) दर्ज की जानी चाहिए जो असामान्य या अनुचित जटिलता की परिस्थितियों में किया गया प्रतीत होता है।
+
+  Hypothesis (Actual):
+    किसी भी लेनदेन के लिए एक संदिग्ध लेनदेन रिपोर्ट (एसटीआर) दायर की जानी चाहिए जो असामान्य या अनुचित जटिलता की परिस्थितियों में किया गया प्रतीत होता है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    असामान्य किंवा अवास्तव गुंतागुंतीच्या परिस्थितीत केलेला कोणताही व्यवहार संशयास्पद व्यवहार अहवाल (STR) म्हणून दाखल करणे आवश्यक आहे।
+
+  [92mReference (Expected):
+    A Suspicious Transaction Report (STR) must be filed for any transaction that appears to be made in circumstances of unusual or unjustified complexity.
+
+  Hypothesis (Actual):
+    Any transaction made under unusual or unreasonably complicated circumstances must be filed as a Suspicious Transaction Report (STR).
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A Suspicious Transaction Report (STR) must be filed for any transaction that appears to be made in circumstances of unusual or unjustified complexity.
+
+  [92mReference (Expected):
+    असामान्य किंवा अवास्तव गुंतागुंतीच्या परिस्थितीत केलेला कोणताही व्यवहार संशयास्पद व्यवहार अहवाल (STR) म्हणून दाखल करणे आवश्यक आहे।
+
+  Hypothesis (Actual):
+    असामान्य किंवा अन्यायकारक जटिलतेच्या परिस्थितीत केलेल्या कोणत्याही व्यवहारासाठी संशयास्पद व्यवहार अहवाल (एसटीआर) दाखल करणे आवश्यक आहे.
+
+--- Testing Case T025 (25/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    यदि कोई लेन-देन इस संदेह का उचित आधार देता है कि इसमें किसी अनुसूचित अपराध की आय शामिल हो सकती है, तो मूल्य की परवाह किए बिना एक STR दर्ज किया जाना चाहिए।
+
+  [92mReference (Expected):
+    An STR should be filed if a transaction gives rise to a reasonable ground of suspicion that it may involve the proceeds of a scheduled offence, regardless of the value.
+
+  Hypothesis (Actual):
+    If a transaction gives reasonable grounds for suspicion that it may include the proceeds of a scheduled offence, an STR must be entered regardless of the value.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    An STR should be filed if a transaction gives rise to a reasonable ground of suspicion that it may involve the proceeds of a scheduled offence, regardless of the value.
+
+  [92mReference (Expected):
+    यदि कोई लेन-देन इस संदेह का उचित आधार देता है कि इसमें किसी अनुसूचित अपराध की आय शामिल हो सकती है, तो मूल्य की परवाह किए बिना एक STR दर्ज किया जाना चाहिए।
+
+  Hypothesis (Actual):
+    एक एसटीआर दायर किया जाना चाहिए यदि कोई लेनदेन संदेह के उचित आधार को जन्म देता है कि इसमें मूल्य की परवाह किए बिना एक अनुसूचित अपराध की आय शामिल हो सकती है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    जर एखादा व्यवहार अनुसूचित गुन्ह्यातून मिळालेल्या पैशाचा समावेश असल्याचा वाजवी संशय निर्माण करत असेल, तर मूल्याचा विचार न करता, STR दाखल करणे आवश्यक आहे।
+
+  [92mReference (Expected):
+    An STR should be filed if a transaction gives rise to a reasonable ground of suspicion that it may involve the proceeds of a scheduled offence, regardless of the value.
+
+  Hypothesis (Actual):
+    जर एखादा व्यवहार अनुसूचित गुन्ह्यातून मिळालेल्या पैशाचा समावेश असल्याचा वाजवी संशय निर्माण करत असेल, तर मूल्याचा विचार न करता, STR दाखल करणे आवश्यक आहे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    An STR should be filed if a transaction gives rise to a reasonable ground of suspicion that it may involve the proceeds of a scheduled offence, regardless of the value.
+
+  [92mReference (Expected):
+    जर एखादा व्यवहार अनुसूचित गुन्ह्यातून मिळालेल्या पैशाचा समावेश असल्याचा वाजवी संशय निर्माण करत असेल, तर मूल्याचा विचार न करता, STR दाखल करणे आवश्यक आहे।
+
+  Hypothesis (Actual):
+    जर एखाद्या व्यवहाराने संशयाचे वाजवी कारण निर्माण केले असेल तर त्यात मूल्याची पर्वा न करता अनुसूचित गुन्ह्याच्या उत्पन्नाचा समावेश असू शकतो असा संशय निर्माण झाला असेल तर एसटीआर दाखल केला पाहिजे.
+
+--- Testing Case T026 (26/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    एक लेन-देन CTR और STR दोनों के तहत रिपोर्ट किया जा सकता है यदि वह दोनों के मानदंडों को पूरा करता है (जैसे, 15 लाख की नकद जमा जो संदिग्ध भी प्रतीत होती है)।
+
+  [92mReference (Expected):
+    A transaction can be reported under both CTR and STR if it meets the criteria for both (e.g., a cash deposit of 15 lakhs that also appears suspicious).
+
+  Hypothesis (Actual):
+    A transaction can be reported under both CTR and STR if it meets the criteria of both (e.g., a cash deposit of 15 lakh which also appears to be suspicious).
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A transaction can be reported under both CTR and STR if it meets the criteria for both (e.g., a cash deposit of 15 lakhs that also appears suspicious).
+
+  [92mReference (Expected):
+    एक लेन-देन CTR और STR दोनों के तहत रिपोर्ट किया जा सकता है यदि वह दोनों के मानदंडों को पूरा करता है (जैसे, 15 लाख की नकद जमा जो संदिग्ध भी प्रतीत होती है)।
+
+  Hypothesis (Actual):
+    एक लेनदेन को सीटीआर और एसटीआर दोनों के तहत रिपोर्ट किया जा सकता है यदि यह दोनों के मानदंडों को पूरा करता है (उदाहरण के लिए, 15 लाख की नकद जमा जो संदिग्ध भी प्रतीत होती है)।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    एखादा व्यवहार CTR आणि STR या दोन्हींच्या अंतर्गत नोंदवला जाऊ शकतो, जर तो दोन्ही निकष पूर्ण करत असेल (उदा., 15 लाखांची रोख ठेव जी संशयास्पद देखील वाटते)।
+
+  [92mReference (Expected):
+    A transaction can be reported under both CTR and STR if it meets the criteria for both (e.g., a cash deposit of 15 lakhs that also appears suspicious).
+
+  Hypothesis (Actual):
+    एखादा व्यवहार CTR आणि STR या दोन्हींच्या अंतर्गत नोंदवला जाऊ शकतो, जर तो दोन्ही निकष पूर्ण करत असेल (उदा., 15 लाखांची रोख ठेव जी संशयास्पद देखील वाटते)।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A transaction can be reported under both CTR and STR if it meets the criteria for both (e.g., a cash deposit of 15 lakhs that also appears suspicious).
+
+  [92mReference (Expected):
+    एखादा व्यवहार CTR आणि STR या दोन्हींच्या अंतर्गत नोंदवला जाऊ शकतो, जर तो दोन्ही निकष पूर्ण करत असेल (उदा., 15 लाखांची रोख ठेव जी संशयास्पद देखील वाटते)।
+
+  Hypothesis (Actual):
+    जर एखाद्या व्यवहाराची नोंद सीटीआर आणि एसटीआर या दोन्ही अंतर्गत केली जाऊ शकते जर तो दोघांसाठी निकष पूर्ण करत असेल (उदा. 15 लाखांची रोख ठेव जी संशयास्पद देखील दिसते).
+
+--- Testing Case T027 (27/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    पांच लाख रुपये से अधिक मूल्य के सभी सीमा-पार वायर ट्रांसफर, जहां या तो उद्गम या गंतव्य भारत में है, की सूचना दी जानी चाहिए।
+
+  [92mReference (Expected):
+    All cross-border wire transfers of a value more than five lakh rupees, where either the origin or destination is in India, must be reported.
+
+  Hypothesis (Actual):
+    All cross-border wire transfers of value above five lakh rupees, where either the origin or destination is in India, should be reported.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    All cross-border wire transfers of a value more than five lakh rupees, where either the origin or destination is in India, must be reported.
+
+  [92mReference (Expected):
+    पांच लाख रुपये से अधिक मूल्य के सभी सीमा-पार वायर ट्रांसफर, जहां या तो उद्गम या गंतव्य भारत में है, की सूचना दी जानी चाहिए।
+
+  Hypothesis (Actual):
+    पांच लाख रुपये से अधिक मूल्य के सभी सीमा पार तार हस्तांतरण, जहां या तो मूल या गंतव्य भारत में है, की सूचना दी जानी चाहिए।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    पाच लाख रुपयांपेक्षा जास्त मूल्याचे सर्व सीमा-पार वायर ट्रान्सफर, ज्यांचे मूळ किंवा गंतव्यस्थान भारतात आहे, त्यांची नोंद करणे आवश्यक आहे।
+
+  [92mReference (Expected):
+    All cross-border wire transfers of a value more than five lakh rupees, where either the origin or destination is in India, must be reported.
+
+  Hypothesis (Actual):
+    All cross-border wire transfers of value above five lakh rupees, whose origin or destination is in India, are required to be registered.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    All cross-border wire transfers of a value more than five lakh rupees, where either the origin or destination is in India, must be reported.
+
+  [92mReference (Expected):
+    पाच लाख रुपयांपेक्षा जास्त मूल्याचे सर्व सीमा-पार वायर ट्रान्सफर, ज्यांचे मूळ किंवा गंतव्यस्थान भारतात आहे, त्यांची नोंद करणे आवश्यक आहे।
+
+  Hypothesis (Actual):
+    पाच लाख रुपयांपेक्षा जास्त किंमतीच्या सर्व क्रॉस-बॉर्डर वायर ट्रान्सफरची माहिती दिली पाहिजे, जिथे मूळ किंवा गंतव्यस्थान भारतात आहे.
+
+--- Testing Case T028 (28/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    गैर-लाभकारी संगठनों द्वारा दस लाख रुपये से अधिक मूल्य की प्राप्तियों से जुड़े सभी लेन-देनों की सूचना दी जानी चाहिए।
+
+  [92mReference (Expected):
+    All transactions involving receipts by non-profit organizations of a value more than ten lakh rupees must be reported.
+
+  Hypothesis (Actual):
+    All transactions involving receipts of more than ten lakh rupees by non-profit organizations should be reported.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    All transactions involving receipts by non-profit organizations of a value more than ten lakh rupees must be reported.
+
+  [92mReference (Expected):
+    गैर-लाभकारी संगठनों द्वारा दस लाख रुपये से अधिक मूल्य की प्राप्तियों से जुड़े सभी लेन-देनों की सूचना दी जानी चाहिए।
+
+  Hypothesis (Actual):
+    दस लाख रुपये से अधिक मूल्य के गैर-लाभकारी संगठनों द्वारा प्राप्तियों से जुड़े सभी लेनदेन की सूचना दी जानी चाहिए।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    ना-नफा संस्थांद्वारे दहा लाख रुपयांपेक्षा जास्त मूल्याच्या पावती असलेल्या सर्व व्यवहारांची नोंद करणे आवश्यक आहे।
+
+  [92mReference (Expected):
+    All transactions involving receipts by non-profit organizations of a value more than ten lakh rupees must be reported.
+
+  Hypothesis (Actual):
+    All transactions with receipts of more than ten lakh rupees by non-profit organizations are required to be recorded.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    All transactions involving receipts by non-profit organizations of a value more than ten lakh rupees must be reported.
+
+  [92mReference (Expected):
+    ना-नफा संस्थांद्वारे दहा लाख रुपयांपेक्षा जास्त मूल्याच्या पावती असलेल्या सर्व व्यवहारांची नोंद करणे आवश्यक आहे।
+
+  Hypothesis (Actual):
+    दहा लाख रुपयांपेक्षा जास्त किमतीच्या ना-नफा तत्त्वावरील संस्थांकडून झालेल्या पावत्यांचा समावेश असलेल्या सर्व व्यवहारांची नोंद करणे आवश्यक आहे.
+
+--- Testing Case T029 (29/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    पचास लाख रुपये या उससे अधिक मूल्य की किसी भी अचल संपत्ति की खरीद और बिक्री एक रिपोर्ट करने योग्य लेन-देन है।
+
+  [92mReference (Expected):
+    The purchase and sale of any immovable property valued at fifty lakh rupees or more is a reportable transaction.
+
+  Hypothesis (Actual):
+    The purchase and sale of any immovable property worth fifty lakh rupees or more is a reportable transaction.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    The purchase and sale of any immovable property valued at fifty lakh rupees or more is a reportable transaction.
+
+  [92mReference (Expected):
+    पचास लाख रुपये या उससे अधिक मूल्य की किसी भी अचल संपत्ति की खरीद और बिक्री एक रिपोर्ट करने योग्य लेन-देन है।
+
+  Hypothesis (Actual):
+    पचास लाख रुपये या उससे अधिक मूल्य की किसी भी अचल संपत्ति की खरीद और बिक्री एक रिपोर्ट करने योग्य लेनदेन है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    पन्नास लाख रुपये किंवा त्यापेक्षा जास्त मूल्याच्या कोणत्याही स्थावर मालमत्तेची खरेदी आणि विक्री हा नोंदवण्यायोग्य व्यवहार आहे।
+
+  [92mReference (Expected):
+    The purchase and sale of any immovable property valued at fifty lakh rupees or more is a reportable transaction.
+
+  Hypothesis (Actual):
+    The purchase and sale of any immovable property valued at fifty lakh rupees or more is a recordable transaction.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    The purchase and sale of any immovable property valued at fifty lakh rupees or more is a reportable transaction.
+
+  [92mReference (Expected):
+    पन्नास लाख रुपये किंवा त्यापेक्षा जास्त मूल्याच्या कोणत्याही स्थावर मालमत्तेची खरेदी आणि विक्री हा नोंदवण्यायोग्य व्यवहार आहे।
+
+  Hypothesis (Actual):
+    पन्नास लाख रुपये किंवा त्याहून अधिक किंमतीच्या कोणत्याही स्थावर मालमत्तेची खरेदी आणि विक्री हा एक अहवाल करण्यायोग्य व्यवहार आहे.
+
+--- Testing Case T030 (30/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    एक ग्राहक एक ही महीने में 4-4 लाख रुपये की तीन नकद जमा करता है। यदि ये आपस में जुड़े हुए पाए जाते हैं, तो बैंक को एक CTR दर्ज करना होगा क्योंकि कुल (12 लाख) सीमा से अधिक है।
+
+  [92mReference (Expected):
+    A customer makes three cash deposits of 4 lakhs each in a single month. If these are found to be integrally connected, the bank must file a CTR as the aggregate (12 lakhs) exceeds the threshold.
+
+  Hypothesis (Actual):
+    A customer makes three cash deposits of Rs 4 lakh each in the same month. If these are found to be interlinked, the bank will have to file a CTR as the total (12 lakh) exceeds the limit.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A customer makes three cash deposits of 4 lakhs each in a single month. If these are found to be integrally connected, the bank must file a CTR as the aggregate (12 lakhs) exceeds the threshold.
+
+  [92mReference (Expected):
+    एक ग्राहक एक ही महीने में 4-4 लाख रुपये की तीन नकद जमा करता है। यदि ये आपस में जुड़े हुए पाए जाते हैं, तो बैंक को एक CTR दर्ज करना होगा क्योंकि कुल (12 लाख) सीमा से अधिक है।
+
+  Hypothesis (Actual):
+    एक ग्राहक एक महीने में 4-4 लाख रुपये की तीन नकद जमा करता है। यदि ये एकीकृत रूप से जुड़े हुए पाए जाते हैं, तो बैंक को सीटीआर दाखिल करना होगा क्योंकि कुल (12 लाख) सीमा से अधिक है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    एक ग्राहक एकाच महिन्यात प्रत्येकी 4 लाख रुपयांच्या तीन रोख ठेवी जमा करतो. जर ते व्यवहार एकमेकांशी जोडलेले आढळले, तर बँकेने CTR दाखल करणे आवश्यक आहे, कारण एकूण रक्कम (12 लाख) मर्यादेपेक्षा जास्त आहे।
+
+  [92mReference (Expected):
+    A customer makes three cash deposits of 4 lakhs each in a single month. If these are found to be integrally connected, the bank must file a CTR as the aggregate (12 lakhs) exceeds the threshold.
+
+  Hypothesis (Actual):
+    A customer deposits three cash deposits of Rs 4 lakh each in the same month. If those transactions are found to be interlinked, then the bank must file a CTR, as the total amount (12 lakhs) is more than the limit.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A customer makes three cash deposits of 4 lakhs each in a single month. If these are found to be integrally connected, the bank must file a CTR as the aggregate (12 lakhs) exceeds the threshold.
+
+  [92mReference (Expected):
+    एक ग्राहक एकाच महिन्यात प्रत्येकी 4 लाख रुपयांच्या तीन रोख ठेवी जमा करतो. जर ते व्यवहार एकमेकांशी जोडलेले आढळले, तर बँकेने CTR दाखल करणे आवश्यक आहे, कारण एकूण रक्कम (12 लाख) मर्यादेपेक्षा जास्त आहे।
+
+  Hypothesis (Actual):
+    एक ग्राहक एका महिन्यात प्रत्येकी ४ लाखांच्या तीन रोख ठेवी करतो. जर हे अखंडपणे जोडलेले आढळले तर बँकेने सीटीआर दाखल करणे आवश्यक आहे कारण एकूण (12 लाख) मर्यादेपेक्षा जास्त आहे.
+
+--- Testing Case T031 (31/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    यदि किसी बैंक को संदेह है कि कोई ग्राहक आतंकवाद के वित्तपोषण में शामिल है, तो उसे तुरंत FIU-IND के पास एक STR दर्ज करना होगा।
+
+  [92mReference (Expected):
+    If a bank suspects a client is involved in financing terrorism, it must immediately file an STR with FIU-IND.
+
+  Hypothesis (Actual):
+    If a bank suspects that a client is involved in the financing of terrorism, it must immediately file an STR with the FIU-IND.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    If a bank suspects a client is involved in financing terrorism, it must immediately file an STR with FIU-IND.
+
+  [92mReference (Expected):
+    यदि किसी बैंक को संदेह है कि कोई ग्राहक आतंकवाद के वित्तपोषण में शामिल है, तो उसे तुरंत FIU-IND के पास एक STR दर्ज करना होगा।
+
+  Hypothesis (Actual):
+    यदि किसी बैंक को संदेह है कि कोई ग्राहक आतंकवाद के वित्तपोषण में शामिल है, तो उसे तुरंत एफआईयू-आईएनडी के साथ एक एसटीआर दर्ज करना चाहिए।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    जर एखाद्या बँकेला संशय आला की एखादा ग्राहक दहशतवादाला वित्तपुरवठा करण्यात गुंतलेला आहे, तर तिने ताबडतोब FIU-IND कडे STR दाखल करणे आवश्यक आहे।
+
+  [92mReference (Expected):
+    If a bank suspects a client is involved in financing terrorism, it must immediately file an STR with FIU-IND.
+
+  Hypothesis (Actual):
+    If a bank suspects that a client is engaged in terror financing, it must immediately file an STR with the FIU-IND.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    If a bank suspects a client is involved in financing terrorism, it must immediately file an STR with FIU-IND.
+
+  [92mReference (Expected):
+    जर एखाद्या बँकेला संशय आला की एखादा ग्राहक दहशतवादाला वित्तपुरवठा करण्यात गुंतलेला आहे, तर तिने ताबडतोब FIU-IND कडे STR दाखल करणे आवश्यक आहे।
+
+  Hypothesis (Actual):
+    जर एखाद्या बँकेला असा संशय आला की एखादा ग्राहक दहशतवादाला वित्तपुरवठा करण्यात गुंतलेला आहे, तर त्याने त्वरित एफआययू-आयएनडीकडे एसटीआर दाखल करणे आवश्यक आहे.
+
+--- Testing Case T032 (32/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    एक रिपोर्टिंग इकाई PMLA के तहत रिकॉर्ड बनाए रखने और प्रस्तुत करने के अपने अनिवार्य दायित्व से बचने के लिए ग्राहक गोपनीयता संबंधी चिंताओं का हवाला नहीं दे सकती है।
+
+  [92mReference (Expected):
+    A reporting entity cannot cite customer privacy concerns to avoid its mandatory obligation of maintaining and furnishing records under PMLA.
+
+  Hypothesis (Actual):
+    A reporting entity may not cite customer privacy concerns to avoid its mandatory obligation to maintain and furnish records under the PMLA.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A reporting entity cannot cite customer privacy concerns to avoid its mandatory obligation of maintaining and furnishing records under PMLA.
+
+  [92mReference (Expected):
+    एक रिपोर्टिंग इकाई PMLA के तहत रिकॉर्ड बनाए रखने और प्रस्तुत करने के अपने अनिवार्य दायित्व से बचने के लिए ग्राहक गोपनीयता संबंधी चिंताओं का हवाला नहीं दे सकती है।
+
+  Hypothesis (Actual):
+    एक रिपोर्टिंग इकाई पीएमएलए के तहत रिकॉर्ड बनाए रखने और प्रस्तुत करने के अपने अनिवार्य दायित्व से बचने के लिए ग्राहकों की गोपनीयता चिंताओं का हवाला नहीं दे सकती है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    रिपोर्टिंग संस्था PMLA अंतर्गत नोंदी ठेवण्याच्या आणि सादर करण्याच्या अनिवार्य दायित्वापासून वाचण्यासाठी ग्राहकांच्या गोपनीयतेच्या कारणांचा हवाला देऊ शकत नाही।
+
+  [92mReference (Expected):
+    A reporting entity cannot cite customer privacy concerns to avoid its mandatory obligation of maintaining and furnishing records under PMLA.
+
+  Hypothesis (Actual):
+    रिपोर्टिंग संस्था PMLA अंतर्गत नोंदी ठेवण्याच्या आणि सादर करण्याच्या अनिवार्य दायित्वापासून वाचण्यासाठी ग्राहकांच्या गोपनीयतेच्या कारणांचा हवाला देऊ शकत नाही।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A reporting entity cannot cite customer privacy concerns to avoid its mandatory obligation of maintaining and furnishing records under PMLA.
+
+  [92mReference (Expected):
+    रिपोर्टिंग संस्था PMLA अंतर्गत नोंदी ठेवण्याच्या आणि सादर करण्याच्या अनिवार्य दायित्वापासून वाचण्यासाठी ग्राहकांच्या गोपनीयतेच्या कारणांचा हवाला देऊ शकत नाही।
+
+  Hypothesis (Actual):
+    पीएमएलए अंतर्गत नोंदी राखण्याची आणि सादर करण्याची अनिवार्य जबाबदारी टाळण्यासाठी अहवाल देणारी संस्था ग्राहकांच्या गोपनीयतेच्या चिंतेचा हवाला देऊ शकत नाही.
+
+--- Testing Case T033 (33/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    निर्धारित समय के भीतर एक आवश्यक STR दाखिल करने में विफलता गैर-अनुपालन का गठन करती है और निदेशक द्वारा मौद्रिक दंड आकर्षित कर सकती है।
+
+  [92mReference (Expected):
+    Failure to file a required STR within the prescribed time constitutes non-compliance and can attract monetary penalties from the Director.
+
+  Hypothesis (Actual):
+    Failure to file a required STR within the stipulated time constitutes non-compliance and may attract monetary penalties by the director.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Failure to file a required STR within the prescribed time constitutes non-compliance and can attract monetary penalties from the Director.
+
+  [92mReference (Expected):
+    निर्धारित समय के भीतर एक आवश्यक STR दाखिल करने में विफलता गैर-अनुपालन का गठन करती है और निदेशक द्वारा मौद्रिक दंड आकर्षित कर सकती है।
+
+  Hypothesis (Actual):
+    निर्धारित समय के भीतर आवश्यक एसटीआर दाखिल करने में विफलता गैर-अनुपालन का गठन करती है और निदेशक से मौद्रिक दंड लग सकता है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    विहित वेळेत आवश्यक STR दाखल करण्यात अयशस्वी झाल्यास, ते गैर-अनुपालन मानले जाते आणि संचालकाद्वारे आर्थिक दंड आकारला जाऊ शकतो।
+
+  [92mReference (Expected):
+    Failure to file a required STR within the prescribed time constitutes non-compliance and can attract monetary penalties from the Director.
+
+  Hypothesis (Actual):
+    Failure to file the required STR within the stipulated time, is considered non-compliance and may result in a financial penalty by the director.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Failure to file a required STR within the prescribed time constitutes non-compliance and can attract monetary penalties from the Director.
+
+  [92mReference (Expected):
+    विहित वेळेत आवश्यक STR दाखल करण्यात अयशस्वी झाल्यास, ते गैर-अनुपालन मानले जाते आणि संचालकाद्वारे आर्थिक दंड आकारला जाऊ शकतो।
+
+  Hypothesis (Actual):
+    विहित वेळेत आवश्यक एसटीआर दाखल करण्यात अयशस्वी झाल्यास त्याचे पालन न करणे ठरते आणि संचालकांकडून आर्थिक दंड आकारला जाऊ शकतो.
+
+--- Testing Case T034 (34/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    करदाताओं को गोपनीयता का अधिकार है, जिसका अर्थ है कि आयकर विभाग कानून द्वारा अधिकृत किए जाने तक करदाता द्वारा प्रदान की गई किसी भी जानकारी का खुलासा नहीं करेगा।
+
+  [92mReference (Expected):
+    Taxpayers have the right to confidentiality, meaning the Income Tax Department shall not disclose any information provided by the taxpayer unless authorized by law.
+
+  Hypothesis (Actual):
+    Taxpayers have a right to confidentiality, which means that the Income Tax Department will not disclose any information provided by the taxpayer unless authorized by law.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Taxpayers have the right to confidentiality, meaning the Income Tax Department shall not disclose any information provided by the taxpayer unless authorized by law.
+
+  [92mReference (Expected):
+    करदाताओं को गोपनीयता का अधिकार है, जिसका अर्थ है कि आयकर विभाग कानून द्वारा अधिकृत किए जाने तक करदाता द्वारा प्रदान की गई किसी भी जानकारी का खुलासा नहीं करेगा।
+
+  Hypothesis (Actual):
+    करदाताओं को गोपनीयता का अधिकार है, जिसका अर्थ है कि आयकर विभाग करदाता द्वारा प्रदान की गई किसी भी जानकारी का खुलासा नहीं करेगा जब तक कि कानून द्वारा अधिकृत न किया गया हो।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    करदात्यांना गोपनीयतेचा अधिकार आहे, याचा अर्थ असा की जोपर्यंत कायद्याने अधिकृत केले जात नाही, तोपर्यंत आयकर विभाग करदात्याने प्रदान केलेली कोणतीही माहिती उघड करणार नाही।
+
+  [92mReference (Expected):
+    Taxpayers have the right to confidentiality, meaning the Income Tax Department shall not disclose any information provided by the taxpayer unless authorized by law.
+
+  Hypothesis (Actual):
+    Taxpayers have a right to privacy, which means that unless authorized by law, the Income Tax Department will not disclose any information provided by the taxpayer.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Taxpayers have the right to confidentiality, meaning the Income Tax Department shall not disclose any information provided by the taxpayer unless authorized by law.
+
+  [92mReference (Expected):
+    करदात्यांना गोपनीयतेचा अधिकार आहे, याचा अर्थ असा की जोपर्यंत कायद्याने अधिकृत केले जात नाही, तोपर्यंत आयकर विभाग करदात्याने प्रदान केलेली कोणतीही माहिती उघड करणार नाही।
+
+  Hypothesis (Actual):
+    करदात्यांना गोपनीयतेचा अधिकार आहे, याचा अर्थ असा की आयकर विभाग कायद्याद्वारे अधिकृत केल्याशिवाय करदात्याने प्रदान केलेली कोणतीही माहिती उघड करणार नाही.
+
+--- Testing Case T035 (35/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    करदाता चार्टर के अनुसार, करदाताओं को विभाग से पूर्ण और सटीक जानकारी प्राप्त करने का अधिकार है।
+
+  [92mReference (Expected):
+    According to the Taxpayer Charter, taxpayers have the right to receive complete and accurate information from the department.
+
+  Hypothesis (Actual):
+    According to the Taxpayer Charter, taxpayers have the right to receive complete and accurate information from the department.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    According to the Taxpayer Charter, taxpayers have the right to receive complete and accurate information from the department.
+
+  [92mReference (Expected):
+    करदाता चार्टर के अनुसार, करदाताओं को विभाग से पूर्ण और सटीक जानकारी प्राप्त करने का अधिकार है।
+
+  Hypothesis (Actual):
+    करदाता चार्टर के अनुसार, करदाताओं को विभाग से पूरी और सटीक जानकारी प्राप्त करने का अधिकार है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    करदाता सनदेनुसार, करदात्यांना विभागाकडून संपूर्ण आणि अचूक माहिती मिळवण्याचा अधिकार आहे।
+
+  [92mReference (Expected):
+    According to the Taxpayer Charter, taxpayers have the right to receive complete and accurate information from the department.
+
+  Hypothesis (Actual):
+    As per the Taxpayers Charter, taxpayers have the right to seek complete and accurate information from the Department.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    According to the Taxpayer Charter, taxpayers have the right to receive complete and accurate information from the department.
+
+  [92mReference (Expected):
+    करदाता सनदेनुसार, करदात्यांना विभागाकडून संपूर्ण आणि अचूक माहिती मिळवण्याचा अधिकार आहे।
+
+  Hypothesis (Actual):
+    करदात्याच्या सनदेनुसार, करदात्यांना विभागाकडून संपूर्ण आणि अचूक माहिती मिळण्याचा अधिकार आहे.
+
+--- Testing Case T036 (36/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    PMLA की धारा 56 अधिनियम को लागू करने और वैश्विक धन शोधन का मुकाबला करने के लिए जानकारी का आदान-प्रदान करने के लिए विदेशी देशों के साथ समझौते करने का प्रावधान करती है।
+
+  [92mReference (Expected):
+    Section 56 of the PMLA provides for agreements with foreign countries to enforce the Act and exchange information to combat global money laundering.
+
+  Hypothesis (Actual):
+    PMLA की धारा 56 अधिनियम को लागू करने और वैश्विक धन शोधन का मुकाबला करने के लिए जानकारी का आदान-प्रदान करने के लिए विदेशी देशों के साथ समझौते करने का प्रावधान करती है।
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Section 56 of the PMLA provides for agreements with foreign countries to enforce the Act and exchange information to combat global money laundering.
+
+  [92mReference (Expected):
+    PMLA की धारा 56 अधिनियम को लागू करने और वैश्विक धन शोधन का मुकाबला करने के लिए जानकारी का आदान-प्रदान करने के लिए विदेशी देशों के साथ समझौते करने का प्रावधान करती है।
+
+  Hypothesis (Actual):
+    पीएमएलए की धारा 56 में इस कानून को लागू करने और वैश्विक मनी लॉन्ड्रिंग से निपटने के लिए सूचनाओं के आदान-प्रदान के लिए विदेशों के साथ समझौतों का प्रावधान है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    PMLA चे कलम 56 कायद्याची अंमलबजावणी करण्यासाठी आणि जागतिक धन शोधनाचा सामना करण्यासाठी माहितीची देवाणघेवाण करण्यासाठी परदेशी देशांशी करार करण्याची तरतूद करते।
+
+  [92mReference (Expected):
+    Section 56 of the PMLA provides for agreements with foreign countries to enforce the Act and exchange information to combat global money laundering.
+
+  Hypothesis (Actual):
+    PMLA चे कलम 56 कायद्याची अंमलबजावणी करण्यासाठी आणि जागतिक धन शोधनाचा सामना करण्यासाठी माहितीची देवाणघेवाण करण्यासाठी परदेशी देशांशी करार करण्याची तरतूद करते।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Section 56 of the PMLA provides for agreements with foreign countries to enforce the Act and exchange information to combat global money laundering.
+
+  [92mReference (Expected):
+    PMLA चे कलम 56 कायद्याची अंमलबजावणी करण्यासाठी आणि जागतिक धन शोधनाचा सामना करण्यासाठी माहितीची देवाणघेवाण करण्यासाठी परदेशी देशांशी करार करण्याची तरतूद करते।
+
+  Hypothesis (Actual):
+    पीएमएलए कलम ५६ मध्ये या कायद्याची अंमलबजावणी करण्यासाठी आणि जागतिक मनी लॉन्ड्रिंगचा सामना करण्यासाठी माहितीची देवाणघेवाण करण्यासाठी परदेशी देशांशी करार करण्याची तरतूद आहे.
+
+--- Testing Case T037 (37/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    PMLA की धारा 66 निदेशक को प्रवर्तन के लिए आवश्यक समझे जाने पर अन्य प्राधिकरणों या निकायों को जानकारी का खुलासा करने की अनुमति देती है।
+
+  [92mReference (Expected):
+    Section 66 of the PMLA allows the Director to disclose information to other authorities or bodies as deemed necessary for enforcement.
+
+  Hypothesis (Actual):
+    Section 66 of the PMLA allows the director to disclose information to other authorities or bodies when deemed necessary for enforcement.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Section 66 of the PMLA allows the Director to disclose information to other authorities or bodies as deemed necessary for enforcement.
+
+  [92mReference (Expected):
+    PMLA की धारा 66 निदेशक को प्रवर्तन के लिए आवश्यक समझे जाने पर अन्य प्राधिकरणों या निकायों को जानकारी का खुलासा करने की अनुमति देती है।
+
+  Hypothesis (Actual):
+    पीएमएलए की धारा 66 निदेशक को प्रवर्तन के लिए आवश्यक समझी जाने वाली अन्य अधिकारियों या निकायों को जानकारी का खुलासा करने की अनुमति देती है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    PMLA चे कलम 66 संचालकाला अंमलबजावणीसाठी आवश्यक वाटल्यास, इतर प्राधिकरणांना किंवा संस्थांना माहिती उघड करण्याची परवानगी देते।
+
+  [92mReference (Expected):
+    Section 66 of the PMLA allows the Director to disclose information to other authorities or bodies as deemed necessary for enforcement.
+
+  Hypothesis (Actual):
+    Section 66 of the PMLA allows the Director to disclose information to other authorities or entities, if he deems it necessary for enforcement.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Section 66 of the PMLA allows the Director to disclose information to other authorities or bodies as deemed necessary for enforcement.
+
+  [92mReference (Expected):
+    PMLA चे कलम 66 संचालकाला अंमलबजावणीसाठी आवश्यक वाटल्यास, इतर प्राधिकरणांना किंवा संस्थांना माहिती उघड करण्याची परवानगी देते।
+
+  Hypothesis (Actual):
+    पीएमएलए कलम ६६ संचालकांना अंमलबजावणीसाठी आवश्यक वाटल्यास इतर अधिकारी किंवा संस्थांना माहिती उघड करण्याची परवानगी देते.
+
+--- Testing Case T038 (38/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    मुझे विभिन्न रिपोर्टों के बारे में और बताएं।
+
+  [92mReference (Expected):
+    Tell me more about the different reports.
+
+  Hypothesis (Actual):
+    Tell me more about the various reports.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Tell me more about the different reports.
+
+  [92mReference (Expected):
+    मुझे विभिन्न रिपोर्टों के बारे में और बताएं।
+
+  Hypothesis (Actual):
+    मुझे विभिन्न रिपोर्टों के बारे में और बताएं।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    मला वेगवेगळ्या अहवालांबद्दल अधिक सांगा।
+
+  [92mReference (Expected):
+    Tell me more about the different reports.
+
+  Hypothesis (Actual):
+    Tell me more about the different reports.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Tell me more about the different reports.
+
+  [92mReference (Expected):
+    मला वेगवेगळ्या अहवालांबद्दल अधिक सांगा।
+
+  Hypothesis (Actual):
+    वेगवेगळ्या अहवालांबद्दल मला अधिक सांगा.
+
+--- Testing Case T039 (39/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    KYC के नियम क्या हैं और यदि मेरा बैंक उनका पालन नहीं करता है तो क्या होता है?
+
+  [92mReference (Expected):
+    What are the KYC rules and what happens if my bank doesn't follow them?
+
+  Hypothesis (Actual):
+    What are the rules of KYC and what happens if my bank doesn't follow them?
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    What are the KYC rules and what happens if my bank doesn't follow them?
+
+  [92mReference (Expected):
+    KYC के नियम क्या हैं और यदि मेरा बैंक उनका पालन नहीं करता है तो क्या होता है?
+
+  Hypothesis (Actual):
+    केवाईसी नियम क्या हैं और अगर मेरा बैंक उनका पालन नहीं करता है तो क्या होगा?
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    KYC चे नियम काय आहेत आणि माझ्या बँकेने त्यांचे पालन न केल्यास काय होते?
+
+  [92mReference (Expected):
+    What are the KYC rules and what happens if my bank doesn't follow them?
+
+  Hypothesis (Actual):
+    KYC चे नियम काय आहेत आणि माझ्या बँकेने त्यांचे पालन न केल्यास काय होते?
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    What are the KYC rules and what happens if my bank doesn't follow them?
+
+  [92mReference (Expected):
+    KYC चे नियम काय आहेत आणि माझ्या बँकेने त्यांचे पालन न केल्यास काय होते?
+
+  Hypothesis (Actual):
+    केवायसीचे नियम काय आहेत आणि जर माझी बँक त्यांचे पालन करत नसेल तर काय होते?
+
+--- Testing Case T040 (40/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    मैं अपने पूंजीगत लाभ कर की गणना कैसे करूं?
+
+  [92mReference (Expected):
+    How do I calculate my capital gains tax?
+
+  Hypothesis (Actual):
+    How do I calculate my capital gains tax?
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    How do I calculate my capital gains tax?
+
+  [92mReference (Expected):
+    मैं अपने पूंजीगत लाभ कर की गणना कैसे करूं?
+
+  Hypothesis (Actual):
+    मैं अपने पूंजीगत लाभ कर की गणना कैसे करूं?
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    मी माझ्या भांडवली नफा कराची गणना कशी करू?
+
+  [92mReference (Expected):
+    How do I calculate my capital gains tax?
+
+  Hypothesis (Actual):
+    How do I calculate my capital gains tax?
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    How do I calculate my capital gains tax?
+
+  [92mReference (Expected):
+    मी माझ्या भांडवली नफा कराची गणना कशी करू?
+
+  Hypothesis (Actual):
+    मी माझ्या भांडवली नफा कराची गणना कशी करू?
+
+--- Testing Case T041 (41/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    2025 के लिए सबसे अच्छा ELSS म्यूचुअल फंड कौन सा है?
+
+  [92mReference (Expected):
+    What is the best ELSS mutual fund for 2025?
+
+  Hypothesis (Actual):
+    What is the best ELSS mutual fund for 2025?
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    What is the best ELSS mutual fund for 2025?
+
+  [92mReference (Expected):
+    2025 के लिए सबसे अच्छा ELSS म्यूचुअल फंड कौन सा है?
+
+  Hypothesis (Actual):
+    2025 के लिए सबसे अच्छा ईएलएसएस म्यूचुअल फंड कौन सा है?
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    2025 साठी सर्वोत्तम ELSS म्युच्युअल फंड कोणता आहे?
+
+  [92mReference (Expected):
+    What is the best ELSS mutual fund for 2025?
+
+  Hypothesis (Actual):
+    What is the best ELSS mutual fund for 2025?
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    What is the best ELSS mutual fund for 2025?
+
+  [92mReference (Expected):
+    2025 साठी सर्वोत्तम ELSS म्युच्युअल फंड कोणता आहे?
+
+  Hypothesis (Actual):
+    2025 साठी सर्वोत्तम ईएलएसएस म्युच्युअल फंड कोणता आहे?
+
+--- Testing Case T042 (42/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    करदाता शिकायत निवारण तंत्र के माध्यम से शिकायतें दर्ज कर सकते हैं, जिसमें क्षेत्रीय शिकायत प्रकोष्ठ और आयकर सेवा केंद्र (ASK) केंद्र शामिल हैं।
+
+  [92mReference (Expected):
+    Taxpayers can lodge complaints via the grievance redressal mechanism, which includes Regional Grievance Cells and Aaykar Seva Kendra (ASK) centers.
+
+  Hypothesis (Actual):
+    Taxpayers can file complaints through the grievance redressal mechanism, which includes the Regional Grievance Cell and the Income Tax Seva Kendra (ASK) Centre.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Taxpayers can lodge complaints via the grievance redressal mechanism, which includes Regional Grievance Cells and Aaykar Seva Kendra (ASK) centers.
+
+  [92mReference (Expected):
+    करदाता शिकायत निवारण तंत्र के माध्यम से शिकायतें दर्ज कर सकते हैं, जिसमें क्षेत्रीय शिकायत प्रकोष्ठ और आयकर सेवा केंद्र (ASK) केंद्र शामिल हैं।
+
+  Hypothesis (Actual):
+    करदाता शिकायत निवारण तंत्र के माध्यम से शिकायत दर्ज कर सकते हैं, जिसमें क्षेत्रीय शिकायत प्रकोष्ठ और आयकर सेवा केंद्र (एएसके) केंद्र शामिल हैं।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    करदाते तक्रार निवारण यंत्रणेद्वारे तक्रारी दाखल करू शकतात, ज्यामध्ये प्रादेशिक तक्रार कक्ष आणि आयकर सेवा केंद्र (ASK) केंद्रांचा समावेश आहे।
+
+  [92mReference (Expected):
+    Taxpayers can lodge complaints via the grievance redressal mechanism, which includes Regional Grievance Cells and Aaykar Seva Kendra (ASK) centers.
+
+  Hypothesis (Actual):
+    करदाते तक्रार निवारण यंत्रणेद्वारे तक्रारी दाखल करू शकतात, ज्यामध्ये प्रादेशिक तक्रार कक्ष आणि आयकर सेवा केंद्र (ASK) केंद्रांचा समावेश आहे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Taxpayers can lodge complaints via the grievance redressal mechanism, which includes Regional Grievance Cells and Aaykar Seva Kendra (ASK) centers.
+
+  [92mReference (Expected):
+    करदाते तक्रार निवारण यंत्रणेद्वारे तक्रारी दाखल करू शकतात, ज्यामध्ये प्रादेशिक तक्रार कक्ष आणि आयकर सेवा केंद्र (ASK) केंद्रांचा समावेश आहे।
+
+  Hypothesis (Actual):
+    करदाते तक्रार निवारण यंत्रणेद्वारे तक्रारी नोंदवू शकतात, ज्यात प्रादेशिक तक्रार कक्ष आणि आयकर सेवा केंद्र (एएसके) केंद्रांचा समावेश आहे.
+
+--- Testing Case T043 (43/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    KYC सत्यापन प्रक्रियाएं PML नियमों के नियम 9 और 10 में विस्तृत हैं, जिनका सभी रिपोर्टिंग संस्थाओं को पालन करना होगा।
+
+  [92mReference (Expected):
+    KYC verification procedures are detailed in Rules 9 and 10 of the PML Rules, which all reporting entities must follow.
+
+  Hypothesis (Actual):
+    The KYC verification procedures are detailed in Rule 9 and 10 of the PML Rules, which all reporting entities must follow.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    KYC verification procedures are detailed in Rules 9 and 10 of the PML Rules, which all reporting entities must follow.
+
+  [92mReference (Expected):
+    KYC सत्यापन प्रक्रियाएं PML नियमों के नियम 9 और 10 में विस्तृत हैं, जिनका सभी रिपोर्टिंग संस्थाओं को पालन करना होगा।
+
+  Hypothesis (Actual):
+    केवाईसी सत्यापन प्रक्रियाओं का विवरण पीएमएल नियमों के नियम 9 और 10 में दिया गया है, जिसका सभी रिपोर्टिंग संस्थाओं को पालन करना चाहिए।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    KYC पडताळणी प्रक्रिया PML नियमांच्या नियम 9 आणि 10 मध्ये तपशीलवार आहेत, ज्यांचे सर्व रिपोर्टिंग संस्थांनी पालन करणे आवश्यक आहे।
+
+  [92mReference (Expected):
+    KYC verification procedures are detailed in Rules 9 and 10 of the PML Rules, which all reporting entities must follow.
+
+  Hypothesis (Actual):
+    KYC पडताळणी प्रक्रिया PML नियमांच्या नियम 9 आणि 10 मध्ये तपशीलवार आहेत, ज्यांचे सर्व रिपोर्टिंग संस्थांनी पालन करणे आवश्यक आहे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    KYC verification procedures are detailed in Rules 9 and 10 of the PML Rules, which all reporting entities must follow.
+
+  [92mReference (Expected):
+    KYC पडताळणी प्रक्रिया PML नियमांच्या नियम 9 आणि 10 मध्ये तपशीलवार आहेत, ज्यांचे सर्व रिपोर्टिंग संस्थांनी पालन करणे आवश्यक आहे।
+
+  Hypothesis (Actual):
+    केवायसी पडताळणी प्रक्रिया पीएमएल नियमांच्या नियम 9 आणि 10 मध्ये तपशीलवार आहे, ज्याचे सर्व अहवाल देणार् या संस्थांनी पालन केले पाहिजे.
+
+--- Testing Case T044 (44/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    'वित्तीय संस्थान' में कोई भी चिट फंड कंपनी, हाउसिंग फाइनेंस संस्थान, भुगतान प्रणाली ऑपरेटर, और डाक विभाग शामिल है।
+
+  [92mReference (Expected):
+    'Financial institution' includes any chit fund company, housing finance institution, payment system operator, and the Department of Posts.
+
+  Hypothesis (Actual):
+    'Financial institution' includes any chit fund company, housing finance institution, payment system operator, and postal department.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    'Financial institution' includes any chit fund company, housing finance institution, payment system operator, and the Department of Posts.
+
+  [92mReference (Expected):
+    'वित्तीय संस्थान' में कोई भी चिट फंड कंपनी, हाउसिंग फाइनेंस संस्थान, भुगतान प्रणाली ऑपरेटर, और डाक विभाग शामिल है।
+
+  Hypothesis (Actual):
+    'वित्तीय संस्थान' में कोई भी चिट फंड कंपनी, आवास वित्त संस्थान, भुगतान प्रणाली ऑपरेटर और डाक विभाग शामिल हैं।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    'वित्तीय संस्था' मध्ये कोणतीही चिट फंड कंपनी, गृहनिर्माण वित्त संस्था, पेमेंट सिस्टम ऑपरेटर, आणि टपाल विभाग यांचा समावेश होतो।
+
+  [92mReference (Expected):
+    'Financial institution' includes any chit fund company, housing finance institution, payment system operator, and the Department of Posts.
+
+  Hypothesis (Actual):
+    'Financial institution' includes any chit fund company, housing finance institution, payment system operator, and postal department.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    'Financial institution' includes any chit fund company, housing finance institution, payment system operator, and the Department of Posts.
+
+  [92mReference (Expected):
+    'वित्तीय संस्था' मध्ये कोणतीही चिट फंड कंपनी, गृहनिर्माण वित्त संस्था, पेमेंट सिस्टम ऑपरेटर, आणि टपाल विभाग यांचा समावेश होतो।
+
+  Hypothesis (Actual):
+    'वित्तीय संस्था' मध्ये कोणतीही चिट फंड कंपनी, गृहनिर्माण वित्त संस्था, पेमेंट सिस्टम ऑपरेटर आणि टपाल विभाग यांचा समावेश होतो.
+
+--- Testing Case T045 (45/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    PMLA के तहत 'बैंकिंग कंपनी' में कोई भी सहकारी बैंक शामिल है जिस पर बैंकिंग विनियमन अधिनियम, 1949 लागू होता है।
+
+  [92mReference (Expected):
+    A 'banking company' under PMLA includes any co-operative bank to which the Banking Regulation Act, 1949 applies.
+
+  Hypothesis (Actual):
+    A 'banking company' under the PMLA includes any co-operative bank to which the Banking Regulation Act, 1949 applies.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A 'banking company' under PMLA includes any co-operative bank to which the Banking Regulation Act, 1949 applies.
+
+  [92mReference (Expected):
+    PMLA के तहत 'बैंकिंग कंपनी' में कोई भी सहकारी बैंक शामिल है जिस पर बैंकिंग विनियमन अधिनियम, 1949 लागू होता है।
+
+  Hypothesis (Actual):
+    पीएमएलए के तहत एक 'बैंकिंग कंपनी' में कोई भी सहकारी बैंक शामिल है जिस पर बैंकिंग विनियमन अधिनियम, 1949 लागू होता है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    PMLA अंतर्गत 'बँकिंग कंपनी' मध्ये अशी कोणतीही सहकारी बँक समाविष्ट आहे जिला बँकिंग नियमन अधिनियम, 1949 लागू होतो।
+
+  [92mReference (Expected):
+    A 'banking company' under PMLA includes any co-operative bank to which the Banking Regulation Act, 1949 applies.
+
+  Hypothesis (Actual):
+    PMLA अंतर्गत 'बँकिंग कंपनी' मध्ये अशी कोणतीही सहकारी बँक समाविष्ट आहे जिला बँकिंग नियमन अधिनियम, 1949 लागू होतो।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A 'banking company' under PMLA includes any co-operative bank to which the Banking Regulation Act, 1949 applies.
+
+  [92mReference (Expected):
+    PMLA अंतर्गत 'बँकिंग कंपनी' मध्ये अशी कोणतीही सहकारी बँक समाविष्ट आहे जिला बँकिंग नियमन अधिनियम, 1949 लागू होतो।
+
+  Hypothesis (Actual):
+    पीएमएलए अंतर्गत 'बँकिंग कंपनी'मध्ये बँकिंग नियमन कायदा, 1949 लागू असलेल्या कोणत्याही सहकारी बँकेचा समावेश होतो.
+
+--- Testing Case T046 (46/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    यदि किसी लेन-देन में जाली या नकली करेंसी नोट शामिल हैं, तो राशि की परवाह किए बिना, इसे एक संदिग्ध लेन-देन के रूप में रिपोर्ट किया जाना चाहिए।
+
+  [92mReference (Expected):
+    If a transaction involves forged or counterfeit currency notes, it must be reported as a suspicious transaction, regardless of the amount.
+
+  Hypothesis (Actual):
+    If a transaction involves counterfeit or counterfeit currency notes, regardless of the amount, it should be reported as a suspicious transaction.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    If a transaction involves forged or counterfeit currency notes, it must be reported as a suspicious transaction, regardless of the amount.
+
+  [92mReference (Expected):
+    यदि किसी लेन-देन में जाली या नकली करेंसी नोट शामिल हैं, तो राशि की परवाह किए बिना, इसे एक संदिग्ध लेन-देन के रूप में रिपोर्ट किया जाना चाहिए।
+
+  Hypothesis (Actual):
+    यदि किसी लेनदेन में जाली या नकली मुद्रा नोट शामिल हैं, तो इसे एक संदिग्ध लेनदेन के रूप में रिपोर्ट किया जाना चाहिए, चाहे राशि कुछ भी हो।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    जर एखाद्या व्यवहारात बनावट किंवा नकली चलन नोटांचा समावेश असेल, तर रकमेचा विचार न करता, तो एक संशयास्पद व्यवहार म्हणून नोंदवला गेला पाहिजे।
+
+  [92mReference (Expected):
+    If a transaction involves forged or counterfeit currency notes, it must be reported as a suspicious transaction, regardless of the amount.
+
+  Hypothesis (Actual):
+    जर एखाद्या व्यवहारात बनावट किंवा नकली चलन नोटांचा समावेश असेल, तर रकमेचा विचार न करता, तो एक संशयास्पद व्यवहार म्हणून नोंदवला गेला पाहिजे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    If a transaction involves forged or counterfeit currency notes, it must be reported as a suspicious transaction, regardless of the amount.
+
+  [92mReference (Expected):
+    जर एखाद्या व्यवहारात बनावट किंवा नकली चलन नोटांचा समावेश असेल, तर रकमेचा विचार न करता, तो एक संशयास्पद व्यवहार म्हणून नोंदवला गेला पाहिजे।
+
+  Hypothesis (Actual):
+    जर एखाद्या व्यवहारात बनावट किंवा बनावट चलनी नोटांचा समावेश असेल तर रकमेची पर्वा न करता तो संशयास्पद व्यवहार म्हणून नोंदवला जाणे आवश्यक आहे.
+
+--- Testing Case T047 (47/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    किसी व्यक्ति पर धन शोधन के लिए मुकदमा चलाया जा सकता है, भले ही उन्हें मूल अवैध स्रोत का पता न हो, जब तक कि उन्होंने 'जानबूझकर' धन को छिपाने या उपयोग करने में सहायता की हो।
+
+  [92mReference (Expected):
+    A person can be prosecuted for money laundering even if they didn't know the original illegal source, as long as they 'knowingly' assisted in the concealment or use of the funds.
+
+  Hypothesis (Actual):
+    A person can be prosecuted for money laundering, even if they do not know the original illegal source, as long as they have 'knowingly' assisted in concealing or using the funds.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A person can be prosecuted for money laundering even if they didn't know the original illegal source, as long as they 'knowingly' assisted in the concealment or use of the funds.
+
+  [92mReference (Expected):
+    किसी व्यक्ति पर धन शोधन के लिए मुकदमा चलाया जा सकता है, भले ही उन्हें मूल अवैध स्रोत का पता न हो, जब तक कि उन्होंने 'जानबूझकर' धन को छिपाने या उपयोग करने में सहायता की हो।
+
+  Hypothesis (Actual):
+    किसी व्यक्ति पर मनी लॉन्ड्रिंग के लिए मुकदमा चलाया जा सकता है, भले ही उन्हें मूल अवैध स्रोत नहीं पता हो, जब तक कि वे धन को छिपाने या उपयोग करने में 'जानबूझकर' सहायता करते हैं।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    एखाद्या व्यक्तीवर धन शोधनासाठी खटला चालवला जाऊ शकतो, जरी तिला मूळ बेकायदेशीर स्त्रोताची माहिती नसली, तरी तिने 'जाणीवपूर्वक' निधी लपवण्यासाठी किंवा वापरण्यासाठी मदत केली असेल।
+
+  [92mReference (Expected):
+    A person can be prosecuted for money laundering even if they didn't know the original illegal source, as long as they 'knowingly' assisted in the concealment or use of the funds.
+
+  Hypothesis (Actual):
+    A person can be prosecuted for money laundering, even if he or she is not aware of the original illegal source, even if she has 'knowingly' helped hide or use the funds.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A person can be prosecuted for money laundering even if they didn't know the original illegal source, as long as they 'knowingly' assisted in the concealment or use of the funds.
+
+  [92mReference (Expected):
+    एखाद्या व्यक्तीवर धन शोधनासाठी खटला चालवला जाऊ शकतो, जरी तिला मूळ बेकायदेशीर स्त्रोताची माहिती नसली, तरी तिने 'जाणीवपूर्वक' निधी लपवण्यासाठी किंवा वापरण्यासाठी मदत केली असेल।
+
+  Hypothesis (Actual):
+    एखाद्या व्यक्तीला मूळ बेकायदेशीर स्त्रोत माहित नसला तरीही मनी लॉन्ड्रिंगसाठी खटला चालवला जाऊ शकतो, जोपर्यंत त्यांनी 'जाणूनबुजून' निधी लपविण्यास किंवा वापरण्यास मदत केली आहे.
+
+--- Testing Case T048 (48/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    CTR और STR के बीच मुख्य अंतर यह है कि CTR एक मौद्रिक सीमा पर आधारित एक अनिवार्य रिपोर्ट है, जबकि STR आपराधिक गतिविधि के संदेह पर आधारित एक रिपोर्ट है।
+
+  [92mReference (Expected):
+    The key difference between CTR and STR is that CTR is a mandatory report based on a monetary threshold, while STR is a report based on suspicion of criminal activity.
+
+  Hypothesis (Actual):
+    The main difference between CTR and STR is that CTR is a mandatory report based on a monetary threshold, whereas STR is a report based on suspicion of criminal activity.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    The key difference between CTR and STR is that CTR is a mandatory report based on a monetary threshold, while STR is a report based on suspicion of criminal activity.
+
+  [92mReference (Expected):
+    CTR और STR के बीच मुख्य अंतर यह है कि CTR एक मौद्रिक सीमा पर आधारित एक अनिवार्य रिपोर्ट है, जबकि STR आपराधिक गतिविधि के संदेह पर आधारित एक रिपोर्ट है।
+
+  Hypothesis (Actual):
+    सीटीआर और एसटीआर के बीच महत्वपूर्ण अंतर यह है कि सीटीआर एक मौद्रिक सीमा पर आधारित एक अनिवार्य रिपोर्ट है, जबकि एसटीआर आपराधिक गतिविधि के संदेह पर आधारित एक रिपोर्ट है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    CTR आणि STR मधील मुख्य फरक हा आहे की CTR हा आर्थिक मर्यादेवर आधारित अनिवार्य अहवाल आहे, तर STR हा गुन्हेगारी कृत्याच्या संशयावर आधारित अहवाल आहे।
+
+  [92mReference (Expected):
+    The key difference between CTR and STR is that CTR is a mandatory report based on a monetary threshold, while STR is a report based on suspicion of criminal activity.
+
+  Hypothesis (Actual):
+    The main difference between CTR and STR is that CTR is a mandatory report based on financial limits, whereas STR is a report based on suspicion of criminal activity.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    The key difference between CTR and STR is that CTR is a mandatory report based on a monetary threshold, while STR is a report based on suspicion of criminal activity.
+
+  [92mReference (Expected):
+    CTR आणि STR मधील मुख्य फरक हा आहे की CTR हा आर्थिक मर्यादेवर आधारित अनिवार्य अहवाल आहे, तर STR हा गुन्हेगारी कृत्याच्या संशयावर आधारित अहवाल आहे।
+
+  Hypothesis (Actual):
+    सीटीआर आणि एसटीआरमधील मुख्य फरक असा आहे की सीटीआर हा आर्थिक उंबरठ्यावर आधारित एक अनिवार्य अहवाल आहे, तर एसटीआर हा गुन्हेगारी क्रियाकलापांच्या संशयावर आधारित अहवाल आहे.
+
+--- Testing Case T049 (49/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    बिना किसी OVD के एक नया ग्राहक 25 लाख रुपये नकद जमा करने का प्रयास करता है। बैंक को लेन-देन से तब तक इनकार करना चाहिए जब तक कि ग्राहक सम्यक तत्परता पूरी नहीं हो जाती, और यह भी आकलन करना चाहिए कि क्या STR की आवश्यकता है।
+
+  [92mReference (Expected):
+    A new customer without any OVD attempts to deposit 25 lakh rupees in cash. The bank must refuse the transaction until Client Due Diligence is completed, and should also assess if an STR is warranted.
+
+  Hypothesis (Actual):
+    A new customer without any OVD attempts to deposit Rs 25 lakh in cash. The bank should refuse the transaction until customer due diligence is met, and also assess whether an STR is required.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A new customer without any OVD attempts to deposit 25 lakh rupees in cash. The bank must refuse the transaction until Client Due Diligence is completed, and should also assess if an STR is warranted.
+
+  [92mReference (Expected):
+    बिना किसी OVD के एक नया ग्राहक 25 लाख रुपये नकद जमा करने का प्रयास करता है। बैंक को लेन-देन से तब तक इनकार करना चाहिए जब तक कि ग्राहक सम्यक तत्परता पूरी नहीं हो जाती, और यह भी आकलन करना चाहिए कि क्या STR की आवश्यकता है।
+
+  Hypothesis (Actual):
+    बिना किसी ओवीडी के एक नया ग्राहक 25 लाख रुपये नकद जमा करने का प्रयास करता है। बैंक को तब तक लेनदेन से इनकार करना चाहिए जब तक कि ग्राहक का उचित परिश्रम पूरा न हो जाए, और यह भी आकलन करना चाहिए कि एसटीआर की आवश्यकता है या नहीं।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    कोणताही OVD नसलेला नवीन ग्राहक 25 लाख रुपये रोख जमा करण्याचा प्रयत्न करतो. बँकेने ग्राहक योग्य तत्परता पूर्ण होईपर्यंत व्यवहार नाकारला पाहिजे, आणि STR दाखल करण्याची आवश्यकता आहे का याचेही मूल्यांकन केले पाहिजे।
+
+  [92mReference (Expected):
+    A new customer without any OVD attempts to deposit 25 lakh rupees in cash. The bank must refuse the transaction until Client Due Diligence is completed, and should also assess if an STR is warranted.
+
+  Hypothesis (Actual):
+    कोणताही OVD नसलेला नवीन ग्राहक 25 लाख रुपये रोख जमा करण्याचा प्रयत्न करतो. बँकेने ग्राहक योग्य तत्परता पूर्ण होईपर्यंत व्यवहार नाकारला पाहिजे, आणि STR दाखल करण्याची आवश्यकता आहे का याचेही मूल्यांकन केले पाहिजे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A new customer without any OVD attempts to deposit 25 lakh rupees in cash. The bank must refuse the transaction until Client Due Diligence is completed, and should also assess if an STR is warranted.
+
+  [92mReference (Expected):
+    कोणताही OVD नसलेला नवीन ग्राहक 25 लाख रुपये रोख जमा करण्याचा प्रयत्न करतो. बँकेने ग्राहक योग्य तत्परता पूर्ण होईपर्यंत व्यवहार नाकारला पाहिजे, आणि STR दाखल करण्याची आवश्यकता आहे का याचेही मूल्यांकन केले पाहिजे।
+
+  Hypothesis (Actual):
+    कोणताही ओव्हीडी न करता नवीन ग्राहक २५ लाख रुपये रोख जमा करण्याचा प्रयत्न करतो. क्लायंट ड्यू डिलिजन्स पूर्ण होईपर्यंत बँकेने व्यवहार नाकारला पाहिजे आणि एसटीआरची हमी दिली आहे की नाही हे देखील मूल्यांकन केले पाहिजे.
+
+--- Testing Case T050 (50/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    PMLA के गैर-अनुपालन के लिए दंड में लिखित चेतावनी, अनुपालन के लिए विशिष्ट निर्देश, या प्रत्येक विफलता के लिए मौद्रिक जुर्माना शामिल हो सकता है।
+
+  [92mReference (Expected):
+    Penalties for non-compliance with PMLA can include written warnings, specific directions for compliance, or monetary fines for each failure.
+
+  Hypothesis (Actual):
+    Penalties for non-compliance with the PMLA may include a written warning, specific instructions for compliance, or monetary penalties for each failure.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    Penalties for non-compliance with PMLA can include written warnings, specific directions for compliance, or monetary fines for each failure.
+
+  [92mReference (Expected):
+    PMLA के गैर-अनुपालन के लिए दंड में लिखित चेतावनी, अनुपालन के लिए विशिष्ट निर्देश, या प्रत्येक विफलता के लिए मौद्रिक जुर्माना शामिल हो सकता है।
+
+  Hypothesis (Actual):
+    पीएमएलए का पालन न करने के लिए दंड में लिखित चेतावनी, अनुपालन के लिए विशिष्ट निर्देश या प्रत्येक विफलता के लिए मौद्रिक जुर्माना शामिल हो सकता है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    PMLA चे पालन न केल्यास, प्रत्येक अयशस्वीतेसाठी लेखी ताकीद, अनुपालनासाठी विशिष्ट निर्देश, किंवा आर्थिक दंड यांसारख्या शिक्षा होऊ शकतात।
+
+  [92mReference (Expected):
+    Penalties for non-compliance with PMLA can include written warnings, specific directions for compliance, or monetary fines for each failure.
+
+  Hypothesis (Actual):
+    PMLA चे पालन न केल्यास, प्रत्येक अयशस्वीतेसाठी लेखी ताकीद, अनुपालनासाठी विशिष्ट निर्देश, किंवा आर्थिक दंड यांसारख्या शिक्षा होऊ शकतात।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    Penalties for non-compliance with PMLA can include written warnings, specific directions for compliance, or monetary fines for each failure.
+
+  [92mReference (Expected):
+    PMLA चे पालन न केल्यास, प्रत्येक अयशस्वीतेसाठी लेखी ताकीद, अनुपालनासाठी विशिष्ट निर्देश, किंवा आर्थिक दंड यांसारख्या शिक्षा होऊ शकतात।
+
+  Hypothesis (Actual):
+    पीएमएलए चे पालन न केल्याबद्दल दंडामध्ये लेखी इशारा, अनुपालनासाठी विशिष्ट दिशानिर्देश किंवा प्रत्येक अपयशासाठी आर्थिक दंड यांचा समावेश असू शकतो.
+
+--- Testing Case T051 (51/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    एक ग्राहक के लेन-देन में एक अज्ञात इकाई 'support@crypto-exchange.biz' को एक बड़ा वायर ट्रांसफर शामिल था और मेमो में एक संदिग्ध URL 'http://invest-fast.xyz/login' का संदर्भ दिया गया था।
+
+  [92mReference (Expected):
+    A client's transaction involved a large wire transfer to an unknown entity 'support@crypto-exchange.biz' and referenced a suspicious URL 'http://invest-fast.xyz/login' in the memo.
+
+  Hypothesis (Actual):
+    A customer's transaction involved a large wire transfer to an unknown entity 'support@crypto-exchange.biz' and the memo referred to a suspicious URL 'http://invest-fast.xyz/login'.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A client's transaction involved a large wire transfer to an unknown entity 'support@crypto-exchange.biz' and referenced a suspicious URL 'http://invest-fast.xyz/login' in the memo.
+
+  [92mReference (Expected):
+    एक ग्राहक के लेन-देन में एक अज्ञात इकाई 'support@crypto-exchange.biz' को एक बड़ा वायर ट्रांसफर शामिल था और मेमो में एक संदिग्ध URL 'http://invest-fast.xyz/login' का संदर्भ दिया गया था।
+
+  Hypothesis (Actual):
+    एक ग्राहक के लेन-देन में एक अज्ञात इकाई 'support@crypto-exchange.biz' में एक बड़ा वायर ट्रांसफर शामिल था और मेमो में एक संदिग्ध यूआरएल 'http://invest-fast.xyz/login' का संदर्भ दिया गया था।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    एका ग्राहकाच्या व्यवहारात 'support@crypto-exchange.biz' या अज्ञात संस्थेला मोठ्या वायर ट्रान्सफरचा समावेश होता आणि मेमोमध्ये 'http://invest-fast.xyz/login' या संशयास्पद URL चा संदर्भ दिला होता।
+
+  [92mReference (Expected):
+    A client's transaction involved a large wire transfer to an unknown entity 'support@crypto-exchange.biz' and referenced a suspicious URL 'http://invest-fast.xyz/login' in the memo.
+
+  Hypothesis (Actual):
+    एका ग्राहकाच्या व्यवहारात 'support@crypto-exchange.biz' या अज्ञात संस्थेला मोठ्या वायर ट्रान्सफरचा समावेश होता आणि मेमोमध्ये 'http://invest-fast.xyz/login' या संशयास्पद URL चा संदर्भ दिला होता।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A client's transaction involved a large wire transfer to an unknown entity 'support@crypto-exchange.biz' and referenced a suspicious URL 'http://invest-fast.xyz/login' in the memo.
+
+  [92mReference (Expected):
+    एका ग्राहकाच्या व्यवहारात 'support@crypto-exchange.biz' या अज्ञात संस्थेला मोठ्या वायर ट्रान्सफरचा समावेश होता आणि मेमोमध्ये 'http://invest-fast.xyz/login' या संशयास्पद URL चा संदर्भ दिला होता।
+
+  Hypothesis (Actual):
+    क्लायंटच्या व्यवहारात अज्ञात संस्था 'support@crypto-exchange.biz' कडे मोठ्या वायर ट्रान्सफरचा समावेश होता आणि मेमोमध्ये संशयास्पद URL 'http://invest-fast.xyz/login' चा संदर्भ होता.
+
+--- Testing Case T052 (52/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    चल रही सम्यक तत्परता के हिस्से के रूप में, यदि कोई ग्राहक अपने संपर्क विवरण को एक नए ईमेल, 'new.client@example.com' पर अपडेट करता है, तो इसे सत्यापित किया जाना चाहिए और ग्राहक की प्रोफ़ाइल में अपडेट किया जाना चाहिए।
+
+  [92mReference (Expected):
+    As part of ongoing due diligence, if a client updates their contact details to a new email, 'new.client@example.com', this must be verified and updated in the client's profile.
+
+  Hypothesis (Actual):
+    As part of the ongoing due diligence, if a customer updates their contact details to a new email, 'new.client@example.com', it must be verified and updated in the customer's profile.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    As part of ongoing due diligence, if a client updates their contact details to a new email, 'new.client@example.com', this must be verified and updated in the client's profile.
+
+  [92mReference (Expected):
+    चल रही सम्यक तत्परता के हिस्से के रूप में, यदि कोई ग्राहक अपने संपर्क विवरण को एक नए ईमेल, 'new.client@example.com' पर अपडेट करता है, तो इसे सत्यापित किया जाना चाहिए और ग्राहक की प्रोफ़ाइल में अपडेट किया जाना चाहिए।
+
+  Hypothesis (Actual):
+    चल रहे उचित परिश्रम के हिस्से के रूप में, यदि कोई ग्राहक अपने संपर्क विवरण को एक नए ईमेल, 'new.client@example.com' में अपडेट करता है, तो इसे ग्राहक की प्रोफ़ाइल में सत्यापित और अपडेट किया जाना चाहिए।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    सुरू असलेल्या योग्य तत्परतेचा भाग म्हणून, जर एखाद्या ग्राहकाने त्याचे संपर्क तपशील 'new.client@example.com' या नवीन ईमेलवर अद्यतनित केले, तर ते सत्यापित करणे आणि ग्राहकाच्या प्रोफाइलमध्ये अद्यतनित करणे आवश्यक आहे।
+
+  [92mReference (Expected):
+    As part of ongoing due diligence, if a client updates their contact details to a new email, 'new.client@example.com', this must be verified and updated in the client's profile.
+
+  Hypothesis (Actual):
+    As part of the ongoing due diligence, if a customer updates his contact details to a new email 'new.client@example.com', the same needs to be verified and updated in the customer's profile.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    As part of ongoing due diligence, if a client updates their contact details to a new email, 'new.client@example.com', this must be verified and updated in the client's profile.
+
+  [92mReference (Expected):
+    सुरू असलेल्या योग्य तत्परतेचा भाग म्हणून, जर एखाद्या ग्राहकाने त्याचे संपर्क तपशील 'new.client@example.com' या नवीन ईमेलवर अद्यतनित केले, तर ते सत्यापित करणे आणि ग्राहकाच्या प्रोफाइलमध्ये अद्यतनित करणे आवश्यक आहे।
+
+  Hypothesis (Actual):
+    चालू असलेल्या योग्य परिश्रमाचा एक भाग म्हणून, जर एखाद्या क्लायंटने त्यांचे संपर्क तपशील नवीन ईमेल, 'new.client@example.com' वर अद्यतनित केले तर हे क्लायंटच्या प्रोफाइलमध्ये सत्यापित आणि अद्यतनित केले जाणे आवश्यक आहे.
+
+--- Testing Case T053 (53/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    सहायता के लिए, करदाता आयकर सेवा केंद्र (ASK) को +91-1800-180-1961 पर कॉल कर सकते हैं या शिकायत दर्ज करने के लिए 'https://www.incometax.gov.in' पर आधिकारिक पोर्टल पर जा सकते हैं।
+
+  [92mReference (Expected):
+    For support, taxpayers can call the Aaykar Seva Kendra (ASK) at +91-1800-180-1961 or visit the official portal at 'https://www.incometax.gov.in' to raise a grievance.
+
+  Hypothesis (Actual):
+    For assistance, taxpayers can call the Income Tax Seva Kendra (ASK) at +91-1800-180-1961 or visit the official portal at 'https://www.incometax.gov.in' to file a complaint.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    For support, taxpayers can call the Aaykar Seva Kendra (ASK) at +91-1800-180-1961 or visit the official portal at 'https://www.incometax.gov.in' to raise a grievance.
+
+  [92mReference (Expected):
+    सहायता के लिए, करदाता आयकर सेवा केंद्र (ASK) को +91-1800-180-1961 पर कॉल कर सकते हैं या शिकायत दर्ज करने के लिए 'https://www.incometax.gov.in' पर आधिकारिक पोर्टल पर जा सकते हैं।
+
+  Hypothesis (Actual):
+    सहायता के लिए, करदाता आयकर सेवा केंद्र (एएसके) को +91-1800-180-1961 पर कॉल कर सकते हैं या शिकायत दर्ज करने के लिए 'https://www.incometax.gov.in' पर आधिकारिक पोर्टल पर जा सकते हैं।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    समर्थनासाठी, करदाते आयकर सेवा केंद्राला (ASK) +91-1800-180-1961 वर कॉल करू शकतात किंवा तक्रार नोंदवण्यासाठी 'https://www.incometax.gov.in' या अधिकृत पोर्टलला भेट देऊ शकतात।
+
+  [92mReference (Expected):
+    For support, taxpayers can call the Aaykar Seva Kendra (ASK) at +91-1800-180-1961 or visit the official portal at 'https://www.incometax.gov.in' to raise a grievance.
+
+  Hypothesis (Actual):
+    For support, taxpayers can call the Income Tax Seva Kendra (ASK) at +91-1800-180-1961 or visit the official portal 'https://www.incometax.gov.in' to lodge a complaint.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    For support, taxpayers can call the Aaykar Seva Kendra (ASK) at +91-1800-180-1961 or visit the official portal at 'https://www.incometax.gov.in' to raise a grievance.
+
+  [92mReference (Expected):
+    समर्थनासाठी, करदाते आयकर सेवा केंद्राला (ASK) +91-1800-180-1961 वर कॉल करू शकतात किंवा तक्रार नोंदवण्यासाठी 'https://www.incometax.gov.in' या अधिकृत पोर्टलला भेट देऊ शकतात।
+
+  Hypothesis (Actual):
+    मदतीसाठी, करदाते आयकर सेवा केंद्र (एएसके) वर +91-1800-180-1961 वर कॉल करू शकतात किंवा तक्रार नोंदवण्यासाठी 'https://www.incometax.gov.in' वरील अधिकृत पोर्टलला भेट देऊ शकतात.
+
+--- Testing Case T054 (54/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    एक ग्राहक का पंजीकृत फ़ोन नंबर, +1-555-123-4567, कई असंबंधित खातों से जुड़ा हुआ था, जो सभी एक ही दिन खोले गए थे। इस पैटर्न ने STR के लिए एक आंतरिक समीक्षा शुरू कर दी।
+
+  [92mReference (Expected):
+    A client's registered phone number, +1-555-123-4567, was linked to multiple unrelated accounts that were all opened on the same day. This pattern triggered an internal review for an STR.
+
+  Hypothesis (Actual):
+    One customer's registered phone number, +1-555-123-4567, was linked to several unrelated accounts, all of which were opened on the same day. This pattern triggered an internal review for the STR.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A client's registered phone number, +1-555-123-4567, was linked to multiple unrelated accounts that were all opened on the same day. This pattern triggered an internal review for an STR.
+
+  [92mReference (Expected):
+    एक ग्राहक का पंजीकृत फ़ोन नंबर, +1-555-123-4567, कई असंबंधित खातों से जुड़ा हुआ था, जो सभी एक ही दिन खोले गए थे। इस पैटर्न ने STR के लिए एक आंतरिक समीक्षा शुरू कर दी।
+
+  Hypothesis (Actual):
+    एक ग्राहक का पंजीकृत फ़ोन नंबर, +1-555-123-4567, कई असंबंधित खातों से जुड़ा हुआ था जो सभी एक ही दिन खोले गए थे। इस पैटर्न ने एसटीआर के लिए एक आंतरिक समीक्षा को ट्रिगर किया।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    एका ग्राहकाचा नोंदणीकृत फोन नंबर, +1-555-123-4567, अनेक असंबद्ध खात्यांशी जोडलेला होता, जी सर्व एकाच दिवशी उघडली गेली होती. या पॅटर्नमुळे STR साठी अंतर्गत पुनरावलोकन सुरू झाले।
+
+  [92mReference (Expected):
+    A client's registered phone number, +1-555-123-4567, was linked to multiple unrelated accounts that were all opened on the same day. This pattern triggered an internal review for an STR.
+
+  Hypothesis (Actual):
+    One customer's registered phone number, +1-555-123-4567, was linked to several unrelated accounts, all of which were opened on the same day. This pattern led to an internal review for the STR.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A client's registered phone number, +1-555-123-4567, was linked to multiple unrelated accounts that were all opened on the same day. This pattern triggered an internal review for an STR.
+
+  [92mReference (Expected):
+    एका ग्राहकाचा नोंदणीकृत फोन नंबर, +1-555-123-4567, अनेक असंबद्ध खात्यांशी जोडलेला होता, जी सर्व एकाच दिवशी उघडली गेली होती. या पॅटर्नमुळे STR साठी अंतर्गत पुनरावलोकन सुरू झाले।
+
+  Hypothesis (Actual):
+    क्लायंटचा नोंदणीकृत फोन नंबर, +1-555-123-4567, एकाच दिवशी उघडलेल्या एकाधिक असंबंधित खात्यांशी जोडला गेला होता. या पॅटर्नमुळे एसटीआरसाठी अंतर्गत पुनरावलोकन सुरू झाले.
+
+--- Testing Case T055 (55/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    इस अधिनियम द्वारा प्रदत्त किसी भी शक्ति के अनुसरण में की गई किसी भी कार्रवाई के संबंध में किसी भी न्यायालय द्वारा कोई निषेधाज्ञा नहीं दी जाएगी, जैसा कि 'https://fiuindia.gov.in/pmla-rules' पर विस्तृत है।
+
+  [92mReference (Expected):
+    No injunction shall be granted by any Court in respect of any action taken in pursuance of any power conferred by this Act, as detailed on 'https://fiuindia.gov.in/pmla-rules'.
+
+  Hypothesis (Actual):
+    No injunction shall be granted by any court in respect of any action taken in pursuance of any power conferred by this Act, as detailed on 'https://fiuindia.gov.in/pmla-rules'.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    No injunction shall be granted by any Court in respect of any action taken in pursuance of any power conferred by this Act, as detailed on 'https://fiuindia.gov.in/pmla-rules'.
+
+  [92mReference (Expected):
+    इस अधिनियम द्वारा प्रदत्त किसी भी शक्ति के अनुसरण में की गई किसी भी कार्रवाई के संबंध में किसी भी न्यायालय द्वारा कोई निषेधाज्ञा नहीं दी जाएगी, जैसा कि 'https://fiuindia.gov.in/pmla-rules' पर विस्तृत है।
+
+  Hypothesis (Actual):
+    इस अधिनियम द्वारा प्रदत्त किसी भी शक्ति के अनुसरण में की गई किसी भी कार्रवाई के संबंध में किसी भी न्यायालय द्वारा कोई निषेधाज्ञा नहीं दी जाएगी, जैसा कि 'https://fiuindia.gov.in/pmla-rules' पर विस्तृत है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    'https://fiuindia.gov.in/pmla-rules' वर तपशील दिल्याप्रमाणे, या कायद्याद्वारे प्रदान केलेल्या कोणत्याही अधिकाराच्या अनुषंगाने केलेल्या कोणत्याही कारवाईच्या संदर्भात कोणत्याही न्यायालयाद्वारे कोणताही मनाईहुकूम दिला जाणार नाही।
+
+  [92mReference (Expected):
+    No injunction shall be granted by any Court in respect of any action taken in pursuance of any power conferred by this Act, as detailed on 'https://fiuindia.gov.in/pmla-rules'.
+
+  Hypothesis (Actual):
+    'https://fiuindia.gov.in/pmla-rules' वर तपशील दिल्याप्रमाणे, या कायद्याद्वारे प्रदान केलेल्या कोणत्याही अधिकाराच्या अनुषंगाने केलेल्या कोणत्याही कारवाईच्या संदर्भात कोणत्याही न्यायालयाद्वारे कोणताही मनाईहुकूम दिला जाणार नाही।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    No injunction shall be granted by any Court in respect of any action taken in pursuance of any power conferred by this Act, as detailed on 'https://fiuindia.gov.in/pmla-rules'.
+
+  [92mReference (Expected):
+    'https://fiuindia.gov.in/pmla-rules' वर तपशील दिल्याप्रमाणे, या कायद्याद्वारे प्रदान केलेल्या कोणत्याही अधिकाराच्या अनुषंगाने केलेल्या कोणत्याही कारवाईच्या संदर्भात कोणत्याही न्यायालयाद्वारे कोणताही मनाईहुकूम दिला जाणार नाही।
+
+  Hypothesis (Actual):
+    या अधिनियमाद्वारे प्रदान केलेल्या कोणत्याही अधिकाराच्या अनुषंगाने केलेल्या कोणत्याही कारवाईच्या संदर्भात कोणत्याही न्यायालयाद्वारे कोणताही हुकूम मंजूर केला जाणार नाही, जसे की 'https://fiuindia.gov.in/pmla-rules' वर तपशीलवार आहे.
+
+--- Testing Case T056 (56/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    सेवा संबंधी समस्या के संबंध में औपचारिक शिकायत दर्ज करने के लिए, करदाता को अपने PAN और निर्धारण वर्ष के साथ 'complaints@tax-grievance.gov.in' पर एक ईमेल भेजने का निर्देश दिया गया था।
+
+  [92mReference (Expected):
+    To file a formal complaint regarding a service issue, the taxpayer was instructed to send an email to 'complaints@tax-grievance.gov.in' with their PAN and assessment year.
+
+  Hypothesis (Actual):
+    To file a formal complaint regarding a service issue, the taxpayer was instructed to send an email to 'complaints@tax-grievance.gov.in' with their PAN and assessment year.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    To file a formal complaint regarding a service issue, the taxpayer was instructed to send an email to 'complaints@tax-grievance.gov.in' with their PAN and assessment year.
+
+  [92mReference (Expected):
+    सेवा संबंधी समस्या के संबंध में औपचारिक शिकायत दर्ज करने के लिए, करदाता को अपने PAN और निर्धारण वर्ष के साथ 'complaints@tax-grievance.gov.in' पर एक ईमेल भेजने का निर्देश दिया गया था।
+
+  Hypothesis (Actual):
+    सेवा के मुद्दे के बारे में औपचारिक शिकायत दर्ज करने के लिए, करदाता को अपने पैन और मूल्यांकन वर्ष के साथ 'complaints@tax-grievance.gov.in' को एक ईमेल भेजने का निर्देश दिया गया था।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    सेवेच्या समस्येबाबत औपचारिक तक्रार दाखल करण्यासाठी, करदात्याला त्यांचा PAN आणि मूल्यांकन वर्ष नमूद करून 'complaints@tax-grievance.gov.in' वर ईमेल पाठवण्याची सूचना देण्यात आली होती।
+
+  [92mReference (Expected):
+    To file a formal complaint regarding a service issue, the taxpayer was instructed to send an email to 'complaints@tax-grievance.gov.in' with their PAN and assessment year.
+
+  Hypothesis (Actual):
+    For filing a formal complaint regarding a service issue, the taxpayer was instructed to send an email to 'complaints@tax-grievance.gov.in' mentioning their PAN and assessment year.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    To file a formal complaint regarding a service issue, the taxpayer was instructed to send an email to 'complaints@tax-grievance.gov.in' with their PAN and assessment year.
+
+  [92mReference (Expected):
+    सेवेच्या समस्येबाबत औपचारिक तक्रार दाखल करण्यासाठी, करदात्याला त्यांचा PAN आणि मूल्यांकन वर्ष नमूद करून 'complaints@tax-grievance.gov.in' वर ईमेल पाठवण्याची सूचना देण्यात आली होती।
+
+  Hypothesis (Actual):
+    सेवेच्या समस्येबाबत औपचारिक तक्रार दाखल करण्यासाठी, करदात्याला त्यांचे पॅन आणि मूल्यांकन वर्षासह 'complaints@tax-grievance.gov.in' ला ईमेल पाठविण्याची सूचना देण्यात आली होती.
+
+--- Testing Case T057 (57/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    'darpan.gov.in' पोर्टल पर पंजीकृत NPOs को ₹10,000 से अधिक के सभी दान की सूचना दाता के विवरण के साथ दी जानी चाहिए, जिसमें उनका फोन नंबर और ईमेल पता, यदि उपलब्ध हो, शामिल है।
+
+  [92mReference (Expected):
+    All donations over ₹10,000 to NPOs registered on the 'darpan.gov.in' portal must be reported with donor details, including their phone number and email address if available.
+
+  Hypothesis (Actual):
+    All donations above ₹10,000 to NPOs registered on the 'darpan.gov.in' portal should be communicated with the donor's details, including their phone number and email address, if available.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    All donations over ₹10,000 to NPOs registered on the 'darpan.gov.in' portal must be reported with donor details, including their phone number and email address if available.
+
+  [92mReference (Expected):
+    'darpan.gov.in' पोर्टल पर पंजीकृत NPOs को ₹10,000 से अधिक के सभी दान की सूचना दाता के विवरण के साथ दी जानी चाहिए, जिसमें उनका फोन नंबर और ईमेल पता, यदि उपलब्ध हो, शामिल है।
+
+  Hypothesis (Actual):
+    'darpan.gov.in' पोर्टल पर पंजीकृत एनपीओ को ₹10,000 से अधिक के सभी दान की सूचना दाता के विवरण के साथ दी जानी चाहिए, जिसमें उनका फोन नंबर और ईमेल पता शामिल है यदि उपलब्ध हो।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    'darpan.gov.in' पोर्टलवर नोंदणीकृत NPOs ला ₹10,000 पेक्षा जास्त असलेल्या सर्व देणग्यांची नोंद देणगीदाराच्या तपशीलांसह करणे आवश्यक आहे, ज्यात त्यांचा फोन नंबर आणि ईमेल पत्ता, उपलब्ध असल्यास, समाविष्ट आहे।
+
+  [92mReference (Expected):
+    All donations over ₹10,000 to NPOs registered on the 'darpan.gov.in' portal must be reported with donor details, including their phone number and email address if available.
+
+  Hypothesis (Actual):
+    'darpan.gov.in' पोर्टलवर नोंदणीकृत NPOs ला ₹10,000 पेक्षा जास्त असलेल्या सर्व देणग्यांची नोंद देणगीदाराच्या तपशीलांसह करणे आवश्यक आहे, ज्यात त्यांचा फोन नंबर आणि ईमेल पत्ता, उपलब्ध असल्यास, समाविष्ट आहे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    All donations over ₹10,000 to NPOs registered on the 'darpan.gov.in' portal must be reported with donor details, including their phone number and email address if available.
+
+  [92mReference (Expected):
+    'darpan.gov.in' पोर्टलवर नोंदणीकृत NPOs ला ₹10,000 पेक्षा जास्त असलेल्या सर्व देणग्यांची नोंद देणगीदाराच्या तपशीलांसह करणे आवश्यक आहे, ज्यात त्यांचा फोन नंबर आणि ईमेल पत्ता, उपलब्ध असल्यास, समाविष्ट आहे।
+
+  Hypothesis (Actual):
+    'darpan.gov.in' पोर्टलवर नोंदणीकृत एनपीओना ₹10,000 पेक्षा जास्त देणग्या उपलब्ध असल्यास त्यांचा फोन नंबर आणि ईमेल पत्त्यासह देणगीदाराच्या तपशीलांसह कळविणे आवश्यक आहे.
+
+--- Testing Case T058 (58/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    एक ग्राहक, श्री शर्मा (+91-9876543210), को 'remit.finance@offshore-bank.org' से बिना किसी स्पष्ट आर्थिक उद्देश्य के एक बड़ी आवक प्रेषण प्राप्त हुई। यह एक चेतावनी संकेत है।
+
+  [92mReference (Expected):
+    A customer, Mr. Sharma (+91-9876543210), received a large inward remittance from 'remit.finance@offshore-bank.org' with no clear economic purpose. This is a red flag.
+
+  Hypothesis (Actual):
+    One customer, Mr. Sharma (+91-9876543210), received a large inward remittance from 'remit.finance@offshore-bank.org' with no apparent economic purpose. This is a warning sign.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A customer, Mr. Sharma (+91-9876543210), received a large inward remittance from 'remit.finance@offshore-bank.org' with no clear economic purpose. This is a red flag.
+
+  [92mReference (Expected):
+    एक ग्राहक, श्री शर्मा (+91-9876543210), को 'remit.finance@offshore-bank.org' से बिना किसी स्पष्ट आर्थिक उद्देश्य के एक बड़ी आवक प्रेषण प्राप्त हुई। यह एक चेतावनी संकेत है।
+
+  Hypothesis (Actual):
+    एक ग्राहक, श्री शर्मा (+91-9876543210) को 'remit.finance@offshore-bank.org' से एक बड़ा आवक प्रेषण प्राप्त हुआ, जिसका कोई स्पष्ट आर्थिक उद्देश्य नहीं था। यह एक लाल झंडा है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    एक ग्राहक, श्री शर्मा (+91-9876543210), यांना 'remit.finance@offshore-bank.org' कडून कोणताही स्पष्ट आर्थिक उद्देश नसताना मोठी रक्कम प्राप्त झाली. हे एक धोक्याचे चिन्ह आहे।
+
+  [92mReference (Expected):
+    A customer, Mr. Sharma (+91-9876543210), received a large inward remittance from 'remit.finance@offshore-bank.org' with no clear economic purpose. This is a red flag.
+
+  Hypothesis (Actual):
+    एक ग्राहक, श्री शर्मा (+91-9876543210), यांना 'remit.finance@offshore-bank.org' कडून कोणताही स्पष्ट आर्थिक उद्देश नसताना मोठी रक्कम प्राप्त झाली. हे एक धोक्याचे चिन्ह आहे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A customer, Mr. Sharma (+91-9876543210), received a large inward remittance from 'remit.finance@offshore-bank.org' with no clear economic purpose. This is a red flag.
+
+  [92mReference (Expected):
+    एक ग्राहक, श्री शर्मा (+91-9876543210), यांना 'remit.finance@offshore-bank.org' कडून कोणताही स्पष्ट आर्थिक उद्देश नसताना मोठी रक्कम प्राप्त झाली. हे एक धोक्याचे चिन्ह आहे।
+
+  Hypothesis (Actual):
+    श्री. शर्मा (+91-9876543210) या ग्राहकाला 'remit.finance@offshore-bank.org' कडून मोठ्या प्रमाणात आवक रेमिटन्स प्राप्त झाला, ज्याचा कोणताही स्पष्ट आर्थिक हेतू नव्हता. हा लाल झेंडा आहे.
+
+--- Testing Case T059 (59/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    KYC के लिए 'आधिकारिक रूप से वैध दस्तावेज़ों' (OVD) की आधिकारिक सूची RBI की वेबसाइट 'https://www.rbi.org.in/kyc-master-direction.aspx' पर पाई जा सकती है।
+
+  [92mReference (Expected):
+    The official list of 'Officially Valid Documents' (OVD) for KYC can be found on the RBI's website at 'https://www.rbi.org.in/kyc-master-direction.aspx'.
+
+  Hypothesis (Actual):
+    The official list of 'Officially Valid Documents' (OVDs) for KYC can be found on the RBI's website 'https://www.rbi.org.in/kyc-master-direction.aspx'.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    The official list of 'Officially Valid Documents' (OVD) for KYC can be found on the RBI's website at 'https://www.rbi.org.in/kyc-master-direction.aspx'.
+
+  [92mReference (Expected):
+    KYC के लिए 'आधिकारिक रूप से वैध दस्तावेज़ों' (OVD) की आधिकारिक सूची RBI की वेबसाइट 'https://www.rbi.org.in/kyc-master-direction.aspx' पर पाई जा सकती है।
+
+  Hypothesis (Actual):
+    केवाईसी के लिए 'आधिकारिक रूप से वैध दस्तावेजों' (ओवीडी) की आधिकारिक सूची आरबीआई की वेबसाइट 'https://www.rbi.org.in/kyc-master-direction.aspx' पर देखी जा सकती है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    KYC साठी 'अधिकृतपणे वैध दस्तऐवजांची' (OVD) अधिकृत यादी RBI च्या वेबसाइट 'https://www.rbi.org.in/kyc-master-direction.aspx' वर आढळू शकते।
+
+  [92mReference (Expected):
+    The official list of 'Officially Valid Documents' (OVD) for KYC can be found on the RBI's website at 'https://www.rbi.org.in/kyc-master-direction.aspx'.
+
+  Hypothesis (Actual):
+    KYC साठी 'अधिकृतपणे वैध दस्तऐवजांची' (OVD) अधिकृत यादी RBI च्या वेबसाइट 'https://www.rbi.org.in/kyc-master-direction.aspx' वर आढळू शकते।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    The official list of 'Officially Valid Documents' (OVD) for KYC can be found on the RBI's website at 'https://www.rbi.org.in/kyc-master-direction.aspx'.
+
+  [92mReference (Expected):
+    KYC साठी 'अधिकृतपणे वैध दस्तऐवजांची' (OVD) अधिकृत यादी RBI च्या वेबसाइट 'https://www.rbi.org.in/kyc-master-direction.aspx' वर आढळू शकते।
+
+  Hypothesis (Actual):
+    केवायसीसाठी 'ऑफिशिअली व्हॅलिड डॉक्युमेंट्स' (ओव्हीडी) ची अधिकृत यादी आरबीआयच्या वेबसाइटवर 'https://www.rbi.org.in/kyc-master-direction.aspx' वर उपलब्ध आहे.
+
+--- Testing Case T060 (60/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    ग्राहक सम्यक तत्परता (CDD) के हिस्से के रूप में, एक रिपोर्टिंग इकाई को OTP या इसी तरह की सत्यापन विधि के माध्यम से ग्राहक के पंजीकृत मोबाइल नंबर, जैसे +91-9988776655, को सत्यापित करना होगा।
+
+  [92mReference (Expected):
+    As part of Client Due Diligence (CDD), a reporting entity must verify the client's registered mobile number, such as +91-9988776655, through an OTP or a similar validation method.
+
+  Hypothesis (Actual):
+    As part of the Customer Readiness (CDD), a reporting entity must verify the customer's registered mobile number, such as +91-9988776655, through OTP or a similar verification method.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    As part of Client Due Diligence (CDD), a reporting entity must verify the client's registered mobile number, such as +91-9988776655, through an OTP or a similar validation method.
+
+  [92mReference (Expected):
+    ग्राहक सम्यक तत्परता (CDD) के हिस्से के रूप में, एक रिपोर्टिंग इकाई को OTP या इसी तरह की सत्यापन विधि के माध्यम से ग्राहक के पंजीकृत मोबाइल नंबर, जैसे +91-9988776655, को सत्यापित करना होगा।
+
+  Hypothesis (Actual):
+    क्लाइंट ड्यू डिलिजेंस (CDD) के हिस्से के रूप में, रिपोर्टिंग इकाई को ओटीपी या इसी तरह की पुष्टि करने वाली विधि के माध्यम से क्लाइंट के पंजीकृत मोबाइल नंबर, जैसे +91-9988776655 की पुष्टि करनी होगी.
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    ग्राहक योग्य तत्परतेचा (CDD) भाग म्हणून, रिपोर्टिंग संस्थेने ग्राहकाचा नोंदणीकृत मोबाईल नंबर, जसे की +91-9988776655, OTP किंवा तत्सम प्रमाणीकरण पद्धतीद्वारे सत्यापित करणे आवश्यक आहे।
+
+  [92mReference (Expected):
+    As part of Client Due Diligence (CDD), a reporting entity must verify the client's registered mobile number, such as +91-9988776655, through an OTP or a similar validation method.
+
+  Hypothesis (Actual):
+    ग्राहक योग्य तत्परतेचा (CDD) भाग म्हणून, रिपोर्टिंग संस्थेने ग्राहकाचा नोंदणीकृत मोबाईल नंबर, जसे की +91-9988776655, OTP किंवा तत्सम प्रमाणीकरण पद्धतीद्वारे सत्यापित करणे आवश्यक आहे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    As part of Client Due Diligence (CDD), a reporting entity must verify the client's registered mobile number, such as +91-9988776655, through an OTP or a similar validation method.
+
+  [92mReference (Expected):
+    ग्राहक योग्य तत्परतेचा (CDD) भाग म्हणून, रिपोर्टिंग संस्थेने ग्राहकाचा नोंदणीकृत मोबाईल नंबर, जसे की +91-9988776655, OTP किंवा तत्सम प्रमाणीकरण पद्धतीद्वारे सत्यापित करणे आवश्यक आहे।
+
+  Hypothesis (Actual):
+    क्लायंट ड्यू डिलिजन्स (सीडीडी) चा एक भाग म्हणून, रिपोर्टिंग एंटिटीने ओटीपी किंवा तत्सम प्रमाणीकरण पद्धतीद्वारे क्लायंटचा नोंदणीकृत मोबाइल नंबर, जसे की +91-9988776655 सत्यापित करणे आवश्यक आहे.
+
+--- Testing Case T061 (61/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    एक ग्राहक ने 'ceo@startup-world.io' ईमेल का उपयोग करके एक खाता खोला और तुरंत एक शेल कंपनी की वेबसाइट 'www.xyz-holdings.ky' का हवाला देते हुए, एक उच्च-जोखिम वाले क्षेत्राधिकार में धन हस्तांतरित किया।
+
+  [92mReference (Expected):
+    A client opened an account using the email 'ceo@startup-world.io' and immediately transferred funds to a high-risk jurisdiction, referencing a shell company website 'www.xyz-holdings.ky'.
+
+  Hypothesis (Actual):
+    A customer opened an account using a 'ceo@startup-world.io' email and immediately transferred the funds to a high-risk jurisdiction, citing a shell company's website 'www.xyz-holdings.ky'.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A client opened an account using the email 'ceo@startup-world.io' and immediately transferred funds to a high-risk jurisdiction, referencing a shell company website 'www.xyz-holdings.ky'.
+
+  [92mReference (Expected):
+    एक ग्राहक ने 'ceo@startup-world.io' ईमेल का उपयोग करके एक खाता खोला और तुरंत एक शेल कंपनी की वेबसाइट 'www.xyz-holdings.ky' का हवाला देते हुए, एक उच्च-जोखिम वाले क्षेत्राधिकार में धन हस्तांतरित किया।
+
+  Hypothesis (Actual):
+    एक ग्राहक ने ईमेल 'ceo@startup-world.io' का उपयोग करके एक खाता खोला और तुरंत एक शेल कंपनी की वेबसाइट 'www.xyz-holdings.ky' का संदर्भ देते हुए उच्च जोखिम वाले क्षेत्राधिकार में धन स्थानांतरित कर दिया।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    एका ग्राहकाने 'ceo@startup-world.io' हा ईमेल वापरून खाते उघडले आणि तात्काळ 'www.xyz-holdings.ky' या शेल कंपनीच्या वेबसाइटचा संदर्भ देत, उच्च-जोखमीच्या अधिकारक्षेत्रात निधी हस्तांतरित केला।
+
+  [92mReference (Expected):
+    A client opened an account using the email 'ceo@startup-world.io' and immediately transferred funds to a high-risk jurisdiction, referencing a shell company website 'www.xyz-holdings.ky'.
+
+  Hypothesis (Actual):
+    One customer opened an account using the email 'ceo@startup-world.io' and immediately transferred funds to a high-risk jurisdiction, referring to the shell company's website 'www.xyz-holdings.ky'.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A client opened an account using the email 'ceo@startup-world.io' and immediately transferred funds to a high-risk jurisdiction, referencing a shell company website 'www.xyz-holdings.ky'.
+
+  [92mReference (Expected):
+    एका ग्राहकाने 'ceo@startup-world.io' हा ईमेल वापरून खाते उघडले आणि तात्काळ 'www.xyz-holdings.ky' या शेल कंपनीच्या वेबसाइटचा संदर्भ देत, उच्च-जोखमीच्या अधिकारक्षेत्रात निधी हस्तांतरित केला।
+
+  Hypothesis (Actual):
+    एका क्लायंटने 'ceo@startup-world.io' या ईमेलचा वापर करून खाते उघडले आणि शेल कंपनीच्या वेबसाइटचा संदर्भ देत 'www.xyz-holdings.ky' चा संदर्भ देत त्वरित उच्च-जोखमीच्या अधिकारक्षेत्रात निधी हस्तांतरित केला.
+
+--- Testing Case T062 (62/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    एक बैंक पर STR दाखिल करने में विफल रहने के लिए जुर्माना लगाया गया। 'co@bank.com' पर भेजे गए नोटिस में, एक ग्राहक के नंबर +91-8887776665 से एक लेन-देन की जांच करने में विफलता का हवाला दिया गया, जिसे आंतरिक रूप से ध्वजांकित किया गया था।
+
+  [92mReference (Expected):
+    A bank was fined for failing to file an STR. The notice, sent to 'co@bank.com', cited a failure to investigate a transaction from a client's number, +91-8887776665, which was flagged internally.
+
+  Hypothesis (Actual):
+    एक बैंक पर STR दाखिल करने में विफल रहने के लिए जुर्माना लगाया गया। 'co@bank.com' पर भेजे गए नोटिस में, एक ग्राहक के नंबर +91-8887776665 से एक लेन-देन की जांच करने में विफलता का हवाला दिया गया, जिसे आंतरिक रूप से ध्वजांकित किया गया था।
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A bank was fined for failing to file an STR. The notice, sent to 'co@bank.com', cited a failure to investigate a transaction from a client's number, +91-8887776665, which was flagged internally.
+
+  [92mReference (Expected):
+    एक बैंक पर STR दाखिल करने में विफल रहने के लिए जुर्माना लगाया गया। 'co@bank.com' पर भेजे गए नोटिस में, एक ग्राहक के नंबर +91-8887776665 से एक लेन-देन की जांच करने में विफलता का हवाला दिया गया, जिसे आंतरिक रूप से ध्वजांकित किया गया था।
+
+  Hypothesis (Actual):
+    एसटीआर दाखिल करने में विफल रहने के लिए एक बैंक पर जुर्माना लगाया गया था। 'co@bank.com' को भेजे गए नोटिस में ग्राहक के नंबर, +91-8887776665 से लेनदेन की जांच करने में विफलता का हवाला दिया गया था, जिसे आंतरिक रूप से चिह्नित किया गया था।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    STR दाखल करण्यात अयशस्वी झाल्याबद्दल एका बँकेला दंड ठोठावण्यात आला. 'co@bank.com' वर पाठवलेल्या नोटीसमध्ये, ग्राहकाच्या +91-8887776665 या नंबरवरून झालेल्या व्यवहाराची चौकशी करण्यात अयशस्वी झाल्याचा उल्लेख केला आहे, जो अंतर्गततः ध्वजांकित (flagged) केला गेला होता।
+
+  [92mReference (Expected):
+    A bank was fined for failing to file an STR. The notice, sent to 'co@bank.com', cited a failure to investigate a transaction from a client's number, +91-8887776665, which was flagged internally.
+
+  Hypothesis (Actual):
+    STR दाखल करण्यात अयशस्वी झाल्याबद्दल एका बँकेला दंड ठोठावण्यात आला. 'co@bank.com' वर पाठवलेल्या नोटीसमध्ये, ग्राहकाच्या +91-8887776665 या नंबरवरून झालेल्या व्यवहाराची चौकशी करण्यात अयशस्वी झाल्याचा उल्लेख केला आहे, जो अंतर्गततः ध्वजांकित (flagged) केला गेला होता।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A bank was fined for failing to file an STR. The notice, sent to 'co@bank.com', cited a failure to investigate a transaction from a client's number, +91-8887776665, which was flagged internally.
+
+  [92mReference (Expected):
+    STR दाखल करण्यात अयशस्वी झाल्याबद्दल एका बँकेला दंड ठोठावण्यात आला. 'co@bank.com' वर पाठवलेल्या नोटीसमध्ये, ग्राहकाच्या +91-8887776665 या नंबरवरून झालेल्या व्यवहाराची चौकशी करण्यात अयशस्वी झाल्याचा उल्लेख केला आहे, जो अंतर्गततः ध्वजांकित (flagged) केला गेला होता।
+
+  Hypothesis (Actual):
+    एसटीआर दाखल करण्यात अयशस्वी ठरल्याबद्दल बँकेला दंड ठोठावण्यात आला. 'co@bank.com' ला पाठविलेल्या नोटीसमध्ये ग्राहकाच्या +91-8887776665 क्रमांकावरून व्यवहाराची चौकशी करण्यात अयशस्वी झाल्याचे नमूद केले आहे, जे अंतर्गत ध्वजांकित केले गेले होते.
+
+--- Testing Case T063 (63/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    संपूर्ण करदाता चार्टर 'https://incometaxindia.gov.in/Charts%20%20Tables/Taxpayer-Charter.pdf' पर कई भाषाओं में डाउनलोड के लिए उपलब्ध है।
+
+  [92mReference (Expected):
+    The full Taxpayer Charter is available for download in multiple languages at 'https://incometaxindia.gov.in/Charts%20%20Tables/Taxpayer-Charter.pdf'.
+
+  Hypothesis (Actual):
+    The entire Taxpayer Charter is available for download in multiple languages on 'https://incometaxindia.gov.in/Charts%20%20Tables/Taxpayer-Charter.pdf'.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    The full Taxpayer Charter is available for download in multiple languages at 'https://incometaxindia.gov.in/Charts%20%20Tables/Taxpayer-Charter.pdf'.
+
+  [92mReference (Expected):
+    संपूर्ण करदाता चार्टर 'https://incometaxindia.gov.in/Charts%20%20Tables/Taxpayer-Charter.pdf' पर कई भाषाओं में डाउनलोड के लिए उपलब्ध है।
+
+  Hypothesis (Actual):
+    पूर्ण करदाता चार्टर 'https://incometaxindia.gov.in/Charts%20%20Tables/Taxpayer-Charter.pdf' पर कई भाषाओं में डाउनलोड के लिए उपलब्ध है।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    संपूर्ण करदाता सनद 'https://incometaxindia.gov.in/Charts%20%20Tables/Taxpayer-Charter.pdf' वर अनेक भाषांमध्ये डाउनलोडसाठी उपलब्ध आहे।
+
+  [92mReference (Expected):
+    The full Taxpayer Charter is available for download in multiple languages at 'https://incometaxindia.gov.in/Charts%20%20Tables/Taxpayer-Charter.pdf'.
+
+  Hypothesis (Actual):
+    संपूर्ण करदाता सनद 'https://incometaxindia.gov.in/Charts%20%20Tables/Taxpayer-Charter.pdf' वर अनेक भाषांमध्ये डाउनलोडसाठी उपलब्ध आहे।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    The full Taxpayer Charter is available for download in multiple languages at 'https://incometaxindia.gov.in/Charts%20%20Tables/Taxpayer-Charter.pdf'.
+
+  [92mReference (Expected):
+    संपूर्ण करदाता सनद 'https://incometaxindia.gov.in/Charts%20%20Tables/Taxpayer-Charter.pdf' वर अनेक भाषांमध्ये डाउनलोडसाठी उपलब्ध आहे।
+
+  Hypothesis (Actual):
+    संपूर्ण करदाता सनद 'https://incometaxindia.gov.in/Charts%20%20Tables/Taxpayer-Charter.pdf' वर अनेक भाषांमध्ये डाउनलोड करण्यासाठी उपलब्ध आहे.
+
+--- Testing Case T064 (64/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    'लेन-देन' में इलेक्ट्रॉनिक माध्यमों से धन की कोई भी जमा, निकासी, या विनिमय शामिल है, जैसे कि 'user@payment-app.com' जैसे उपयोगकर्ता के ईमेल से शुरू किया गया भुगतान।
+
+  [92mReference (Expected):
+    'Transaction' includes any deposit, withdrawal, or exchange of funds by electronic means, such as a payment initiated from a user's email like 'user@payment-app.com'.
+
+  Hypothesis (Actual):
+    'Transaction' includes any deposit, withdrawal, or exchange of funds by electronic means, such as a payment initiated from a user's email such as 'user@payment-app.com'.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    'Transaction' includes any deposit, withdrawal, or exchange of funds by electronic means, such as a payment initiated from a user's email like 'user@payment-app.com'.
+
+  [92mReference (Expected):
+    'लेन-देन' में इलेक्ट्रॉनिक माध्यमों से धन की कोई भी जमा, निकासी, या विनिमय शामिल है, जैसे कि 'user@payment-app.com' जैसे उपयोगकर्ता के ईमेल से शुरू किया गया भुगतान।
+
+  Hypothesis (Actual):
+    'लेनदेन' में इलेक्ट्रॉनिक माध्यमों से कोई भी जमा, निकासी या धन का आदान-प्रदान शामिल है, जैसे कि उपयोगकर्ता के ईमेल से शुरू किया गया भुगतान जैसे 'user@payment-app.com'।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    'व्यवहार' मध्ये इलेक्ट्रॉनिक माध्यमांद्वारे निधी जमा करणे, काढणे, किंवा देवाणघेवाण करणे समाविष्ट आहे, जसे की 'user@payment-app.com' सारख्या वापरकर्त्याच्या ईमेलवरून सुरू केलेले पेमेंट।
+
+  [92mReference (Expected):
+    'Transaction' includes any deposit, withdrawal, or exchange of funds by electronic means, such as a payment initiated from a user's email like 'user@payment-app.com'.
+
+  Hypothesis (Actual):
+    A 'transaction' involves the collection, withdrawal, or exchange of funds through electronic means, such as a payment initiated from a user's email such as 'user@payment-app.com'.
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    'Transaction' includes any deposit, withdrawal, or exchange of funds by electronic means, such as a payment initiated from a user's email like 'user@payment-app.com'.
+
+  [92mReference (Expected):
+    'व्यवहार' मध्ये इलेक्ट्रॉनिक माध्यमांद्वारे निधी जमा करणे, काढणे, किंवा देवाणघेवाण करणे समाविष्ट आहे, जसे की 'user@payment-app.com' सारख्या वापरकर्त्याच्या ईमेलवरून सुरू केलेले पेमेंट।
+
+  Hypothesis (Actual):
+    'व्यवहार' मध्ये इलेक्ट्रॉनिक माध्यमांद्वारे कोणतीही ठेव, पैसे काढणे किंवा निधीची देवाणघेवाण समाविष्ट आहे, जसे की 'user@payment-app.com' सारख्या वापरकर्त्याच्या ईमेलवरून सुरू केलेले पेमेंट.
+
+--- Testing Case T065 (65/65) ---
+
+[Pair 1/4: Hindi -> English]
+
+  Source:
+    एक ग्राहक के अंतरराष्ट्रीय फ़ोन नंबर, +44-20-7946-0958, से जुड़े एक लेन-देन के लिए एक संदिग्ध लेन-देन रिपोर्ट (STR) दायर की गई थी, जो एक ऑनलाइन जुआ साइट 'www.bet-lucky.com' से संबद्ध था।
+
+  [92mReference (Expected):
+    A suspicious transaction report (STR) was filed for a transaction linked to a client's international phone number, +44-20-7946-0958, which was associated with an online gambling site 'www.bet-lucky.com'.
+
+  Hypothesis (Actual):
+    A Suspicious Transaction Report (STR) was filed for a transaction involving a customer's international phone number, +44-20-7946-0958, which was affiliated with an online gambling site 'www.bet-lucky.com'.
+
+[Pair 2/4: English -> Hindi]
+
+  Source:
+    A suspicious transaction report (STR) was filed for a transaction linked to a client's international phone number, +44-20-7946-0958, which was associated with an online gambling site 'www.bet-lucky.com'.
+
+  [92mReference (Expected):
+    एक ग्राहक के अंतरराष्ट्रीय फ़ोन नंबर, +44-20-7946-0958, से जुड़े एक लेन-देन के लिए एक संदिग्ध लेन-देन रिपोर्ट (STR) दायर की गई थी, जो एक ऑनलाइन जुआ साइट 'www.bet-lucky.com' से संबद्ध था।
+
+  Hypothesis (Actual):
+    एक ग्राहक के अंतरराष्ट्रीय फोन नंबर, +44-20-7946-0958 से जुड़े लेनदेन के लिए एक संदिग्ध लेनदेन रिपोर्ट (एसटीआर) दायर की गई थी, जो एक ऑनलाइन जुआ साइट 'www.bet-lucky.com' से जुड़ा था।
+
+[Pair 3/4: Marathi -> English]
+
+  Source:
+    एका ग्राहकाच्या आंतरराष्ट्रीय फोन नंबर, +44-20-7946-0958, शी लिंक असलेल्या व्यवहारासाठी एक संशयास्पद व्यवहार अहवाल (STR) दाखल करण्यात आला, जो 'www.bet-lucky.com' या ऑनलाइन जुगार साइटशी संबंधित होता।
+
+  [92mReference (Expected):
+    A suspicious transaction report (STR) was filed for a transaction linked to a client's international phone number, +44-20-7946-0958, which was associated with an online gambling site 'www.bet-lucky.com'.
+
+  Hypothesis (Actual):
+    एका ग्राहकाच्या आंतरराष्ट्रीय फोन नंबर, +44-20-7946-0958, शी लिंक असलेल्या व्यवहारासाठी एक संशयास्पद व्यवहार अहवाल (STR) दाखल करण्यात आला, जो 'www.bet-lucky.com' या ऑनलाइन जुगार साइटशी संबंधित होता।
+
+[Pair 4/4: English -> Marathi]
+
+  Source:
+    A suspicious transaction report (STR) was filed for a transaction linked to a client's international phone number, +44-20-7946-0958, which was associated with an online gambling site 'www.bet-lucky.com'.
+
+  [92mReference (Expected):
+    एका ग्राहकाच्या आंतरराष्ट्रीय फोन नंबर, +44-20-7946-0958, शी लिंक असलेल्या व्यवहारासाठी एक संशयास्पद व्यवहार अहवाल (STR) दाखल करण्यात आला, जो 'www.bet-lucky.com' या ऑनलाइन जुगार साइटशी संबंधित होता।
+
+  Hypothesis (Actual):
+    ऑनलाइन जुगार साइट 'www.bet-lucky.com' शी संबंधित असलेल्या क्लायंटच्या आंतरराष्ट्रीय फोन नंबर, +44-20-7946-0958 शी संबंधित व्यवहारासाठी संशयास्पद व्यवहार अहवाल (एसटीआर) दाखल करण्यात आला.
+
+...Functional tests complete.
+
+=============================================
+  NLP Evaluation Summary
+=============================================
+
+  Hindi -> English (Total Samples: 65)
+  ------------------------------
+    Avg BLEU:      0.6654
+    Avg METEOR:    0.8723
+    Avg ROUGE-L:   0.8160
+
+  English -> Hindi (Total Samples: 65)
+  ------------------------------
+    Avg BLEU:      0.6421
+    Avg METEOR:    0.8296
+    Avg ROUGE-L:   0.8049
+
+  Marathi -> English (Total Samples: 65)
+  ------------------------------
+    Avg BLEU:      0.3552
+    Avg METEOR:    0.5224
+    Avg ROUGE-L:   0.4665
+
+  English -> Marathi (Total Samples: 65)
+  ------------------------------
+    Avg BLEU:      0.3360
+    Avg METEOR:    0.5957
+    Avg ROUGE-L:   0.5807
+=============================================
+
+Test suite finished.

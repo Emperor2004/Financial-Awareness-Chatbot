@@ -36,7 +36,7 @@ This project utilizes a modern, Python-based stack for AI and web development.
 
 * **Backend**:
     * **Framework**: **FastAPI**
-    * **AI/NLP**: **LangChain**, **Google Gemini**
+    * **AI/NLP**: **LangChain**, **Ollama**
     * **Vector Database**: **ChromaDB**
     * **Data Collection**: **BeautifulSoup4**, **PyMuPDF**, **Requests**, **Selenium**, **Undetected Chromedriver**
 * **Frontend**:

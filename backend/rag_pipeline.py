@@ -6,8 +6,55 @@ Handles document retrieval and LLM response generation
 import os
 import re
 from typing import List, Dict, Any
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_chroma import Chroma
+# Prefer canonical LangChain imports. Provide a compatibility fallback for
+# older / third-party packaging that exposed these under different module
+# names (e.g. `langchain_huggingface`, `langchain_chroma`). This avoids
+# ModuleNotFoundError on systems with modern langchain installs.
+# Try several possible import locations for embedding and vectorstore classes
+# to support different LangChain packaging/layouts (core langchain, community
+# extensions, or standalone integration packages like langchain-huggingface).
+# This mirrors how other modules in the repo import these classes.
+HuggingFaceEmbeddings = None
+Chroma = None
+import_errors = []
+
+# Embeddings import fallbacks
+for emb_path in (
+    ("langchain.embeddings", "HuggingFaceEmbeddings"),
+    ("langchain_community.embeddings", "HuggingFaceEmbeddings"),
+    ("langchain_huggingface", "HuggingFaceEmbeddings"),
+):
+    module_name, attr = emb_path
+    try:
+        module = __import__(module_name, fromlist=[attr])
+        HuggingFaceEmbeddings = getattr(module, attr)
+        break
+    except Exception as e:
+        import_errors.append(f"{module_name}.{attr}: {e}")
+
+# Chroma import fallbacks
+for chroma_path in (
+    ("langchain.vectorstores", "Chroma"),
+    ("langchain_chroma", "Chroma"),
+    ("langchain_community.vectorstores.chroma", "Chroma"),
+    ("langchain_community.vectorstores", "Chroma"),
+):
+    module_name, attr = chroma_path
+    try:
+        module = __import__(module_name, fromlist=[attr])
+        Chroma = getattr(module, attr)
+        break
+    except Exception as e:
+        import_errors.append(f"{module_name}.{attr}: {e}")
+
+if HuggingFaceEmbeddings is None or Chroma is None:
+    raise ImportError(
+        "Could not import HuggingFaceEmbeddings and/or Chroma from any known "
+        "locations. Please install the packages listed in requirements.txt: "
+        "`langchain`, `langchain-chroma`, `langchain-huggingface` or the "
+        "community extensions `langchain-community`. Import attempts:\n"
+        + "\n".join(import_errors)
+    )
 import ollama
 import logging
 

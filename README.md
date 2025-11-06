@@ -8,10 +8,13 @@
 
 - ✅ **Functional Full-Stack Application**: Backend API + Frontend UI + Authentication
 - ✅ **Advanced RAG Pipeline**: E5-large-v2 embeddings + ChromaDB vector store
+- ✅ **Section-Aware Document Ingestion**: Hybrid chunking strategy preventing context blending
 - ✅ **Multi-Model Evaluation**: Comprehensive comparison of 3 LLMs (Llama 3.2, Mistral 7B, Gemma 2)
 - ✅ **Production-Ready Architecture**: Scalable Flask backend + Next.js frontend
 - ✅ **Comprehensive Test Dataset**: 50-question evaluation framework
+- ✅ **Fine-tuning Dataset**: 200 high-quality examples targeting known RAG failures
 - ✅ **Login System**: Secure authentication with protected routes
+- ✅ **Reranking Support**: BGE reranker for improved retrieval accuracy
 
 ## 🚀 Live Application Features
 
@@ -27,12 +30,14 @@
 - **Real-time Chat**: Interactive conversation with the AI assistant
 - **Source Citations**: Transparent document references
 - **Theme Support**: Dark/light mode toggle
+- **Video Tutorials**: Comprehensive multimedia learning library
 
 ### Knowledge Base
 - **E5-large-v2 Embeddings**: State-of-the-art semantic search
 - **ChromaDB Vector Store**: Efficient document retrieval
-- **Official Documents**: FIU-IND and Income Tax Department data
-- **Smart Chunking**: Optimized document segmentation
+- **Section-Aware Chunking**: Hybrid strategy preventing Section 4/13 confusion
+- **Official Documents**: Re-ingested FIU-IND and Income Tax Department data
+- **Smart Chunking**: Complete sections preserved, preventing context blending
 
 ## 📊 Model Performance Results
 
@@ -70,30 +75,39 @@
 ### AI/ML
 - **Embeddings**: intfloat/e5-large-v2
 - **LLMs**: Llama 3.2 3B, Mistral 7B Instruct, Gemma 2 9B
+- **Reranker**: BAAI/bge-reranker-base (fp16 optimized for 6GB VRAM)
 - **Evaluation**: BLEU, ROUGE, Semantic Similarity, F1 scores
-- **Vector Search**: ChromaDB with similarity search
+- **Vector Search**: ChromaDB with similarity search + reranking
 
 ## 📁 Project Structure
 
 ```
 Financial-Awareness-Chatbot/
 ├── ai_core/
-│   └── ingest_e5.py              # E5 embeddings data ingestion
+│   ├── ingest_e5.py              # E5 embeddings data ingestion
+│   └── ingest_e5_section_aware.py # Section-aware hybrid chunking ingestion
 ├── backend/
 │   ├── app.py                    # Flask API server
-│   ├── rag_pipeline.py          # Core RAG implementation
-│   └── db_e5/                   # E5 embeddings database
+│   ├── rag_pipeline.py          # Core RAG implementation with reranking
+│   └── db_e5_section_aware/     # New section-aware knowledge base
 ├── frontend/
 │   ├── app/                     # Next.js pages
 │   │   ├── chat/               # Chat interface
 │   │   ├── login/              # Authentication
-│   │   └── signup/             # User registration
+│   │   ├── signup/             # User registration
+│   │   └── tutorial/           # Video tutorial library
 │   ├── components/              # React components
+│   │   ├── tutorial-video.tsx   # Video player component
+│   │   └── tutorial-gallery.tsx # Tutorial gallery
+│   ├── public/
+│   │   ├── videos/             # Tutorial video files
+│   │   └── thumbnails/         # Video thumbnails
 │   └── lib/                    # Utilities
 ├── evaluation/
 │   ├── compare_models.py        # Model comparison script
 │   ├── metrics.py              # Evaluation metrics
 │   ├── test_dataset_template.json # 50-question test dataset
+│   ├── finetuning_dataset.jsonl  # 200-example fine-tuning dataset
 │   └── results_e5_three_models/ # Latest evaluation results
 ├── data/
 │   ├── fiu/                    # FIU-IND documents
@@ -126,13 +140,20 @@ fin_venv\Scripts\activate  # Windows
 # Install dependencies
 pip install -r requirements.txt
 
+# Install reranker (optional but recommended)
+pip install FlagEmbedding
+
 # Download Ollama models
 ollama pull llama3.2:3b
 ollama pull mistral:7b-instruct
 ollama pull gemma2:9b
 
+# Ingest documents with section-aware chunking (if not already done)
+cd ai_core
+python ingest_e5_section_aware.py
+
 # Run backend
-cd backend
+cd ../backend
 python app.py
 ```
 
@@ -147,6 +168,7 @@ npm run dev
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:5000
 - **Chat Interface**: http://localhost:3000/chat
+- **Video Tutorials**: http://localhost:3000/tutorial
 
 ## 🔧 Configuration
 
@@ -160,9 +182,11 @@ FLASK_DEBUG=True
 
 ### Model Configuration
 Models are configured in `backend/rag_pipeline.py`:
-- **Default Model**: llama3.2:3b
+- **Default Model**: gemma2:9b (optimized for RAG)
 - **Embeddings**: intfloat/e5-large-v2
-- **Retrieval Count**: 5 documents
+- **Retrieval Count**: Adaptive (3-10 based on query complexity)
+- **Reranking**: Enabled by default (k=50 retrieve → top 7 rerank)
+- **Reranker Model**: BAAI/bge-reranker-base (fp16)
 - **Temperature**: 0.1 (factual responses)
 
 ## 📈 Evaluation Framework
@@ -210,6 +234,8 @@ python compare_models.py --models llama3.2:3b mistral:7b-instruct gemma2:9b --te
 - **Real-time Chat**: Instant responses
 - **Loading States**: User feedback
 - **Theme Support**: Dark/light modes
+- **Video Tutorials**: Comprehensive learning library
+- **Search & Filter**: Easy content discovery
 
 ## 📊 Performance Benchmarks
 
@@ -224,12 +250,40 @@ python compare_models.py --models llama3.2:3b mistral:7b-instruct gemma2:9b --te
 - **ROUGE-L**: 0.16-0.17 (Moderate)
 - **BLEU**: 0.03-0.04 (Low - common for generative models)
 
+## 🎯 Latest Updates (Recent Progress)
+
+### Major Improvements
+1. **Section-Aware Document Ingestion** (`ingest_e5_section_aware.py`)
+   - **Hybrid Chunking Strategy**: Splits documents by major sections (Section 4, Section 13, etc.)
+   - **Prevents Context Blending**: Complete sections preserved, eliminating Section 4/13 confusion
+   - **Fallback to Paragraphs**: Non-legal documents use paragraph-based splitting
+   - **Optimized for Reranking**: Works with k=50 retrieval + reranker pipeline
+
+2. **New Knowledge Base** (`db_e5_section_aware/`)
+   - **Re-ingested Documents**: All FIU-IND and Income Tax documents re-processed
+   - **Section Metadata**: Each chunk tagged with section information
+   - **Improved Retrieval**: Better document relevance with section-aware chunking
+
+3. **Fine-tuning Dataset** (`evaluation/finetuning_dataset.jsonl`)
+   - **200 High-Quality Examples**: Surgical targeting of known RAG failures
+   - **Category 1 (70 examples)**: Conflicting context disambiguation (Section 4 vs 13)
+   - **Category 2 (60 examples)**: Hallucination prevention (STR threshold, FRCA)
+   - **Category 3 (40 examples)**: Specific detail extraction (exact numbers)
+   - **Category 4 (30 examples)**: Authoritative style reinforcement
+   - **Ready for Fine-tuning**: Prepared for gemma2:9b RAG generator training
+
+4. **Enhanced RAG Pipeline**
+   - **Reranking Support**: BGE reranker for improved retrieval accuracy
+   - **Adaptive k**: Dynamic document retrieval based on query complexity
+   - **GPU Optimization**: fp16 precision for 6GB VRAM systems
+   - **Section Awareness**: Better handling of section-specific queries
+
 ## 🔮 Next Steps & Future Enhancements
 
 ### Immediate Priorities
-1. **Fine-tuning**: Optimize Mistral 7B on financial domain
-2. **Retrieval Optimization**: Improve precision scores
-3. **Performance Tuning**: Reduce response times
+1. **Fine-tuning**: Use finetuning_dataset.jsonl to train gemma2:9b RAG generator
+2. **Retrieval Optimization**: Continue improving precision scores with reranking
+3. **Performance Tuning**: Reduce response times with optimized batching
 4. **Mobile App**: React Native implementation
 
 ### Long-term Goals

@@ -92,7 +92,8 @@ def health_check():
             'reranker_enabled': pipeline.use_reranker,
             'reranker_loaded': pipeline.reranker is not None,
             'gpu': gpu_status,
-            'timestamp': time.time()
+            'timestamp': time.time(),
+            'translation_enabled': get_translator() is not None,
         }), 200
     except Exception as e:
         return jsonify({
@@ -188,7 +189,48 @@ def chat():
 
         logger.info(f"Processing query from session {session_id}: {user_message[:50]}...")
         logger.info(f"Conversation history length: {len(conversation_history)}")
-        result = pipeline.query(user_message, k=k, conversation_history=conversation_history)
+
+        # 🟢 Step 1: Initialize translator
+        translator = get_translator()
+
+        # 🟢 Step 2: Detect language and handle translation
+        translated_query = user_message
+        detected_lang_name = "English"
+
+        if translator:
+            try:
+                translated_query, detected_language_name = translator.trans_for_rag(user_message)
+                logger.info(f"Language detected: {detected_language_name}")
+                if detected_language_name != "English":
+                    logger.info(f"Query translated to English for RAG pipeline.")
+            except Exception as e:
+                logger.error(f"Translation preprocessing failed: {e}")
+                translated_query = user_message  # Fall back to original
+                detected_language_name = "English"
+        
+        # 🟢 Step 3: Query the RAG pipeline with English text
+        result = pipeline.query(translated_query, k=k, conversation_history=conversation_history)
+        
+        # 🟢 Step 4: Translate the RAG output back to the user’s language
+        final_answer = result['answer']
+        if translator and detected_language_name != "English":
+            try:
+                final_answer = translator.trans_for_output(result['answer'], detected_language_name)
+                logger.info(f"Translated output back to {detected_language_name}.")
+            except Exception as e:
+                logger.error(f"Output translation failed: {e}")
+        
+        # 🟢 Step 5: Build final response
+        response = {
+            "success": True,
+            "response": final_answer,
+            "sources": result["sources"],
+            "metadata": result["metadata"],
+            "session_id": session_id
+        }
+        
+        return jsonify(response), 200
+        
         
         # Restore original model if changed
         if requested_model and requested_model != original_model:

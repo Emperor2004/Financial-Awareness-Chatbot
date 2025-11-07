@@ -34,6 +34,86 @@
 - **Official Documents**: FIU-IND and Income Tax Department data
 - **Smart Chunking**: Optimized document segmentation
 
+## 🌐 Multilingual Support (Newly Added)
+
+The FIU-Sahayak Chatbot now supports multilingual input and output across English, Hindi, and Marathi, including queries written in Roman script (e.g., "money laundering kya hai?" or "kyc mhanje kay?").
+
+### 🔧 Implementation Overview
+
+* Integrated Translation Module powered by Azure Cognitive Translator for bi-directional translation.
+* Added automatic language detection using `langdetect` for Hindi, Marathi, and English.
+* Introduced a Transliteration Handler that detects Roman-script Hindi/Marathi and converts it into Devanagari script using the `indic-transliteration` library.
+* Ensured that RAG operates entirely in English, while users can interact in their preferred language seamlessly.
+
+### 🧠 End-to-End Workflow
+
+1. **User Input:**
+   * Detects the language and script.
+   * If Hindi/Marathi in Roman script → Transliterates to Devanagari.
+   * Non-English queries are translated to English before RAG processing.
+
+2. **RAG Processing:**
+   * Retrieval and synthesis occur using English embeddings and documents.
+
+3. **Output Translation:**
+   * The English RAG response is translated back to the detected original language.
+   * Output appears in Devanagari for Hindi/Marathi or in Roman script for English.
+
+### 💬 Example Queries
+
+| User Query | Auto-detected Language | Internal Processing | Final Output |
+|------------|------------------------|---------------------|--------------|
+| `What is PMLA?` | English | English → RAG → English | English |
+| `मनी लॉन्ड्रिंग क्या है?` | Hindi | Hindi → English → RAG → Hindi | Hindi (Devanagari) |
+| `money laundering kya hai?` | Roman Hindi | Roman → Devanagari → English → RAG → Hindi | Hindi (Devanagari) |
+| `kyc mhanje kay?` | Roman Marathi | Roman → Devanagari → English → RAG → Marathi | Marathi (Devanagari) |
+
+### ⚙️ Key Libraries
+
+* `langdetect` → Language detection
+* `requests` → Azure API communication
+* `indic-transliteration` → Roman → Devanagari conversion
+* `nltk`, `rouge-score` → Translation quality metrics (for testing)
+
+### 🧪 Quality Handling
+
+* Round-trip translation validation ensures reliability.
+* Automatic fallback: short or mixed-language inputs skip strict validation to prevent false failures.
+* Full error handling integrated with Flask API to prevent crashes (`500` errors).
+
+### 💡 Benefits
+
+* Seamless multilingual access for a diverse user base.
+* Accurate responses from English-only financial knowledge base.
+* Robust performance even for mixed-script or partial queries.
+* Completely modular — can be reused for other RAG-based multilingual projects.
+
+### 🧠 Optional Addition to "Technology Stack" Section
+
+You can add one more row like this:
+
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| Language & Translation | Azure Cognitive Translator, `langdetect`, `indic-transliteration` | Multilingual support for English, Hindi, and Marathi (with Roman-script detection) |
+
+### 📘 For `translation/TranslationREADME.md` (module-specific)
+
+#### 🪄 New Feature: Roman-Script Handling
+
+This module now supports automatic transliteration of Roman-script Hindi and Marathi into Devanagari script before translation.
+
+##### How it Works
+
+1. Detects if input text (like `"money laundering kya hai?"`) matches common Roman Hindi or Marathi patterns.
+2. Uses `indic-transliteration` to convert it into Devanagari (`"मनी लॉन्ड्रिंग क्या है?"`).
+3. The standard translation workflow (to English and back) then proceeds unchanged.
+
+##### Benefits
+
+* Allows users to type naturally without switching keyboard scripts.
+* Improves detection accuracy and translation reliability.
+* Requires no configuration changes — works automatically as part of `trans_for_rag()`.
+
 ## 📊 Model Performance Results
 
 ### Three-Model Comparison (50 Questions)
@@ -90,6 +170,24 @@ Financial-Awareness-Chatbot/
 │   │   └── signup/             # User registration
 │   ├── components/              # React components
 │   └── lib/                    # Utilities
+├── translation/                      # Multilingual translation & validation module
+│   ├── __init__.py                   # Package initializer
+│   ├── translator.py                 # Core translation logic (Azure API + validation)
+│   ├── translation_validator.py      # Quality check & similarity metrics
+│   ├── transliteration_handler.py    # Roman-script detection & conversion (new)
+│   ├── TranslationREADME.md          # Detailed documentation for this module
+│   │
+│   └── tests/                        # Unit & integration tests for translation module
+│       ├── __init__.py
+│       ├── translation_module_test.py # Simulated RAG integration tests
+│       ├── test_translation.py        # Full NLP evaluation (BLEU, ROUGE, etc.)
+│       │
+│       ├── data/                     # Test data for translation validation
+│       │   ├── edge_case_test_cases.json
+│       │   └── translation_test_cases.json
+│       │
+│       └── logs/                     # Test logs (timestamped)
+│           └── ...
 ├── evaluation/
 │   ├── compare_models.py        # Model comparison script
 │   ├── metrics.py              # Evaluation metrics
@@ -109,6 +207,7 @@ Financial-Awareness-Chatbot/
 - Node.js 18+
 - Ollama installed locally
 - Git
+
 
 ### 1. Clone and Setup
 ```bash

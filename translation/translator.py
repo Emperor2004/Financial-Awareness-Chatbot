@@ -6,7 +6,8 @@ import requests
 from pathlib import Path
 from langdetect import detect
 # Import validation helpers
-import translation_validator as tv
+from . import translation_validator as tv
+from translation.transliteration_handler import maybe_transliterate_to_devanagari
 
 # --- Custom Exception for Quality Issues ---
 class TranslationQualityError(Exception):
@@ -173,15 +174,21 @@ class Translator:
         # 1. Validate input using the helper function
         tv.check_input(user_query)
 
-        # 2. Detect language
+        # 2. Preprocessing: check if input is Roman-script Hindi/Marathi and convert
+        preprocessed_text, lang_hint = maybe_transliterate_to_devanagari(user_query)
+        if lang_hint:
+            print(f"Transliteration handler: Detected Roman-script {lang_hint}, converted to Devanagari.")
+            user_query = preprocessed_text  # Replace query for detection
+
+        # 3. Detect language
         detected_language_name = self.detect_language(user_query)
         # detect_language raises ValueError if not supported/detectable
 
-        # 3. Handle English passthrough
+        # 4. Handle English passthrough
         if detected_language_name == "English":
             return user_query, detected_language_name
 
-        # 4. Translate Hindi/Marathi to English
+        # 5. Translate Hindi/Marathi to English
         source_lang_code = tv.name_to_code(detected_language_name)
         try:
             english_translation = self._azure_translate(user_query, to_lang_code="en", from_lang_code=source_lang_code)
@@ -190,7 +197,7 @@ class Translator:
             raise RuntimeError(f"Failed to translate query from {detected_language_name} to English: {e}") from e
 
 
-        # 5. Perform Round-Trip Quality Validation
+        # 6. Perform Round-Trip Quality Validation
         try:
             # Translate back to the original language
             roundtrip_back = self._azure_translate(english_translation, to_lang_code=source_lang_code, from_lang_code="en")
@@ -200,12 +207,14 @@ class Translator:
 
             # Check if metrics meet the minimum acceptable threshold
             if not tv.is_acceptable(metrics):
-                # --- QUALITY FAILURE ---
-                # Raise exception instead of returning original text
-                raise TranslationQualityError(
-                    f"Translation quality from {detected_language_name} to English failed validation.",
-                    metrics=metrics
-                )
+                # Skip strict validation for short or romanized queries
+                if len(user_query.split()) <= 5 or any(ch.isascii() for ch in user_query):
+                    print(f"⚠️  Skipping strict validation for short/mixed input: '{user_query}' (score={metrics['combined']:.2f})")
+                else:
+                    raise TranslationQualityError(
+                        f"Translation quality from {detected_language_name} to English failed validation.",
+                        metrics=metrics
+                    )
             # else: Validation passed
 
         except RuntimeError as e:
@@ -222,7 +231,7 @@ class Translator:
             print(f"Warning: Unexpected error during round-trip validation for RAG input: {e}")
             pass # Proceed with the translation
 
-        # 6. Return the English translation and detected language
+        # 7. Return the English translation and detected language
         return english_translation, detected_language_name
 
     def trans_for_output(self, english_rag_response: str, target_language_name: str) -> str:

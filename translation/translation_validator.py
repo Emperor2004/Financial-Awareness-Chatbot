@@ -119,7 +119,7 @@ def preflight_check() -> Dict:
     """
     # Import locally AFTER defining helpers to avoid potential circularity issues
     # and to allow this file to be imported without immediate Azure dependency.
-    from translator import Translator, TranslationQualityError
+    from .translator import Translator, TranslationQualityError
 
     status = {"credentials": False, "basic_translate": False, "errors": []}
     translator_instance = None
@@ -214,7 +214,7 @@ def round_trip_similarity(source_text: str) -> Dict[str, float | str]:
     Imports Translator locally to avoid circular dependencies if this file
     is imported elsewhere without translator.py necessarily being ready.
     """
-    from translator import Translator, TranslationQualityError # Local import
+    from .translator import Translator, TranslationQualityError # Local import
 
     translator_instance = Translator() # Assumes credentials are set
     check_input(source_text)

@@ -15,6 +15,13 @@ waitress>=2.1.0  # Windows-compatible production server (alternative to gunicorn
 # Ollama Python Client
 ollama>=0.1.0
 
+# Translation and Language Processing
+langdetect==1.0.9
+requests>=2.31.0
+indic-transliteration==2.3.58
+nltk>=3.8.1
+rouge-score>=0.1.2
+
 # Evaluation Metrics Dependencies
 nltk>=3.8.1
 rouge-score>=0.1.2

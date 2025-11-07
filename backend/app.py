@@ -5,12 +5,17 @@ Provides REST API endpoints for the frontend
 
 from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
-import os
+import os, sys
 import logging
 from dotenv import load_dotenv
 from rag_pipeline import RAGPipeline, SUPPORTED_MODELS
 import json
 import time
+
+# translation related imports
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from translation.translator import Translator, TranslationQualityError
+import translation.translation_validator as tv
 
 # Load environment variables
 load_dotenv()
@@ -42,6 +47,20 @@ def get_rag_pipeline():
             k=int(os.getenv('RETRIEVAL_K', '5'))
         )
     return rag_pipeline
+
+translator_service = None
+
+def get_translator():
+    """Lazy initialize translator service"""
+    global translator_service
+    if translator_service is None:
+        try:
+            translator_service = Translator()
+            logger.info("Translator service initialized successfully.")
+        except Exception as e:
+            logger.error(f"Failed to initialize Translator: {e}")
+            translator_service = None
+    return translator_service
 
 
 # ==================== API ENDPOINTS ====================
@@ -140,9 +159,55 @@ def chat():
             pipeline.switch_model(requested_model)
         
         # Process query
+        """logger.info(f"Processing query from session {session_id}: {user_message[:50]}...")
+        result = pipeline.query(user_message, k=k)"""
+
         logger.info(f"Processing query from session {session_id}: {user_message[:50]}...")
-        result = pipeline.query(user_message, k=k)
+
+        translator = get_translator()
+        original_language = "English"
+        query_for_rag = user_message
         
+        # --- Step 1: Translate input to English if needed ---
+        if translator:
+            try:
+                query_for_rag, original_language = translator.trans_for_rag(user_message)
+                logger.info(f"Detected language: {original_language}")
+            except (ValueError, TranslationQualityError, RuntimeError) as e:
+                logger.error(f"Translation input error: {e}")
+                return jsonify({
+                    'success': False,
+                    'response': f"Sorry, I couldn't process your query due to a translation issue: {e}"
+                }), 500
+        else:
+            logger.warning("Translator unavailable, proceeding without translation.")
+        
+        # --- Step 2: Pass the English query to RAG ---
+        result = pipeline.query(query_for_rag, k=k)
+        
+        # --- Step 3: Translate output back to original language ---
+        final_response = result['answer']
+        if translator and original_language != "English":
+            try:
+                final_response = translator.trans_for_output(result['answer'], original_language)
+                logger.info(f"Translated output back to {original_language}")
+            except (ValueError, TranslationQualityError, RuntimeError) as e:
+                logger.error(f"Translation output error: {e}")
+                final_response = f"(English) {result['answer']}\n\n[Translation failed: {e}]"
+        
+        # --- Step 4: Return response ---
+        response = {
+            'success': True,
+            'response': final_response,
+            'sources': result['sources'],
+            'metadata': result['metadata'],
+            'session_id': session_id,
+            'language_detected': original_language
+        }
+        
+        return jsonify(response), 200
+        
+                
         # Restore original model if changed
         if requested_model and requested_model != original_model:
             pipeline.switch_model(original_model)

@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 # Financial Awareness Chatbot - FIU-IND NLP Project
 
 ## 🎯 Project Overview
+=======
+# Financial Information Retrieval Assistant
+
+**Financial Awareness Chatbot** is an intelligent, agentic chatbot designed to provide accurate and accessible financial information to users in India. It leverages a Retrieval-Augmented Generation (RAG) architecture to answer user queries based on a trusted knowledge base built from official government and regulatory sources.
+>>>>>>> main
 
 **FIU-Sahayak** is an intelligent chatbot designed to provide accurate information about Indian financial regulations, PMLA compliance, money laundering prevention, and FIU-IND procedures. Built using Retrieval-Augmented Generation (RAG) architecture, it combines advanced language models with a comprehensive knowledge base of official financial documents.
 
@@ -32,12 +38,16 @@
 - **Theme Support**: Dark/light mode toggle
 - **Video Tutorials**: Comprehensive multimedia learning library
 
+<<<<<<< HEAD
 ### Knowledge Base
 - **E5-large-v2 Embeddings**: State-of-the-art semantic search
 - **ChromaDB Vector Store**: Efficient document retrieval
 - **Section-Aware Chunking**: Hybrid strategy preventing Section 4/13 confusion
 - **Official Documents**: Re-ingested FIU-IND and Income Tax Department data
 - **Smart Chunking**: Complete sections preserved, preventing context blending
+=======
+## 2. Solution
+>>>>>>> main
 
 ## 📊 Model Performance Results
 
@@ -72,6 +82,7 @@
 - **shadcn/ui**: Component library
 - **React Hook Form**: Form management
 
+<<<<<<< HEAD
 ### AI/ML
 - **Embeddings**: intfloat/e5-large-v2
 - **LLMs**: Llama 3.2 3B, Mistral 7B Instruct, Gemma 2 9B
@@ -330,3 +341,118 @@ For technical support or questions:
 ✅ **Documentation**: Comprehensive  
 
 **Ready for deployment and further development!** 🚀
+=======
+* **Backend**:
+    * **Framework**: **FastAPI**
+    * **AI/NLP**: **LangChain**, **Ollama**
+    * **Vector Database**: **ChromaDB**
+    * **Data Collection**: **BeautifulSoup4**, **PyMuPDF**, **Requests**, **Selenium**, **Undetected Chromedriver**
+* **Frontend**:
+    * **Framework**: **SvelteKit**
+    * **Styling**: **Tailwind CSS**, **DaisyUI**
+    * **Language**: **TypeScript**
+---
+
+## 4. Project Structure and File Descriptions
+
+The project is organized into a monorepo with two primary directories: `backend` for the Python-based API and AI logic, and `frontend` for the SvelteKit-based user interface.
+```
+Financial Awareness Chatbot/
+│
+├── backend/
+│   ├── scripts/
+│   ├── data/
+│   ├── db/
+│   ├── .env
+│   ├── app.py
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── src/
+│   ├── static/
+│   ├── package.json
+│   ├── svelte.config.js
+│   └── tailwind.config.cjs
+└── README.md
+```
+
+## 5. Setup and Installation
+Follow these steps to get the project running on your local machine.
+
+Clone the Repository:
+
+```Bash
+git clone <your-repository-url>
+cd Financial Awareness Chatbot
+```
+### Backend Setup
+
+1.  **Navigate to the backend directory**:
+    ```bash
+    cd backend
+    ```
+2.  **Create and activate a Python virtual environment**:
+    ```bash
+    python -m venv venv
+    # On Windows
+    .\venv\Scripts\activate
+    # On macOS/Linux
+    source venv/bin/activate
+    ```
+3.  **Install Python dependencies**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+4.  **Set up your Google API Key**:
+    * Create a `.env` file in the `backend` directory.
+    * Add your key: `GOOGLE_API_KEY="YOUR_API_KEY_HERE"`
+
+---
+
+### Frontend Setup
+
+1.  **Navigate to the frontend directory**:
+    ```bash
+    cd frontend
+    ```
+2.  **Install Node.js dependencies**:
+    ```bash
+    npm install
+    ```
+
+---
+
+## 6. Usage Workflow
+The project is run in three stages. You will need two separate terminals to run the backend and frontend servers simultaneously.
+
+#### **Stage 1: Prepare the Knowledge Base** (in `backend` terminal)
+
+This only needs to be done once to build your chatbot's brain.
+
+1.  **Collect Data**: Run the scrapers to fetch documents. For sites that block scraping (like SEBI), you will need to manually download the relevant PDF or text files into the `data/` directory.
+    ```bash
+    python scripts/scrape_fiu.py
+    python scripts/scrape_incometax.py
+    ```
+2.  **Build the Vector Database**: Process all text files into the ChromaDB store.
+    ```bash
+    python scripts/vector_embeddings.py
+    ```
+
+#### **Stage 2: Run the Servers**
+
+1.  **Start the Backend API** (in `backend` terminal):
+    ```bash
+    uvicorn app:app --reload
+    ```
+    The backend API will be running on `http://127.0.0.1:8000`.
+
+#### **Stage 3: Run the Frontends**
+1.  **Start the Frontend Application** (in `frontend` terminal):
+    ```bash
+    npm run dev
+    ```
+    The frontend will be accessible at `http://localhost:5173`.
+
+You can now open your browser and navigate to **http://localhost:5173** to use the Financial Awareness Chatbot.
+>>>>>>> main

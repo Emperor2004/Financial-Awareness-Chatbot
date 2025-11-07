@@ -33,7 +33,7 @@ CORS(app)  # Enable CORS for frontend communication
 
 # Initialize RAG pipeline
 # Default model - can be changed via API
-DEFAULT_MODEL = os.getenv('DEFAULT_MODEL', 'llama3.2:3b')
+DEFAULT_MODEL = os.getenv('DEFAULT_MODEL', 'gemma2:9b')
 rag_pipeline = None
 
 def get_rag_pipeline():
@@ -42,9 +42,13 @@ def get_rag_pipeline():
     if rag_pipeline is None:
         logger.info("Initializing RAG pipeline with E5 embeddings...")
         rag_pipeline = RAGPipeline(
-            db_path=os.getenv('DB_PATH', 'db_e5'),
+            db_path=os.getenv('DB_PATH', None),  # None = auto-detect db_e5_section_aware
             model_name=DEFAULT_MODEL,
-            k=int(os.getenv('RETRIEVAL_K', '5'))
+            k=int(os.getenv('RETRIEVAL_K', '7')),  # Default: 7 (adaptive 3-10 based on query)
+            use_reranker=os.getenv('USE_RERANKER', 'true').lower() == 'true',  # Default: True
+            reranker_model=os.getenv('RERANKER_MODEL', 'BAAI/bge-reranker-base'),
+            rerank_k=int(os.getenv('RERANK_K', '50')) if os.getenv('RERANK_K') else None,  # Default: 50
+            reranker_batch_size=int(os.getenv('RERANKER_BATCH_SIZE', '8'))  # Default: 8 (optimized for 6GB VRAM)
         )
     return rag_pipeline
 
@@ -70,9 +74,24 @@ def health_check():
     """Health check endpoint"""
     try:
         pipeline = get_rag_pipeline()
+        
+        # Check GPU and reranker status
+        gpu_status = {}
+        try:
+            import torch
+            gpu_status = {
+                'cuda_available': torch.cuda.is_available(),
+                'device_name': torch.cuda.get_device_name(0) if torch.cuda.is_available() else None
+            }
+        except ImportError:
+            gpu_status = {'cuda_available': False, 'error': 'PyTorch not available'}
+        
         return jsonify({
             'status': 'healthy',
             'model': pipeline.model_name,
+            'reranker_enabled': pipeline.use_reranker,
+            'reranker_loaded': pipeline.reranker is not None,
+            'gpu': gpu_status,
             'timestamp': time.time()
         }), 200
     except Exception as e:
@@ -131,7 +150,11 @@ def chat():
         "message": "What is PMLA?",
         "session_id": "session_123",  # optional
         "model": "mistral:7b-instruct",  # optional
-        "k": 5  # optional, number of documents to retrieve
+        "k": 5,  # optional, number of documents to retrieve
+        "conversation_history": [  # optional, for conversation memory
+            {"role": "user", "content": "What is PMLA?"},
+            {"role": "assistant", "content": "PMLA is..."}
+        ]
     }
     """
     try:
@@ -149,6 +172,7 @@ def chat():
         session_id = data.get('session_id', 'default')
         k = data.get('k', None)
         requested_model = data.get('model')
+        conversation_history = data.get('conversation_history', [])
         
         # Get pipeline
         pipeline = get_rag_pipeline()
@@ -158,56 +182,14 @@ def chat():
         if requested_model and requested_model in SUPPORTED_MODELS:
             pipeline.switch_model(requested_model)
         
-        # Process query
+        # Process query with conversation history
         """logger.info(f"Processing query from session {session_id}: {user_message[:50]}...")
         result = pipeline.query(user_message, k=k)"""
 
         logger.info(f"Processing query from session {session_id}: {user_message[:50]}...")
-
-        translator = get_translator()
-        original_language = "English"
-        query_for_rag = user_message
+        logger.info(f"Conversation history length: {len(conversation_history)}")
+        result = pipeline.query(user_message, k=k, conversation_history=conversation_history)
         
-        # --- Step 1: Translate input to English if needed ---
-        if translator:
-            try:
-                query_for_rag, original_language = translator.trans_for_rag(user_message)
-                logger.info(f"Detected language: {original_language}")
-            except (ValueError, TranslationQualityError, RuntimeError) as e:
-                logger.error(f"Translation input error: {e}")
-                return jsonify({
-                    'success': False,
-                    'response': f"Sorry, I couldn't process your query due to a translation issue: {e}"
-                }), 500
-        else:
-            logger.warning("Translator unavailable, proceeding without translation.")
-        
-        # --- Step 2: Pass the English query to RAG ---
-        result = pipeline.query(query_for_rag, k=k)
-        
-        # --- Step 3: Translate output back to original language ---
-        final_response = result['answer']
-        if translator and original_language != "English":
-            try:
-                final_response = translator.trans_for_output(result['answer'], original_language)
-                logger.info(f"Translated output back to {original_language}")
-            except (ValueError, TranslationQualityError, RuntimeError) as e:
-                logger.error(f"Translation output error: {e}")
-                final_response = f"(English) {result['answer']}\n\n[Translation failed: {e}]"
-        
-        # --- Step 4: Return response ---
-        response = {
-            'success': True,
-            'response': final_response,
-            'sources': result['sources'],
-            'metadata': result['metadata'],
-            'session_id': session_id,
-            'language_detected': original_language
-        }
-        
-        return jsonify(response), 200
-        
-                
         # Restore original model if changed
         if requested_model and requested_model != original_model:
             pipeline.switch_model(original_model)
@@ -236,10 +218,82 @@ def chat():
 def chat_stream():
     """
     Streaming chat endpoint (Server-Sent Events)
-    For future implementation of streaming responses
+    
+    Request body:
+    {
+        "message": "What is PMLA?",
+        "session_id": "session_123",  # optional
+        "model": "mistral:7b-instruct",  # optional
+        "k": 5,  # optional, number of documents to retrieve
+        "conversation_history": [  # optional, for conversation memory
+            {"role": "user", "content": "What is PMLA?"},
+            {"role": "assistant", "content": "PMLA is..."}
+        ]
+    }
     """
-    # TODO: Implement streaming with ollama.generate(stream=True)
-    return jsonify({'error': 'Streaming not yet implemented'}), 501
+    try:
+        data = request.get_json()
+        
+        # Validate request
+        if not data or 'message' not in data:
+            return jsonify({'error': 'message is required'}), 400
+        
+        user_message = data['message'].strip()
+        if not user_message:
+            return jsonify({'error': 'message cannot be empty'}), 400
+        
+        # Optional parameters
+        session_id = data.get('session_id', 'default')
+        k = data.get('k', None)
+        requested_model = data.get('model')
+        conversation_history = data.get('conversation_history', [])
+        
+        # Get pipeline
+        pipeline = get_rag_pipeline()
+        
+        # Temporarily switch model if requested
+        original_model = pipeline.model_name
+        if requested_model and requested_model in SUPPORTED_MODELS:
+            pipeline.switch_model(requested_model)
+        
+        # Process query with streaming
+        logger.info(f"Processing streaming query from session {session_id}: {user_message[:50]}...")
+        logger.info(f"Conversation history length: {len(conversation_history)}")
+        
+        def generate():
+            try:
+                # Stream from pipeline
+                for item in pipeline.query_stream(user_message, k=k, conversation_history=conversation_history):
+                    if item['type'] == 'sources':
+                        yield f"data: {json.dumps({'type': 'sources', 'data': item['data']})}\n\n"
+                    elif item['type'] == 'chunk':
+                        yield f"data: {json.dumps({'type': 'chunk', 'data': item['data']})}\n\n"
+                    elif item['type'] == 'done':
+                        yield f"data: {json.dumps({'type': 'done'})}\n\n"
+            except Exception as e:
+                logger.error(f"Error in streaming: {str(e)}", exc_info=True)
+                yield f"data: {json.dumps({'type': 'error', 'data': str(e)})}\n\n"
+            finally:
+                # Restore original model if changed
+                if requested_model and requested_model != original_model:
+                    pipeline.switch_model(original_model)
+        
+        return Response(
+            generate(),
+            mimetype='text/event-stream',
+            headers={
+                'Cache-Control': 'no-cache',
+                'X-Accel-Buffering': 'no',
+                'Connection': 'keep-alive'
+            }
+        )
+    
+    except Exception as e:
+        logger.error(f"Error in streaming endpoint: {str(e)}", exc_info=True)
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
 
 
 @app.route('/api/retrieve', methods=['POST'])

@@ -10,7 +10,8 @@ import fitz  # PyMuPDF
 # --- Configuration ---
 # Note: The base URL needs to be constructed carefully from the relative links
 BASE_URL = "https://fiuindia.gov.in"
-STARTING_URL = "https://fiuindia.gov.in/files/Compliance_Orders/orders.html"
+# STARTING_URL = "https://fiuindia.gov.in/files/Compliance_Orders/orders.html"
+STARTING_URL = "https://fiuindia.gov.in/files/FAQs/faqs.html"
 SAVE_DIR = "data/fiu"
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'

@@ -1,22 +1,20 @@
-# scripts/process_local_pdfs.py
-
 import os
 import re
 import fitz  # PyMuPDF
 
 # --- Configuration ---
 # The folder where you manually saved the PDFs
-PDF_SOURCE_DIR = "data/manual_pdf_downloads"
+SEBI_PDF_SOURCE_DIR = "data/manual_pdf_downloads/sebi"
 # The folder where the extracted text files will be saved
-TEXT_SAVE_DIR = "data/sebi_from_pdf"
+TEXT_SAVE_DIR = "data/sebi"
 
 # --- Main Processing Logic ---
 def process_downloaded_pdfs():
     """Reads all PDFs from a source folder, extracts their text, and saves it."""
     print("--- Starting Local PDF Processor ---")
 
-    if not os.path.exists(PDF_SOURCE_DIR):
-        print(f"Error: Source directory not found at '{PDF_SOURCE_DIR}'")
+    if not os.path.exists(SEBI_PDF_SOURCE_DIR):
+        print(f"Error: Source directory not found at '{SEBI_PDF_SOURCE_DIR}'")
         print("Please create it and download the SEBI PDFs into it.")
         return
 
@@ -24,16 +22,16 @@ def process_downloaded_pdfs():
         os.makedirs(TEXT_SAVE_DIR)
         print(f"Created directory: {TEXT_SAVE_DIR}")
 
-    pdf_files = [f for f in os.listdir(PDF_SOURCE_DIR) if f.lower().endswith('.pdf')]
+    pdf_files = [f for f in os.listdir(SEBI_PDF_SOURCE_DIR) if f.lower().endswith('.pdf')]
 
     if not pdf_files:
-        print(f"No PDF files found in '{PDF_SOURCE_DIR}'.")
+        print(f"No PDF files found in '{SEBI_PDF_SOURCE_DIR}'.")
         return
 
     print(f"Found {len(pdf_files)} PDFs to process.")
 
     for pdf_filename in pdf_files:
-        pdf_path = os.path.join(PDF_SOURCE_DIR, pdf_filename)
+        pdf_path = os.path.join(SEBI_PDF_SOURCE_DIR, pdf_filename)
         # Create a corresponding .txt filename
         txt_filename = os.path.splitext(pdf_filename)[0] + ".txt"
         save_path = os.path.join(TEXT_SAVE_DIR, txt_filename)

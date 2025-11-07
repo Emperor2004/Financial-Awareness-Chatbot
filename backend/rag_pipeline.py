@@ -34,7 +34,8 @@ class RAGPipeline:
                  use_reranker: bool = True,
                  reranker_model: str = "BAAI/bge-reranker-base",
                  rerank_k: int = None,
-                 reranker_batch_size: int = 8):
+                 reranker_batch_size: int = 8,
+                 enable_query_transformation: bool = True):
         """
         Initialize RAG pipeline
         
@@ -47,6 +48,7 @@ class RAGPipeline:
             rerank_k: Number of documents to retrieve before reranking. 
                      If None and reranking is enabled, defaults to 50 for better accuracy.
             reranker_batch_size: Batch size for reranking (default: 8, optimized for 6GB VRAM)
+            enable_query_transformation: Whether to transform follow-up queries into standalone queries (default: True)
         """
         # Auto-detect database path (works from both root and backend directory)
         if db_path is None:
@@ -81,6 +83,7 @@ class RAGPipeline:
         self.use_reranker = use_reranker and RERANKER_AVAILABLE
         self.reranker_model_name = reranker_model
         self.reranker_batch_size = reranker_batch_size
+        self.enable_query_transformation = enable_query_transformation
         
         # Initialize embeddings with GPU detection
         logger.info("Loading E5-large-v2 embedding model...")
@@ -403,6 +406,124 @@ class RAGPipeline:
         
         return retrieved_docs
     
+    def transform_query_with_history(
+        self, 
+        latest_user_query: str, 
+        chat_history: List[Dict[str, str]] = None
+    ) -> str:
+        """
+        Transform a follow-up query into a standalone query using conversation history.
+        
+        This function rewrites queries like "What are the penalties for that?" into
+        "What are the penalties for PMLA non-compliance?" by using context from
+        previous conversation turns.
+        
+        Args:
+            latest_user_query: The most recent user query (may contain references like "that", "it", etc.)
+            chat_history: List of previous messages in format [{"role": "user", "content": "..."}, ...]
+            
+        Returns:
+            Standalone query string that can be used for retrieval without context
+        """
+        # Handle empty history (first turn) - return query as-is
+        if not chat_history or len(chat_history) == 0:
+            print(f"\n🔍 QUERY TRANSFORMATION: No history (first turn)")
+            print(f"   Using original query as-is: '{latest_user_query}'\n")
+            logger.info("No conversation history available, using original query as-is")
+            return latest_user_query.strip()
+        
+        # Format conversation history for the prompt
+        # Include last 6 messages (3 exchanges) to provide context without overwhelming
+        recent_history = chat_history[-6:] if len(chat_history) > 6 else chat_history
+        
+        formatted_history = ""
+        for msg in recent_history:
+            role = msg.get('role', 'user')
+            content = msg.get('content', '').strip()
+            if role == 'user':
+                formatted_history += f"User: {content}\n"
+            elif role == 'assistant':
+                # Truncate very long assistant responses to keep prompt manageable
+                # But keep enough context (1000 chars) to resolve pronouns like "its"
+                content_truncated = content[:1000] + "..." if len(content) > 1000 else content
+                formatted_history += f"Assistant: {content_truncated}\n"
+        
+        # Construct the transformation prompt
+        transformation_prompt = f"""Given the following conversation history and a subsequent user query, rephrase the user query to be a standalone question that can be understood without the chat history.
+
+IMPORTANT INSTRUCTIONS:
+- Replace pronouns (it, its, that, this, they, them) with the specific entities or topics they refer to from the conversation history.
+- Focus on the MOST RECENT topics discussed (especially from the last assistant response).
+- Include specifically referenced entities, acts, regulations, procedures, or concepts from the history.
+- If the query is already standalone and contains no pronouns or ambiguous references, return it unchanged.
+- DO NOT answer the question. JUST rewrite the query to be clear and standalone.
+- Your response should ONLY be the rewritten query, nothing else.
+
+Chat History:
+{formatted_history}
+
+Latest User Query: {latest_user_query}
+
+Standalone Query:"""
+
+        print(f"\n🔍 QUERY TRANSFORMATION STARTING")
+        print(f"   Original Query: '{latest_user_query}'")
+        print(f"   History Messages: {len(recent_history)}")
+        logger.info(f"Transforming query with {len(recent_history)} history messages")
+        logger.debug(f"Original query: {latest_user_query}")
+        
+        try:
+            print(f"   Calling LLM for transformation...")
+            # Use Ollama to transform the query
+            # Lower temperature for more consistent rewrites
+            response = ollama.generate(
+                model=self.model_name,
+                prompt=transformation_prompt,
+                options={
+                    'temperature': 0.2,  # Slightly higher than answer generation for creativity in rewrites
+                    'top_p': 0.9,
+                    'top_k': 40,
+                    'num_predict': 150,  # Limit response length (queries should be concise)
+                }
+            )
+            
+            transformed_query = response['response'].strip()
+            
+            # Clean up common LLM artifacts
+            # Remove quotes if the model wrapped the query in them
+            if transformed_query.startswith('"') and transformed_query.endswith('"'):
+                transformed_query = transformed_query[1:-1].strip()
+            if transformed_query.startswith("'") and transformed_query.endswith("'"):
+                transformed_query = transformed_query[1:-1].strip()
+            
+            # Validate that we got a reasonable response
+            if not transformed_query or len(transformed_query) < 3:
+                print(f"   ⚠️  WARNING: Transformed query too short, using original")
+                logger.warning("Transformed query too short, using original query")
+                return latest_user_query.strip()
+            
+            # Check if transformation actually changed the query significantly
+            # If very similar, log it but still use the transformed version
+            if transformed_query.lower() == latest_user_query.lower():
+                print(f"   ℹ️  Query unchanged (already standalone)")
+                print(f"   Result: '{transformed_query}'")
+                logger.info("Query transformation returned original query (already standalone)")
+            else:
+                print(f"   ✅ TRANSFORMATION SUCCESS!")
+                print(f"   Original: '{latest_user_query}'")
+                print(f"   Transformed: '{transformed_query}'")
+                logger.info(f"Query transformed: '{latest_user_query}' → '{transformed_query}'")
+            
+            print(f"🔍 QUERY TRANSFORMATION COMPLETE\n")
+            return transformed_query
+            
+        except Exception as e:
+            print(f"   ❌ ERROR during transformation: {str(e)}")
+            print(f"   ⚠️  Falling back to original query")
+            logger.error(f"Error transforming query: {str(e)}")
+            logger.warning("Falling back to original query")
+            return latest_user_query.strip()
+    
     def generate_prompt(self, query: str, context_docs: List[Dict[str, Any]], conversation_history: List[Dict[str, str]] = None) -> str:
         """
         Generate prompt for LLM using retrieved documents and conversation history
@@ -677,10 +798,25 @@ Now provide your response following this EXACT format:"""
         import time
         start_time = time.time()
         
-        # Step 1: Retrieve relevant documents
-        retrieved_docs = self.retrieve_documents(user_question, k=k)
+        # Step 0: Transform query to standalone if conversation history exists
+        # This handles follow-up questions like "What are the penalties for that?"
+        query_was_transformed = False
+        standalone_query = user_question
+        if self.enable_query_transformation:
+            print(f"\n🚀 QUERY TRANSFORMATION ENABLED (non-streaming)")
+            original_query = user_question
+            standalone_query = self.transform_query_with_history(user_question, conversation_history)
+            query_was_transformed = (standalone_query.lower().strip() != original_query.lower().strip())
+            print(f"📊 Transformation Result: {'TRANSFORMED' if query_was_transformed else 'NO CHANGE'}\n")
+        else:
+            print(f"\n⚠️  QUERY TRANSFORMATION DISABLED - Using original query\n")
+            logger.debug("Query transformation disabled, using original query")
+        
+        # Step 1: Retrieve relevant documents using the standalone query
+        retrieved_docs = self.retrieve_documents(standalone_query, k=k)
         
         # Step 2: Generate prompt with conversation history
+        # Use original user_question for response generation (maintains original intent)
         prompt = self.generate_prompt(user_question, retrieved_docs, conversation_history)
         
         # Step 3: Generate response
@@ -705,16 +841,28 @@ Now provide your response following this EXACT format:"""
                 source_info['section'] = doc['metadata'].get('section')
             sources.append(source_info)
         
+        # Build metadata
+        metadata = {
+            'model': self.model_name,
+            'response_time': round(response_time, 2),
+            'tokens_generated': llm_response.get('tokens', 0),
+            'documents_retrieved': len(retrieved_docs),
+            'success': llm_response['success']
+        }
+        
+        # Add query transformation info if transformation was enabled
+        if self.enable_query_transformation:
+            metadata['query_transformation'] = {
+                'enabled': True,
+                'was_transformed': query_was_transformed,
+                'original_query': user_question if query_was_transformed else None,
+                'standalone_query': standalone_query if query_was_transformed else None
+            }
+        
         return {
             'answer': llm_response['text'],
             'sources': sources,
-            'metadata': {
-                'model': self.model_name,
-                'response_time': round(response_time, 2),
-                'tokens_generated': llm_response.get('tokens', 0),
-                'documents_retrieved': len(retrieved_docs),
-                'success': llm_response['success']
-            }
+            'metadata': metadata
         }
     
     def query_stream(self, user_question: str, k: int = None, conversation_history: List[Dict[str, str]] = None):
@@ -729,10 +877,25 @@ Now provide your response following this EXACT format:"""
         Yields:
             Dictionary with chunk type and content
         """
-        # Step 1: Retrieve relevant documents
-        retrieved_docs = self.retrieve_documents(user_question, k=k)
+        # Step 0: Transform query to standalone if conversation history exists
+        # This handles follow-up questions like "What are the penalties for that?"
+        query_was_transformed = False
+        standalone_query = user_question
+        if self.enable_query_transformation:
+            print(f"\n🚀 QUERY TRANSFORMATION ENABLED (streaming)")
+            original_query = user_question
+            standalone_query = self.transform_query_with_history(user_question, conversation_history)
+            query_was_transformed = (standalone_query.lower().strip() != original_query.lower().strip())
+            print(f"📊 Transformation Result: {'TRANSFORMED' if query_was_transformed else 'NO CHANGE'}\n")
+        else:
+            print(f"\n⚠️  QUERY TRANSFORMATION DISABLED - Using original query\n")
+            logger.debug("Query transformation disabled, using original query")
+        
+        # Step 1: Retrieve relevant documents using the standalone query
+        retrieved_docs = self.retrieve_documents(standalone_query, k=k)
         
         # Step 2: Generate prompt with conversation history
+        # Use original user_question for response generation (maintains original intent)
         prompt = self.generate_prompt(user_question, retrieved_docs, conversation_history)
         
         # Step 3: Format sources for frontend
@@ -751,7 +914,19 @@ Now provide your response following this EXACT format:"""
                 source_info['section'] = doc['metadata'].get('section')
             sources.append(source_info)
         
-        # Send sources metadata first
+        # Send transformation metadata first (for debugging)
+        if self.enable_query_transformation:
+            yield {
+                'type': 'transformation',
+                'data': {
+                    'was_transformed': query_was_transformed,
+                    'original_query': user_question,
+                    'standalone_query': standalone_query,
+                    'history_length': len(conversation_history) if conversation_history else 0
+                }
+            }
+        
+        # Send sources metadata
         yield {
             'type': 'sources',
             'data': sources
@@ -807,6 +982,11 @@ SUPPORTED_MODELS = {
         'name': 'Phi-3',
         'description': 'Microsoft model, strong reasoning',
         'size': '3.8B parameters'
+    },
+    'qwen2.5:7b': {
+        'name': 'Qwen 2.5 7B',
+        'description': 'Excellent instruction following, great for RAG fine-tuning',
+        'size': '7B parameters'
     }
 }
 

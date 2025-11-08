@@ -11,7 +11,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { Send, AlertTriangle, Bot, User, Loader2, History, Download, Trash2 } from "lucide-react"
 import { useAuth } from "@/components/auth-provider"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://unprideful-rene-ungeneric.ngrok-free.dev"
 
 // Simple markdown-to-JSX converter for basic formatting
 const formatMessage = (text: string) => {
@@ -316,7 +316,7 @@ export function ChatInterface() {
       console.error('Error calling API:', error)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: "I apologize, but I'm having trouble connecting to the server. Please make sure the backend is running on http://localhost:5000. Error: " + (error as Error).message,
+        content: `I apologize, but I'm having trouble connecting to the server at ${API_BASE_URL}. Error: ${(error as Error).message}`,
         sender: "bot",
         timestamp: new Date(),
       }

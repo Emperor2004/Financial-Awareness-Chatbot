@@ -1,0 +1,25 @@
+# Translation Module Dependencies
+# Add these to your existing requirements.txt
+
+# Core Translation
+transformers>=4.35.0
+torch>=2.0.0
+sentencepiece>=0.1.99
+accelerate>=0.24.0
+
+# Model Optimization
+bitsandbytes>=0.41.0  # For quantization (optional)
+
+# Utilities
+regex>=2023.10.0
+sacremoses>=0.0.53
+
+# Optional: For better performance
+protobuf>=3.20.0
+tokenizers>=0.15.0
+
+# GPU Support (uncomment if using CUDA)
+--extra-index-url https://download.pytorch.org/whl/cu112
+torch --extra-index-url https://download.pytorch.org/whl/cu112
+torchaudio --extra-index-url https://download.pytorch.org/whl/cu112
+torchvision --extra-index-url https://download.pytorch.org/whl/cu112

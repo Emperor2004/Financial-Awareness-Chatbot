@@ -1,486 +1,208 @@
-<<<<<<< HEAD
 """
-Flask Backend API for Financial Awareness Chatbot
-Provides REST API endpoints for the frontend
+Updated Flask Backend with Translation Support
+Add these imports and routes to your existing backend/app.py
 """
 
-from flask import Flask, request, jsonify, Response
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-import os
 import logging
-=======
-# app.py
-
+import sys
 import os
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from typing import List, Set
 
-from langchain_google_genai import GoogleGenerativeAI, GoogleGenerativeAIEmbeddings
-from langchain_community.vectorstores import Chroma
-from langchain.chains import RetrievalQA
->>>>>>> main
-from dotenv import load_dotenv
-from rag_pipeline import RAGPipeline, SUPPORTED_MODELS
-import json
-import time
+# Add translation module to path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-<<<<<<< HEAD
-# Load environment variables
-load_dotenv()
+from translation.translation import TranslationService, get_translation_service
+from translation.model_loader import get_supported_languages
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-=======
-# --- 1. Load Environment Variables and API Key ---
-load_dotenv()
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-
-if not GOOGLE_API_KEY:
-    raise ValueError("Google API Key not found. Please set the GOOGLE_API_KEY environment variable.")
-
-os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
-
-# --- 2. Initialize FastAPI Application ---
-app = FastAPI(
-    title="Financial Information Retrieval Assistant API",
-    description="An API for querying a financial knowledge base.",
-    version="1.0.0",
->>>>>>> main
-)
-logger = logging.getLogger(__name__)
-
-<<<<<<< HEAD
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend communication
+CORS(app)
 
-# Initialize RAG pipeline
-# Default model - can be changed via API
-DEFAULT_MODEL = os.getenv('DEFAULT_MODEL', 'gemma2:9b')
-rag_pipeline = None
+# Initialize translation service (singleton)
+translation_service = None
 
-def get_rag_pipeline():
-    """Lazy initialization of RAG pipeline"""
-    global rag_pipeline
-    if rag_pipeline is None:
-        logger.info("Initializing RAG pipeline with E5 embeddings...")
-        rag_pipeline = RAGPipeline(
-            db_path=os.getenv('DB_PATH', None),  # None = auto-detect db_e5_section_aware
-            model_name=DEFAULT_MODEL,
-            k=int(os.getenv('RETRIEVAL_K', '7')),  # Default: 7 (adaptive 3-10 based on query)
-            use_reranker=os.getenv('USE_RERANKER', 'true').lower() == 'true',  # Default: True
-            reranker_model=os.getenv('RERANKER_MODEL', 'BAAI/bge-reranker-base'),
-            rerank_k=int(os.getenv('RERANK_K', '50')) if os.getenv('RERANK_K') else None,  # Default: 50
-            reranker_batch_size=int(os.getenv('RERANKER_BATCH_SIZE', '8'))  # Default: 8 (optimized for 6GB VRAM)
-        )
-    return rag_pipeline
-
-
-# ==================== API ENDPOINTS ====================
-
-@app.route('/api/health', methods=['GET'])
-def health_check():
-    """Health check endpoint"""
+def init_translation_service():
+    """Initialize translation service on startup"""
+    global translation_service
     try:
-        pipeline = get_rag_pipeline()
-        
-        # Check GPU and reranker status
-        gpu_status = {}
-        try:
-            import torch
-            gpu_status = {
-                'cuda_available': torch.cuda.is_available(),
-                'device_name': torch.cuda.get_device_name(0) if torch.cuda.is_available() else None
-            }
-        except ImportError:
-            gpu_status = {'cuda_available': False, 'error': 'PyTorch not available'}
-        
-        return jsonify({
-            'status': 'healthy',
-            'model': pipeline.model_name,
-            'reranker_enabled': pipeline.use_reranker,
-            'reranker_loaded': pipeline.reranker is not None,
-            'gpu': gpu_status,
-            'timestamp': time.time()
-        }), 200
+        translation_service = get_translation_service()
+        logging.info("Translation service initialized successfully")
     except Exception as e:
-        return jsonify({
-            'status': 'unhealthy',
-            'error': str(e)
-        }), 500
+        logging.error(f"Failed to initialize translation service: {str(e)}")
+        translation_service = None
 
+# Call during app startup
+@app.before_first_request
+def startup():
+    """Initialize services before first request"""
+    init_translation_service()
 
-@app.route('/api/models', methods=['GET'])
-def get_models():
-    """Get list of available models"""
-    return jsonify({
-        'current_model': get_rag_pipeline().model_name,
-        'available_models': SUPPORTED_MODELS
-    }), 200
+# ============================================
+# Translation Endpoints
+# ============================================
 
-
-@app.route('/api/models/switch', methods=['POST'])
-def switch_model():
-    """Switch to a different model"""
-    data = request.get_json()
-    model_name = data.get('model_name')
+@app.route('/api/translate/detect', methods=['POST'])
+def detect_language():
+    """
+    Detect language of input text
     
-    if not model_name:
-        return jsonify({'error': 'model_name is required'}), 400
+    Request body:
+    {
+        "text": "मैं FIU-IND के बारे में जानना चाहता हूं"
+    }
     
-    if model_name not in SUPPORTED_MODELS:
-        return jsonify({
-            'error': f'Model {model_name} not supported',
-            'available_models': list(SUPPORTED_MODELS.keys())
-        }), 400
-    
+    Response:
+    {
+        "language": "hi",
+        "language_name": "Hindi",
+        "confidence": "high"
+    }
+    """
     try:
-        pipeline = get_rag_pipeline()
-        pipeline.switch_model(model_name)
+        data = request.json
+        text = data.get('text', '')
+        
+        if not text:
+            return jsonify({'error': 'Text is required'}), 400
+        
+        if translation_service is None:
+            return jsonify({'error': 'Translation service not available'}), 503
+        
+        lang_code = translation_service.detect_language(text)
+        lang_name = get_supported_languages().get(lang_code, 'Unknown')
         
         return jsonify({
-            'success': True,
-            'current_model': model_name,
-            'message': f'Switched to {SUPPORTED_MODELS[model_name]["name"]}'
-        }), 200
-    
+            'language': lang_code,
+            'language_name': lang_name,
+            'confidence': 'high' if lang_code != 'en' else 'medium'
+        })
+        
     except Exception as e:
-        logger.error(f"Error switching model: {str(e)}")
+        logging.error(f"Language detection error: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/translate/supported', methods=['GET'])
+def get_supported_langs():
+    """
+    Get list of supported languages
+    
+    Response:
+    {
+        "languages": {
+            "en": "English",
+            "hi": "Hindi",
+            ...
+        }
+    }
+    """
+    try:
+        return jsonify({
+            'languages': get_supported_languages()
+        })
+    except Exception as e:
+        logging.error(f"Error fetching supported languages: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
     """
-    Main chat endpoint
+    Main chat endpoint with automatic translation
     
     Request body:
     {
-        "message": "What is PMLA?",
-        "session_id": "session_123",  # optional
-        "model": "mistral:7b-instruct",  # optional
-        "k": 5,  # optional, number of documents to retrieve
-        "conversation_history": [  # optional, for conversation memory
-            {"role": "user", "content": "What is PMLA?"},
-            {"role": "assistant", "content": "PMLA is..."}
-        ]
+        "message": "मुझे PMLA के बारे में बताएं",
+        "language": "hi"  // Optional, auto-detected if not provided
     }
-    """
-    try:
-        data = request.get_json()
-        
-        # Validate request
-        if not data or 'message' not in data:
-            return jsonify({'error': 'message is required'}), 400
-        
-        user_message = data['message'].strip()
-        if not user_message:
-            return jsonify({'error': 'message cannot be empty'}), 400
-        
-        # Optional parameters
-        session_id = data.get('session_id', 'default')
-        k = data.get('k', None)
-        requested_model = data.get('model')
-        conversation_history = data.get('conversation_history', [])
-        
-        # Get pipeline
-        pipeline = get_rag_pipeline()
-        
-        # Temporarily switch model if requested
-        original_model = pipeline.model_name
-        if requested_model and requested_model in SUPPORTED_MODELS:
-            pipeline.switch_model(requested_model)
-        
-        # Process query with conversation history
-        logger.info(f"Processing query from session {session_id}: {user_message[:50]}...")
-        logger.info(f"Conversation history length: {len(conversation_history)}")
-        result = pipeline.query(user_message, k=k, conversation_history=conversation_history)
-        
-        # Restore original model if changed
-        if requested_model and requested_model != original_model:
-            pipeline.switch_model(original_model)
-        
-        # Return response
-        response = {
-            'success': True,
-            'response': result['answer'],
-            'sources': result['sources'],
-            'metadata': result['metadata'],
-            'session_id': session_id
-        }
-        
-        return jsonify(response), 200
     
-    except Exception as e:
-        logger.error(f"Error in chat endpoint: {str(e)}", exc_info=True)
-        return jsonify({
-            'success': False,
-            'error': str(e),
-            'response': "I apologize, but I encountered an error processing your request. Please try again."
-        }), 500
-
-
-@app.route('/api/chat/stream', methods=['POST'])
-def chat_stream():
-    """
-    Streaming chat endpoint (Server-Sent Events)
-    
-    Request body:
+    Response:
     {
-        "message": "What is PMLA?",
-        "session_id": "session_123",  # optional
-        "model": "mistral:7b-instruct",  # optional
-        "k": 5,  # optional, number of documents to retrieve
-        "conversation_history": [  # optional, for conversation memory
-            {"role": "user", "content": "What is PMLA?"},
-            {"role": "assistant", "content": "PMLA is..."}
-        ]
+        "response": "PMLA के बारे में...",  // Translated to user's language
+        "detected_language": "hi",
+        "english_query": "Tell me about PMLA",  // For debugging
+        "sources": [...],
+        "model": "gemma2:9b"
     }
     """
     try:
-        data = request.get_json()
+        data = request.json
+        user_message = data.get('message', '')
+        user_language = data.get('language', None)
         
-        # Validate request
-        if not data or 'message' not in data:
-            return jsonify({'error': 'message is required'}), 400
-        
-        user_message = data['message'].strip()
         if not user_message:
-            return jsonify({'error': 'message cannot be empty'}), 400
+            return jsonify({'error': 'Message is required'}), 400
         
-        # Optional parameters
-        session_id = data.get('session_id', 'default')
-        k = data.get('k', None)
-        requested_model = data.get('model')
-        conversation_history = data.get('conversation_history', [])
+        # Check if translation service is available
+        if translation_service is None:
+            logging.warning("Translation service not available, processing in English only")
+            detected_lang = 'en'
+            english_query = user_message
+        else:
+            # Process with translation
+            detected_lang, english_query, _ = translation_service.process_conversation(
+                user_input=user_message,
+                system_response="",  # Will be filled after RAG
+                user_lang=user_language
+            )
         
-        # Get pipeline
-        pipeline = get_rag_pipeline()
+        # Get RAG response (assuming you have a get_rag_response function)
+        # from rag_pipeline import get_rag_response
+        # rag_result = get_rag_response(english_query)
         
-        # Temporarily switch model if requested
-        original_model = pipeline.model_name
-        if requested_model and requested_model in SUPPORTED_MODELS:
-            pipeline.switch_model(requested_model)
+        # For demonstration, using a placeholder
+        english_response = f"This is a response about {english_query}..."
+        sources = []
+        model_used = "gemma2:9b"
         
-        # Process query with streaming
-        logger.info(f"Processing streaming query from session {session_id}: {user_message[:50]}...")
-        logger.info(f"Conversation history length: {len(conversation_history)}")
-        
-        def generate():
-            try:
-                # Stream from pipeline
-                for item in pipeline.query_stream(user_message, k=k, conversation_history=conversation_history):
-                    if item['type'] == 'sources':
-                        yield f"data: {json.dumps({'type': 'sources', 'data': item['data']})}\n\n"
-                    elif item['type'] == 'chunk':
-                        yield f"data: {json.dumps({'type': 'chunk', 'data': item['data']})}\n\n"
-                    elif item['type'] == 'done':
-                        yield f"data: {json.dumps({'type': 'done'})}\n\n"
-            except Exception as e:
-                logger.error(f"Error in streaming: {str(e)}", exc_info=True)
-                yield f"data: {json.dumps({'type': 'error', 'data': str(e)})}\n\n"
-            finally:
-                # Restore original model if changed
-                if requested_model and requested_model != original_model:
-                    pipeline.switch_model(original_model)
-        
-        return Response(
-            generate(),
-            mimetype='text/event-stream',
-            headers={
-                'Cache-Control': 'no-cache',
-                'X-Accel-Buffering': 'no',
-                'Connection': 'keep-alive'
-            }
-        )
-    
-    except Exception as e:
-        logger.error(f"Error in streaming endpoint: {str(e)}", exc_info=True)
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
-
-
-@app.route('/api/retrieve', methods=['POST'])
-def retrieve_documents():
-    """
-    Retrieve documents without generating response
-    Useful for debugging and testing retrieval quality
-    """
-    try:
-        data = request.get_json()
-        
-        if not data or 'query' not in data:
-            return jsonify({'error': 'query is required'}), 400
-        
-        query = data['query']
-        k = data.get('k', 5)
-        
-        pipeline = get_rag_pipeline()
-        docs = pipeline.retrieve_documents(query, k=k)
+        # Translate response back to user's language
+        if translation_service and detected_lang != 'en':
+            translated_response = translation_service.translate_from_english(
+                english_response,
+                detected_lang
+            )
+        else:
+            translated_response = english_response
         
         return jsonify({
-            'success': True,
-            'query': query,
-            'documents': docs,
-            'count': len(docs)
-        }), 200
-    
+            'response': translated_response,
+            'detected_language': detected_lang,
+            'language_name': get_supported_languages().get(detected_lang, 'Unknown'),
+            'english_query': english_query,
+            'english_response': english_response,
+            'sources': sources,
+            'model': model_used
+        })
+        
     except Exception as e:
-        logger.error(f"Error in retrieve endpoint: {str(e)}")
+        logging.error(f"Chat error: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
-
-@app.route('/api/stats', methods=['GET'])
-def get_stats():
-    """Get database statistics"""
+@app.route('/api/translate/clear-cache', methods=['POST'])
+def clear_translation_cache():
+    """Clear translation cache"""
     try:
-        pipeline = get_rag_pipeline()
-        
-        # Get collection info from ChromaDB
-        collection = pipeline.vectordb._collection
-        count = collection.count()
-        
-        return jsonify({
-            'success': True,
-            'total_documents': count,
-            'collection_name': 'financial_regulations',
-            'embedding_model': 'sentence-transformers/all-MiniLM-L6-v2',
-            'current_llm': pipeline.model_name
-        }), 200
-    
+        if translation_service:
+            translation_service.clear_cache()
+            return jsonify({'message': 'Translation cache cleared'})
+        return jsonify({'error': 'Translation service not available'}), 503
     except Exception as e:
-        logger.error(f"Error getting stats: {str(e)}")
+        logging.error(f"Error clearing cache: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
+# ============================================
+# Health Check with Translation Status
+# ============================================
 
-# Error handlers
-@app.errorhandler(404)
-def not_found(e):
-    return jsonify({'error': 'Endpoint not found'}), 404
-
-
-@app.errorhandler(500)
-def internal_error(e):
-    logger.error(f"Internal server error: {str(e)}")
-    return jsonify({'error': 'Internal server error'}), 500
-
-
-# ==================== MAIN ====================
+@app.route('/health', methods=['GET'])
+def health():
+    """Health check with translation service status"""
+    translation_status = 'healthy' if translation_service else 'unavailable'
+    
+    return jsonify({
+        'status': 'healthy',
+        'translation_service': translation_status,
+        'supported_languages': len(get_supported_languages())
+    })
 
 if __name__ == '__main__':
-    # Configuration
-    HOST = os.getenv('HOST', '0.0.0.0')
-    PORT = int(os.getenv('PORT', 5000))
-    DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'  # Changed default to False
-    
-    logger.info("="*60)
-    logger.info("Financial Awareness Chatbot - Backend API")
-    logger.info("="*60)
-    logger.info(f"Host: {HOST}")
-    logger.info(f"Port: {PORT}")
-    logger.info(f"Debug: {DEBUG}")
-    logger.info(f"Default Model: {DEFAULT_MODEL}")
-    logger.info("="*60)
-    
-    # Run Flask app
-    app.run(
-        host=HOST,
-        port=PORT,
-        debug=DEBUG,
-        use_reloader=False  # Disable auto-reloader to prevent restart loops
-    )
-=======
-# --- 3. CORS (Cross-Origin Resource Sharing) Middleware ---
-# This allows your frontend (running on a different port) to communicate with this backend.
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
-    allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
-)
-
-# --- 4. Load AI and Data Components ---
-try:
-    print("Loading AI and data components...")
-    
-    # Initialize the LLM (Large Language Model)
-    llm = GoogleGenerativeAI(model="gemini-pro", temperature=0.2)
-
-    # Load the persistent vector database
-    persist_directory = 'db'
-    if not os.path.exists(persist_directory):
-        raise FileNotFoundError("Vector database not found. Please run ingest.py first.")
-    
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-    vectordb = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
-
-    # Create the core RetrievalQA chain
-    qa_chain = RetrievalQA.from_chain_type(
-        llm=llm,
-        chain_type="stuff",
-        retriever=vectordb.as_retriever(search_kwargs={"k": 3}), # Retrieve top 3 results
-        return_source_documents=True,
-        verbose=False, # Set to True for debugging
-    )
-    print("Components loaded successfully.")
-
-except Exception as e:
-    print(f"Error loading components: {e}")
-    qa_chain = None # Set to None if loading fails
-
-# --- 5. Define API Request and Response Models ---
-class ChatRequest(BaseModel):
-    question: str
-
-class SourceDocument(BaseModel):
-    source: str
-
-class ChatResponse(BaseModel):
-    answer: str
-    sources: Set[str] # Use a set to automatically handle unique sources
-
-# --- 6. Define the API Endpoint ---
-@app.post("/chat", response_model=ChatResponse)
-def chat_endpoint(request: ChatRequest):
-    """
-    Receives a question, processes it through the RAG chain, and returns the answer with sources.
-    """
-    if not qa_chain:
-        raise HTTPException(status_code=503, detail="RAG chain is not available. Check server logs.")
-
-    if not request.question:
-        raise HTTPException(status_code=400, detail="Question cannot be empty.")
-
-    try:
-        print(f"Received query: {request.question}")
-        llm_response = qa_chain.invoke(request.question)
-        
-        # Process the response to extract the answer and unique source file paths
-        answer = llm_response.get('result', 'Sorry, I could not find an answer.')
-        
-        # Extract the filename from the full path of the source documents
-        source_filenames = {
-            os.path.basename(doc.metadata.get('source', 'N/A'))
-            for doc in llm_response.get("source_documents", [])
-        }
-        
-        return ChatResponse(answer=answer, sources=source_filenames)
-
-    except Exception as e:
-        print(f"Error during query processing: {e}")
-        raise HTTPException(status_code=500, detail="An error occurred while processing your request.")
-
-# --- 7. Health Check Endpoint ---
-@app.get("/")
-def read_root():
-    return {"status": "API is running"}
-
-# To run this app, use the command: uvicorn app:app --reload
->>>>>>> main
+    app.run(host='0.0.0.0', port=5000, debug=True)
